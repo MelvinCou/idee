@@ -28,12 +28,6 @@ paths:
       consumes:
       - application/json
       description: Ping the server
-      parameters:
-      - description: Account ID
-        in: path
-        name: id
-        required: true
-        type: integer
       produces:
       - application/json
       responses:
@@ -56,9 +50,6 @@ paths:
       summary: Ping
       tags:
       - ping
-schemes:
-- http
-- https
 securityDefinitions:
   BasicAuth:
     type: basic
