@@ -15,7 +15,8 @@
 	},
 
 	"postAttachCommand": {
-		"server": "cd server && swag init && air"
+		"server": "cd server && swag init && air",
+		"front": "cd front && npm install && npm run dev"
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
