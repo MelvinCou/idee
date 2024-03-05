@@ -5,3 +5,7 @@ services:
     build: server
     ports:
       - 5312:5312
+  front:
+    build: front
+    ports:
+      - 80:80
