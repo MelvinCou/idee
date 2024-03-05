@@ -14,12 +14,8 @@
 		"server": "go install github.com/cosmtrek/air@latest && go install github.com/swaggo/swag/cmd/swag@v1.8.11"
 	},
 
-	"updateContentCommand": {
-		"server": "cd server && go build"
-	},
-
 	"postAttachCommand": {
-		"server": "cd server && air"
+		"server": "cd server && swag init && air"
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
