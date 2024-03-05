@@ -21,7 +21,9 @@ jobs:
       - name: format code
         run: go fmt
       - name: format swagger comment
-        run: swag fmt
+        run: | 
+          swag init
+          swag fmt
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
       - name: run test
