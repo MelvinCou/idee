@@ -1,0 +1,33 @@
+name: server
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+
+jobs:
+  server-lint&format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - mame: format code
+      - run: go fmt
+      - name: format swagger comment
+      - run: swag fmt
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v4
+      - name: run test
+      - run: go test -v
+      - name: runt test coverage
+      - run: go test -cover
+
+
+        
