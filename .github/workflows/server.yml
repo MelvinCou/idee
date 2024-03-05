@@ -10,7 +10,7 @@ on:
       - 'server/**'
 
 jobs:
-  server-lint&format:
+  server:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -18,16 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
-      - mame: format code
-      - run: go fmt
+      - name: format code
+        run: go fmt
       - name: format swagger comment
-      - run: swag fmt
+        run: swag fmt
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
       - name: run test
-      - run: go test -v
+        run: go test -v
       - name: runt test coverage
-      - run: go test -cover
+        run: go test -cover
 
 
-        

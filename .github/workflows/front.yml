@@ -7,7 +7,7 @@ on:
       - 'front/**'
 
 jobs:
-  front-lint&format:
+  front:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,4 +22,3 @@ jobs:
         uses: actions/cache@v2
       - name: Install dependencies
         run: npm install
-        
