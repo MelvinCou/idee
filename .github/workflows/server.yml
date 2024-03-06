@@ -20,8 +20,6 @@ jobs:
       - uses: actions/setup-go@v5
       - name: format code
         run: go fmt
-      - name: download swag
-        run: go get -u github.com/swaggo/swag/cmd/swag
       - uses: yegorrybchenko/go-swag-action@v0.1
         with:
           command: init && fmt
