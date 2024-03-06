@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-go@v5
       - name: format code
         run: go fmt
+      - name: download swag
+        run: go get -u github.com/swaggo/swag/cmd/swag
       - name: init swagger comment
         run:  swag init
         working-directory: ./server
