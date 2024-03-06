@@ -20,10 +20,10 @@ jobs:
       - uses: actions/setup-go@v5
       - name: format code
         run: go fmt
+      - name: init swagger comment
+        run:  swag init
       - name: format swagger comment
-        run: | 
-          swag init
-          swag fmt
+        run:  swag fmt
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
       - name: run test
