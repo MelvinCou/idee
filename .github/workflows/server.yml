@@ -24,9 +24,11 @@ jobs:
         with:
           command: init && fmt
           swagWersion: 1.8.12
+          working-directory: ./server
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
       - uses: n8maninger/action-golang-test@v1
         with:
           args: "-race;-failfast;-tags=testing debug netgo;-cover"
+          working-directory: ./server
 
