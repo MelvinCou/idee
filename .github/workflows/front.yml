@@ -1,5 +1,8 @@
 name: front
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -7,7 +10,7 @@ on:
       - 'front/**'
 
 jobs:
-  front:
+  format:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,8 +20,84 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 20  
       - name: Restore dependencies cache
         uses: actions/cache@v2
+        with:
+          path: |
+            front/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.lock') }}
       - name: Install dependencies
         run: npm install
+      - name: format
+        run: npm run format
+
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+    steps:
+          - uses: actions/checkout@v4
+          - name: Setup NodeJS
+            uses: actions/setup-node@v3
+            with:
+              node-version: 20  
+          - name: Restore dependencies cache
+            uses: actions/cache@v2
+            with:
+              path: |
+                front/node_modules
+              key: ${{ runner.os }}-node-${{ hashFiles('**/package.lock') }}
+          - name: Install dependencies
+            run: npm install
+          - name: check type
+            run: npm run type-check
+          - name: check lint
+            run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+    steps:
+          - uses: actions/checkout@v4
+          - name: Setup NodeJS
+            uses: actions/setup-node@v3
+            with:
+              node-version: 20  
+          - name: Restore dependencies cache
+            uses: actions/cache@v2
+            with:
+              path: |
+                front/node_modules
+              key: ${{ runner.os }}-node-${{ hashFiles('**/package.lock') }}
+          - name: Install dependencies
+            run: npm install
+          - name: uni test
+            run: npm run test:unit
+          - name: e2e test
+            run: npm run test:e2e
+
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+    steps:
+          - uses: actions/checkout@v4
+          - name: Setup NodeJS
+            uses: actions/setup-node@v3
+            with:
+              node-version: 20  
+          - name: Restore dependencies cache
+            uses: actions/cache@v2
+            with:
+              path: |
+                front/node_modules
+              key: ${{ runner.os }}-node-${{ hashFiles('**/package.lock') }}
+          - name: Install dependencies
+            run: npm install
+          - name: build for prod
+            run: npm run build-only
