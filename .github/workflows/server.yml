@@ -1,4 +1,4 @@
-name: server
+name: Server
 on:
   push:
     branches:
@@ -9,6 +9,9 @@ on:
     paths:
       - 'server/**'
 
+permissions:
+  contents: read
+
 jobs:
   server:
     runs-on: ubuntu-latest
@@ -18,20 +21,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
-      - name: format code
-        run: go fmt
-        working-directory: ./server
-      - uses: yegorrybchenko/go-swag-action@v0.1
-        with:
-          command: init -d server
-          swagWersion: 1.8.11
-      - name: golangci-lint
+      - name: Run Golang CI
         uses: golangci/golangci-lint-action@v4
         with:
-          version: v1.54
+          version: v1.56
           working-directory: server
-      - uses: n8maninger/action-golang-test@v1
-        with:
-          args: "-race;-failfast;-tags=testing debug netgo;-cover"
-          working-directory: server
-
+      - name: Format code
+        run: |
+          go install github.com/swaggo/swag/cmd/swag@v1.8.11
+          go fmt
+          swag fmt
+          git diff --exit-code
+      - name: Build server
+        run: |
+          swag init
+          go build
+      - name: Run unit tests
+        run: go test
