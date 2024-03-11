@@ -10,7 +10,7 @@ on:
       - 'front/**'
 
 jobs:
-  format:
+  front:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -29,15 +29,15 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package.lock') }}
       - name: Install dependencies
         run: npm install
-      - name: Format
+      - name: Format code
         run: npm run format
       - name: Check type
         run: npm run type-check
       - name: Check lint
         run: npm run lint
-      - name: Uni test
+      - name: Unit test
         run: npm run test:unit
-      - name: Cypress run
+      - name: Run cypress
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
