@@ -9,6 +9,8 @@ import (
 	docs "server/docs"
 
 	swaggerFiles "github.com/swaggo/files"
+
+	"fmt"
 )
 
 //	@title						Idee API
@@ -36,7 +38,10 @@ func main() {
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run() // listen and serve on 0.0.0.0:8080
+
+	if err := r.Run(); err != nil { // listen and serve on 0.0.0.0:8080
+		fmt.Printf("%+v\n", err)
+	}
 }
 
 // Ping godoc

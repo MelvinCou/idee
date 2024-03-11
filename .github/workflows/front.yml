@@ -29,13 +29,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package.lock') }}
       - name: Install dependencies
         run: npm install
-      - name: format
+      - name: Format
         run: npm run format
-      - name: check type
+      - name: Check type
         run: npm run type-check
-      - name: check lint
+      - name: Check lint
         run: npm run lint
-      - name: uni test
+      - name: Uni test
         run: npm run test:unit
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -43,5 +43,5 @@ jobs:
           build: npm run build
           start: npm run test:e2e --host
           working-directory: front
-      - name: build for prod
+      - name: Build for prod
         run: npm run build-only
