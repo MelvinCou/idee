@@ -1,0 +1,47 @@
+name: Front
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'front/**'
+
+jobs:
+  front:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20  
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            front/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package.lock') }}
+      - name: Install dependencies
+        run: npm install
+      - name: Format code
+        run: npm run format
+      - name: Check type
+        run: npm run type-check
+      - name: Check lint
+        run: npm run lint
+      - name: Unit test
+        run: npm run test:unit
+      - name: Run cypress
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run test:e2e --host
+          working-directory: front
+      - name: Build for prod
+        run: npm run build-only
