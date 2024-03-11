@@ -26,9 +26,9 @@ jobs:
         with:
           path: |
             front/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package.lock') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('front/package.lock') }}
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Format code
         run: npm run format
       - name: Check type
