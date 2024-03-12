@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
@@ -29,6 +30,7 @@ import (
 //	@externalDocs.url			https://swagger.io/resources/open-api/
 func main() {
 	r := gin.Default()
+	r.Use(cors.Default())
 	docs.SwaggerInfo.BasePath = "/"
 
 	api := r.Group("/api")
