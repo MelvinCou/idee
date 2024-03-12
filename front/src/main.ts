@@ -19,6 +19,8 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
+app.config.globalProperties.$api_url = import.meta.env.VITE_API_URL
+
 app.use(createPinia())
 app.use(router)
 app.use(vuetify)
