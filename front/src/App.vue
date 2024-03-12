@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { Ping } from "./api/Ping";
+import { ref } from "vue";
+
+const api = new Ping({
+  baseUrl: import.meta.env.VITE_API_URL
+});
+const ping = ref();
+
+const getPing = async () => {
+  ping.value = (await api.pingList()).data;
+}
+
+getPing();
 </script>
 
 <template>
@@ -9,6 +22,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <h1 class="blue">The ping request: {{ ping }}</h1>
 
       <h1 class="text-3xl font-bold underline text-amber-950 bg-red-700">Hello world!</h1>
 
