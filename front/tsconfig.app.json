@@ -21,6 +21,6 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "allowJs": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": false
   }
 }
