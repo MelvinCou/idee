@@ -11,5 +11,5 @@
 
 export interface MainResponse {
   /** @example "pong" */
-  message?: string;
+  message?: string
 }
