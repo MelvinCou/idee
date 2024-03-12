@@ -8,11 +8,6 @@ repos:
         entry: .hooks/lint-server-files.sh
         language: system
         types: [ go ]
-      - id: format-frontend-files
-        name: format frontend files
-        entry: .hooks/format-frontend-files.sh
-        language: system
-        types: [ javascript, html, ts, vue ]
       - id: lint-frontend-files
         name: lint frontend files
         entry: .hooks/lint-frontend-files.sh
