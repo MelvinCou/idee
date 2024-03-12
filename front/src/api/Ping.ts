@@ -9,8 +9,8 @@
  * ---------------------------------------------------------------
  */
 
-import { MainResponse } from './data-contracts'
-import { ContentType, HttpClient, RequestParams } from './http-client'
+import { MainResponse } from './data-contracts';
+import { ContentType, HttpClient, RequestParams } from './http-client';
 
 export class Ping<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
@@ -27,6 +27,6 @@ export class Ping<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
       method: 'GET',
       type: ContentType.Json,
       format: 'json',
-      ...params
-    })
+      ...params,
+    });
 }
