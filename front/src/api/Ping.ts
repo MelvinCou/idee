@@ -9,8 +9,8 @@
  * ---------------------------------------------------------------
  */
 
-import { type MainResponse } from "./data-contracts";
-import { ContentType, HttpClient, type RequestParams } from "./http-client";
+import { MainResponse } from './data-contracts'
+import { ContentType, HttpClient, RequestParams } from './http-client'
 
 export class Ping<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
@@ -24,9 +24,9 @@ export class Ping<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
   pingList = (params: RequestParams = {}) =>
     this.request<MainResponse, string>({
       path: `/ping`,
-      method: "GET",
+      method: 'GET',
       type: ContentType.Json,
-      format: "json",
-      ...params,
-    });
+      format: 'json',
+      ...params
+    })
 }
