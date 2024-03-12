@@ -3,22 +3,19 @@ exclude: .*.md
 repos:
   - repo: local
     hooks:
-      - id: golangci-lint
-        name: golangci-lint
-        description: Fast linters runner for Go. Note that only modified files are linted, so linters like 'unused' that need to scan all files won't work as expected.
-        entry: ./hooks/lint-server-files.sh
-        language: golang
+      - id: lint-server-files
+        name: lint server files
+        entry: .hooks/lint-server-files.sh
+        language: system
         types: [ go ]
-        require_serial: true
-        pass_filenames: false
       - id: format-frontend-files
         name: format frontend files
-        entry: ./hooks/format-frontend-files.sh
+        entry: .hooks/format-frontend-files.sh
         language: system
         types: [ javascript, html, ts, vue ]
       - id: lint-frontend-files
         name: lint frontend files
-        entry: ./hooks/lint-frontend-files.sh
+        entry: .hooks/lint-frontend-files.sh
         language: system
         types: [ javascript, html, ts, vue ]
   - repo: https://github.com/pre-commit/pre-commit-hooks
