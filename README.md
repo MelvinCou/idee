@@ -19,12 +19,12 @@ air
 ## Front
 
 ```sh
-# Refresh API access
-npx swagger-typescript-api --modular -p ./server/docs/swagger.json -o ./front/src/api
 # Get into front folder
 cd front
 # Install dependencies
 npm install
+# Update API access classes
+npm run swagger
 # Run front with hot reload
 npm run dev
 ```
