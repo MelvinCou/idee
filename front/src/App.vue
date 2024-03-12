@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
-import { Ping } from './api/Ping';
-import { ref } from 'vue';
+import { RouterLink, RouterView } from "vue-router";
+import HelloWorld from "./components/HelloWorld.vue";
+import { Ping } from "./api/Ping";
+import { ref } from "vue";
 
 const api = new Ping({
   baseUrl: import.meta.env.VITE_API_URL,
