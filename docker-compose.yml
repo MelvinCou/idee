@@ -9,7 +9,7 @@ services:
     environment:
       JAVA_OPTS: "-Xms1g -Xmx4g"
     volumes:
-    - ./dataset:/docker-entrypoint-initdb.d
+    - ./database/dataset:/docker-entrypoint-initdb.d
   datatourisme:
     build: database
     restart: always
