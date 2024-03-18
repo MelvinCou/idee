@@ -9,7 +9,8 @@ Setup datatourisme database:
 ```sh
 # Get datatourisme source file
 # Uri format: ttps://diffuseur.datatourisme.fr/webservice/FLUX_ID/APP_KEY
-curl https://diffuseur.datatourisme.fr/webservice/9ff559def21afe21ebb2676161bd48b0/9af7af21-4089-4435-8bd9-c1e570ed9900 -o dataset/kb/data/flux.rdf
+mkdir -p database/dataset/kb/data/
+curl https://diffuseur.datatourisme.fr/webservice/9ff559def21afe21ebb2676161bd48b0/9af7af21-4089-4435-8bd9-c1e570ed9900 -o database/dataset/kb/data/flux.rdf
 # Start database from docker (~30 min)
 docker-compose up
 ```
