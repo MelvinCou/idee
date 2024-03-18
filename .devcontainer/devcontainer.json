@@ -14,7 +14,8 @@
 
   "postCreateCommand": {
     "server": "go install github.com/cosmtrek/air@latest && go install github.com/swaggo/swag/cmd/swag@v1.8.11",
-    "front": "sudo apt-get update && sudo apt-get install -qqy --no-install-recommends libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb"
+    "front": "sudo apt-get update && sudo apt-get install -qqy --no-install-recommends libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb",
+    "database": "docker-compose build"
   },
 
   "postAttachCommand": {
@@ -26,7 +27,7 @@
   // "features": {},
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [5173, 8080],
+  "forwardPorts": [5173, 8080, 8081, 9999],
   "customizations": {
     "vscode": {
       "extensions": ["esbenp.prettier-vscode"]
