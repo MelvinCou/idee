@@ -44,3 +44,9 @@ npm run swagger
 # Run front with hot reload
 npm run dev
 ```
+
+## Run in production mode
+
+```sh
+docker-compose -f docker-compose.yml -f docker-compose.production.yml up
+```
