@@ -4,16 +4,14 @@ services:
   blazegraph:
     image: conjecto/blazegraph:2.1.5
     restart: always
-    ports:
-    - 9999:9999
     environment:
       JAVA_OPTS: "-Xms1g -Xmx4g"
     volumes:
-    - ./database/dataset:/docker-entrypoint-initdb.d
+      - ./database/dataset:/docker-entrypoint-initdb.d
   datatourisme:
     build: database
     restart: always
     ports:
-    - 8081:80
+      - 8081:80
     depends_on:
-    - blazegraph
+      - blazegraph
