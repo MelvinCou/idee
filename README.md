@@ -30,6 +30,10 @@ swag fmt
 # Run server with hot reload
 air
 # access to API documentation: http://127.0.0.1:8080/swagger/index.html
+
+# If there is a problem with the schema provided by datatourisme:
+npm install -g get-graphql-schema
+get-graphql-schema http://127.0.0.1:8081 > server/graphql/schema.graphql
 ```
 
 ## Front
