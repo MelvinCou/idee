@@ -1,0 +1,3759 @@
+schema {
+  query: datatourismeQuery
+}
+
+type Agent {
+  _uri: String
+
+  """Description de la ressource."""
+  rdfs_comment: [LangString]
+
+  """L&#039;adresse postale du lieu concerné"""
+  schema_address: [schema_PostalAddress]
+
+  """Le POI que cet Agent a créé."""
+  hasCreated: [PointOfInterest]
+  owns: [PointOfInterest]
+
+  """Le POI que cet Agent a publié."""
+  hasPublished: [PointOfInterest]
+
+  """L&#039;adresse du site internet d&#039;un Agent."""
+  foaf_homepage: [String]
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: [String]
+
+  """
+  Code attribué par l&#039;INSEE en référence à la nomenclature des activités françaises.
+  """
+  apeNaf: [String]
+
+  """
+  Le numéro SIRET est un identifiant numérique de 14 chiffres composé du SIREN
+  (9 chiffres) et d&#039;un numéro interne de classement de 5 chiffres (NIC)
+  caractérisant l&#039;établissement d&#039;une entreprise en tant qu&#039;unité
+  géographiquement localisée.
+  """
+  siret: [String]
+
+  """
+  Numéro d’enregistrement, composé de 13 caractères, délivré par la marie pour
+  les meublés et chambres chez l’habitant qui ne répondraient pas à la
+  définition de la chambre d’hôtes.
+  """
+  registeredNumber: [String]
+
+  """Numéro d&#039;inscription au Registre du Commerce et des Sociétés."""
+  rcs: [String]
+
+  """Un numéro de téléphone FAX."""
+  schema_faxNumber: [String]
+
+  """Un numéro de téléphone."""
+  schema_telephone: [String]
+
+  """Un courriel, courrier électronique."""
+  schema_email: [String]
+
+  """
+  Le nom officiel de l&#039;organisation, ex: Le nom de la société enregistrée.
+  """
+  schema_legalName: [String]
+
+  """Un logo représentant l&#039;organisation."""
+  schema_logo: [String]
+
+  """La civilité d&#039;une personne."""
+  foaf_title: [String]
+
+  """Le genre d&#039;une personne."""
+  schema_gender: [schema_GenderType]
+
+  """Le prénom d&#039;une personne."""
+  schema_givenName: [String]
+
+  """Le nom de famille d&#039;une personne."""
+  schema_familyName: [String]
+  rdf_type: [String]
+}
+
+input Agent_Filter {
+  _or: [Agent_Filter]
+  _and: [Agent_Filter]
+  _not: [Agent_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Description de la ressource."""
+  rdfs_comment: Filter
+
+  """L&#039;adresse postale du lieu concerné"""
+  schema_address: schema_PostalAddress_Filter
+
+  """Le POI que cet Agent a créé."""
+  hasCreated: PointOfInterest_Filter
+  owns: PointOfInterest_Filter
+
+  """Le POI que cet Agent a publié."""
+  hasPublished: PointOfInterest_Filter
+
+  """L&#039;adresse du site internet d&#039;un Agent."""
+  foaf_homepage: Filter
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Filter
+
+  """
+  Code attribué par l&#039;INSEE en référence à la nomenclature des activités françaises.
+  """
+  apeNaf: Filter
+
+  """
+  Le numéro SIRET est un identifiant numérique de 14 chiffres composé du SIREN
+  (9 chiffres) et d&#039;un numéro interne de classement de 5 chiffres (NIC)
+  caractérisant l&#039;établissement d&#039;une entreprise en tant qu&#039;unité
+  géographiquement localisée.
+  """
+  siret: Filter
+
+  """
+  Numéro d’enregistrement, composé de 13 caractères, délivré par la marie pour
+  les meublés et chambres chez l’habitant qui ne répondraient pas à la
+  définition de la chambre d’hôtes.
+  """
+  registeredNumber: Filter
+
+  """Numéro d&#039;inscription au Registre du Commerce et des Sociétés."""
+  rcs: Filter
+
+  """Un numéro de téléphone FAX."""
+  schema_faxNumber: Filter
+
+  """Un numéro de téléphone."""
+  schema_telephone: Filter
+
+  """Un courriel, courrier électronique."""
+  schema_email: Filter
+
+  """
+  Le nom officiel de l&#039;organisation, ex: Le nom de la société enregistrée.
+  """
+  schema_legalName: Filter
+
+  """Un logo représentant l&#039;organisation."""
+  schema_logo: Filter
+
+  """La civilité d&#039;une personne."""
+  foaf_title: Filter
+
+  """Le genre d&#039;une personne."""
+  schema_gender: schema_GenderType_Filter
+
+  """Le prénom d&#039;une personne."""
+  schema_givenName: Filter
+
+  """Le nom de famille d&#039;une personne."""
+  schema_familyName: Filter
+  rdf_type: Filter
+}
+
+input Agent_Sort {
+  """Description de la ressource."""
+  rdfs_comment: Sort
+
+  """L&#039;adresse postale du lieu concerné"""
+  schema_address: schema_PostalAddress_Sort
+
+  """Le POI que cet Agent a créé."""
+  hasCreated: PointOfInterest_Sort
+  owns: PointOfInterest_Sort
+
+  """Le POI que cet Agent a publié."""
+  hasPublished: PointOfInterest_Sort
+
+  """L&#039;adresse du site internet d&#039;un Agent."""
+  foaf_homepage: Sort
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Sort
+
+  """
+  Code attribué par l&#039;INSEE en référence à la nomenclature des activités françaises.
+  """
+  apeNaf: Sort
+
+  """
+  Le numéro SIRET est un identifiant numérique de 14 chiffres composé du SIREN
+  (9 chiffres) et d&#039;un numéro interne de classement de 5 chiffres (NIC)
+  caractérisant l&#039;établissement d&#039;une entreprise en tant qu&#039;unité
+  géographiquement localisée.
+  """
+  siret: Sort
+
+  """
+  Numéro d’enregistrement, composé de 13 caractères, délivré par la marie pour
+  les meublés et chambres chez l’habitant qui ne répondraient pas à la
+  définition de la chambre d’hôtes.
+  """
+  registeredNumber: Sort
+
+  """Numéro d&#039;inscription au Registre du Commerce et des Sociétés."""
+  rcs: Sort
+
+  """Un numéro de téléphone FAX."""
+  schema_faxNumber: Sort
+
+  """Un numéro de téléphone."""
+  schema_telephone: Sort
+
+  """Un courriel, courrier électronique."""
+  schema_email: Sort
+
+  """
+  Le nom officiel de l&#039;organisation, ex: Le nom de la société enregistrée.
+  """
+  schema_legalName: Sort
+
+  """Un logo représentant l&#039;organisation."""
+  schema_logo: Sort
+
+  """La civilité d&#039;une personne."""
+  foaf_title: Sort
+
+  """Le genre d&#039;une personne."""
+  schema_gender: schema_GenderType_Sort
+
+  """Le prénom d&#039;une personne."""
+  schema_givenName: Sort
+
+  """Le nom de famille d&#039;une personne."""
+  schema_familyName: Sort
+}
+
+"""
+Un équipement, un service, un aménagement, une infrastructure, proposé par un
+POI. Ex: un minibar pour une chambre d&#039;hôtel, des bungalows pour un
+camping, des couverts pour un restaurant.
+"""
+type Amenity {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+
+  """
+  Les langues proposées par l&#039;équipement d&#039;information. Il est
+  recommandé d&#039;utiliser comme valeur celles definies par la RFC 1766 qui
+  comprend un code de langage à deux caractères(venant du standard ISO 639),
+  éventuellement suivi d&#039;un code à deux lettres pour le pays (venant du
+  standard ISO 3166). Par exemple, &#039;en&#039; pour l&#039;anglais,
+  &#039;fr&#039; pour le français, ou&#039;en-uk&#039; pour l&#039;anglais
+  utilisé au Royaume-Uni.
+  """
+  availableLanguage: [String]
+  rdf_type: [String]
+}
+
+"""
+Un équipement, un service, un aménagement, une infrastructure, proposé par un
+POI. Ex: un minibar pour une chambre d&#039;hôtel, des bungalows pour un
+camping, des couverts pour un restaurant.
+"""
+input Amenity_Filter {
+  _or: [Amenity_Filter]
+  _and: [Amenity_Filter]
+  _not: [Amenity_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+
+  """
+  Les langues proposées par l&#039;équipement d&#039;information. Il est
+  recommandé d&#039;utiliser comme valeur celles definies par la RFC 1766 qui
+  comprend un code de langage à deux caractères(venant du standard ISO 639),
+  éventuellement suivi d&#039;un code à deux lettres pour le pays (venant du
+  standard ISO 3166). Par exemple, &#039;en&#039; pour l&#039;anglais,
+  &#039;fr&#039; pour le français, ou&#039;en-uk&#039; pour l&#039;anglais
+  utilisé au Royaume-Uni.
+  """
+  availableLanguage: Filter
+  rdf_type: Filter
+}
+
+"""
+Un équipement, un service, un aménagement, une infrastructure, proposé par un
+POI. Ex: un minibar pour une chambre d&#039;hôtel, des bungalows pour un
+camping, des couverts pour un restaurant.
+"""
+input Amenity_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+
+  """
+  Les langues proposées par l&#039;équipement d&#039;information. Il est
+  recommandé d&#039;utiliser comme valeur celles definies par la RFC 1766 qui
+  comprend un code de langage à deux caractères(venant du standard ISO 639),
+  éventuellement suivi d&#039;un code à deux lettres pour le pays (venant du
+  standard ISO 3166). Par exemple, &#039;en&#039; pour l&#039;anglais,
+  &#039;fr&#039; pour le français, ou&#039;en-uk&#039; pour l&#039;anglais
+  utilisé au Royaume-Uni.
+  """
+  availableLanguage: Sort
+}
+
+type ArchitecturalStyle {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input ArchitecturalStyle_Filter {
+  _or: [ArchitecturalStyle_Filter]
+  _and: [ArchitecturalStyle_Filter]
+  _not: [ArchitecturalStyle_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input ArchitecturalStyle_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type City {
+  _uri: String
+
+  """est une subdivision du département objet"""
+  isPartOfDepartment: [Department]
+
+  """Code INSEE de la division administrative"""
+  insee: [String]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input City_Filter {
+  _or: [City_Filter]
+  _and: [City_Filter]
+  _not: [City_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """est une subdivision du département objet"""
+  isPartOfDepartment: Department_Filter
+
+  """Code INSEE de la division administrative"""
+  insee: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input City_Sort {
+  """est une subdivision du département objet"""
+  isPartOfDepartment: Department_Sort
+
+  """Code INSEE de la division administrative"""
+  insee: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Le type de cuisine qu&#039;un établissement de restauration peut proposer. Ex: Fruits de mer, Cuisine africaine.
+"""
+type CuisineCategory {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Le type de cuisine qu&#039;un établissement de restauration peut proposer. Ex: Fruits de mer, Cuisine africaine.
+"""
+input CuisineCategory_Filter {
+  _or: [CuisineCategory_Filter]
+  _and: [CuisineCategory_Filter]
+  _not: [CuisineCategory_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""
+Le type de cuisine qu&#039;un établissement de restauration peut proposer. Ex: Fruits de mer, Cuisine africaine.
+"""
+input CuisineCategory_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type datatourismeQuery {
+  poi(uri: String, size: Int, from: Int, sort: [PointOfInterest_Sort], filters: [PointOfInterest_Filter], lang: String): PointOfInterest_ResultSet
+}
+
+"""Representation of date and time in "Y-m-d H:i:s" format"""
+scalar DateTime
+
+"""
+Les départements constituent la seconde division administrative en France. Ex:
+Ain, Oise, ... Un département possède un code INSEE.
+"""
+type Department {
+  _uri: String
+
+  """est une subdivision de la région objet"""
+  isPartOfRegion: [Region]
+
+  """Code INSEE de la division administrative"""
+  insee: [String]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Les départements constituent la seconde division administrative en France. Ex:
+Ain, Oise, ... Un département possède un code INSEE.
+"""
+input Department_Filter {
+  _or: [Department_Filter]
+  _and: [Department_Filter]
+  _not: [Department_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """est une subdivision de la région objet"""
+  isPartOfRegion: Region_Filter
+
+  """Code INSEE de la division administrative"""
+  insee: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""
+Les départements constituent la seconde division administrative en France. Ex:
+Ain, Oise, ... Un département possède un code INSEE.
+"""
+input Department_Sort {
+  """est une subdivision de la région objet"""
+  isPartOfRegion: Region_Sort
+
+  """Code INSEE de la division administrative"""
+  insee: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Une description permet d&#039;associer la description textuelle d&#039;un POI
+avec l&#039;Audience à qui cette description est dédiée. Par exemple, un POI
+peut avoir une description dédiée aux écoles et une autre dédiée au grand
+public. Si une description n&#039;a aucune audience renseignée, on suppose
+qu&#039;elle est dédiée à tous les publics.
+"""
+type Description {
+  _uri: String
+
+  """Description longue de la ressource."""
+  dc_description: [LangString]
+
+  """L&#039;audience à laquelle cet item est dédiée."""
+  isDedicatedTo: [PeopleAudience]
+
+  """
+  Utiliser cette propriété pour attacher une description courte qui pourra être
+  utilisée sur des supports de publication où l&#039;espace est un critère important.
+  """
+  shortDescription: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Une description permet d&#039;associer la description textuelle d&#039;un POI
+avec l&#039;Audience à qui cette description est dédiée. Par exemple, un POI
+peut avoir une description dédiée aux écoles et une autre dédiée au grand
+public. Si une description n&#039;a aucune audience renseignée, on suppose
+qu&#039;elle est dédiée à tous les publics.
+"""
+input Description_Filter {
+  _or: [Description_Filter]
+  _and: [Description_Filter]
+  _not: [Description_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Description longue de la ressource."""
+  dc_description: Filter
+
+  """L&#039;audience à laquelle cet item est dédiée."""
+  isDedicatedTo: PeopleAudience_Filter
+
+  """
+  Utiliser cette propriété pour attacher une description courte qui pourra être
+  utilisée sur des supports de publication où l&#039;espace est un critère important.
+  """
+  shortDescription: Filter
+  rdf_type: Filter
+}
+
+"""
+Une description permet d&#039;associer la description textuelle d&#039;un POI
+avec l&#039;Audience à qui cette description est dédiée. Par exemple, un POI
+peut avoir une description dédiée aux écoles et une autre dédiée au grand
+public. Si une description n&#039;a aucune audience renseignée, on suppose
+qu&#039;elle est dédiée à tous les publics.
+"""
+input Description_Sort {
+  """Description longue de la ressource."""
+  dc_description: Sort
+
+  """L&#039;audience à laquelle cet item est dédiée."""
+  isDedicatedTo: PeopleAudience_Sort
+
+  """
+  Utiliser cette propriété pour attacher une description courte qui pourra être
+  utilisée sur des supports de publication où l&#039;espace est un critère important.
+  """
+  shortDescription: Sort
+}
+
+"""Niveau de difficulté de très facile à très difficile"""
+type DifficultyLevel {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""Niveau de difficulté de très facile à très difficile"""
+input DifficultyLevel_Filter {
+  _or: [DifficultyLevel_Filter]
+  _and: [DifficultyLevel_Filter]
+  _not: [DifficultyLevel_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""Niveau de difficulté de très facile à très difficile"""
+input DifficultyLevel_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type ebucore_Annotation {
+  _uri: String
+
+  """La description de la ressource."""
+  ebucore_comments: [LangString]
+
+  """fournit un description courte."""
+  ebucore_abstract: [LangString]
+
+  """Titre de la ressource."""
+  ebucore_title: [LangString]
+  credits: [String]
+
+  """Les droits applicables sur le media."""
+  ebucore_isCoveredBy: [String]
+
+  """L&#039;audience à laquelle cet item est dédiée."""
+  isDedicatedTo: [PeopleAudience]
+
+  """
+  La date à laquelle les droits commencent à s&#039;appliquer sur ce média (aaaa-mm-jj).
+  """
+  rightsStartDate: [DateTime]
+
+  """
+  La date à laquelle les droits arrêtent de s&#039;appliquer sur ce média (aaaa-mm-jj).
+  """
+  rightsEndDate: [DateTime]
+
+  """
+  Une ressource associée qui est une version, une édition ou une adaptation de la ressource décrite.
+  """
+  dct_hasVersion: [String]
+  rdf_type: [String]
+}
+
+input ebucore_Annotation_Filter {
+  _or: [ebucore_Annotation_Filter]
+  _and: [ebucore_Annotation_Filter]
+  _not: [ebucore_Annotation_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """La description de la ressource."""
+  ebucore_comments: Filter
+
+  """fournit un description courte."""
+  ebucore_abstract: Filter
+
+  """Titre de la ressource."""
+  ebucore_title: Filter
+  credits: Filter
+
+  """Les droits applicables sur le media."""
+  ebucore_isCoveredBy: Filter
+
+  """L&#039;audience à laquelle cet item est dédiée."""
+  isDedicatedTo: PeopleAudience_Filter
+
+  """
+  La date à laquelle les droits commencent à s&#039;appliquer sur ce média (aaaa-mm-jj).
+  """
+  rightsStartDate: Filter
+
+  """
+  La date à laquelle les droits arrêtent de s&#039;appliquer sur ce média (aaaa-mm-jj).
+  """
+  rightsEndDate: Filter
+
+  """
+  Une ressource associée qui est une version, une édition ou une adaptation de la ressource décrite.
+  """
+  dct_hasVersion: Filter
+  rdf_type: Filter
+}
+
+input ebucore_Annotation_Sort {
+  """La description de la ressource."""
+  ebucore_comments: Sort
+
+  """fournit un description courte."""
+  ebucore_abstract: Sort
+
+  """Titre de la ressource."""
+  ebucore_title: Sort
+  credits: Sort
+
+  """Les droits applicables sur le media."""
+  ebucore_isCoveredBy: Sort
+
+  """L&#039;audience à laquelle cet item est dédiée."""
+  isDedicatedTo: PeopleAudience_Sort
+
+  """
+  La date à laquelle les droits commencent à s&#039;appliquer sur ce média (aaaa-mm-jj).
+  """
+  rightsStartDate: Sort
+
+  """
+  La date à laquelle les droits arrêtent de s&#039;appliquer sur ce média (aaaa-mm-jj).
+  """
+  rightsEndDate: Sort
+
+  """
+  Une ressource associée qui est une version, une édition ou une adaptation de la ressource décrite.
+  """
+  dct_hasVersion: Sort
+}
+
+"""Une ressource réprésentant l&#039;object concerné."""
+type ebucore_EditorialObject {
+  _uri: String
+
+  """Une annotation à propos de la ressource concernée."""
+  ebucore_hasAnnotation: [ebucore_Annotation]
+
+  """A pour media représentatif."""
+  ebucore_hasRelatedResource: [ebucore_Resource]
+  rdf_type: [String]
+}
+
+"""Une ressource réprésentant l&#039;object concerné."""
+input ebucore_EditorialObject_Filter {
+  _or: [ebucore_EditorialObject_Filter]
+  _and: [ebucore_EditorialObject_Filter]
+  _not: [ebucore_EditorialObject_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Une annotation à propos de la ressource concernée."""
+  ebucore_hasAnnotation: ebucore_Annotation_Filter
+
+  """A pour media représentatif."""
+  ebucore_hasRelatedResource: ebucore_Resource_Filter
+  rdf_type: Filter
+}
+
+"""Une ressource réprésentant l&#039;object concerné."""
+input ebucore_EditorialObject_Sort {
+  """Une annotation à propos de la ressource concernée."""
+  ebucore_hasAnnotation: ebucore_Annotation_Sort
+
+  """A pour media représentatif."""
+  ebucore_hasRelatedResource: ebucore_Resource_Sort
+}
+
+type ebucore_MimeType {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input ebucore_MimeType_Filter {
+  _or: [ebucore_MimeType_Filter]
+  _and: [ebucore_MimeType_Filter]
+  _not: [ebucore_MimeType_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input ebucore_MimeType_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type ebucore_Resource {
+  _uri: String
+
+  """Le type mime de la ressource (MimeType)."""
+  ebucore_hasMimeType: [ebucore_MimeType]
+
+  """L&#039;unité de la largeur du media."""
+  ebucore_widthUnit: [String]
+
+  """L&#039;adresse URL de la ressource."""
+  ebucore_locator: [String]
+
+  """La largeur du media."""
+  ebucore_width: [Float]
+
+  """L&#039;unité de la hauteur du media."""
+  ebucore_heightUnit: [String]
+
+  """La taille du fichier de la ressource. (en octet)"""
+  ebucore_fileSize: [Float]
+
+  """La hauteur du media."""
+  ebucore_height: [Float]
+  rdf_type: [String]
+}
+
+input ebucore_Resource_Filter {
+  _or: [ebucore_Resource_Filter]
+  _and: [ebucore_Resource_Filter]
+  _not: [ebucore_Resource_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Le type mime de la ressource (MimeType)."""
+  ebucore_hasMimeType: ebucore_MimeType_Filter
+
+  """L&#039;unité de la largeur du media."""
+  ebucore_widthUnit: Filter
+
+  """L&#039;adresse URL de la ressource."""
+  ebucore_locator: Filter
+
+  """La largeur du media."""
+  ebucore_width: Filter
+
+  """L&#039;unité de la hauteur du media."""
+  ebucore_heightUnit: Filter
+
+  """La taille du fichier de la ressource. (en octet)"""
+  ebucore_fileSize: Filter
+
+  """La hauteur du media."""
+  ebucore_height: Filter
+  rdf_type: Filter
+}
+
+input ebucore_Resource_Sort {
+  """Le type mime de la ressource (MimeType)."""
+  ebucore_hasMimeType: ebucore_MimeType_Sort
+
+  """L&#039;unité de la largeur du media."""
+  ebucore_widthUnit: Sort
+
+  """L&#039;adresse URL de la ressource."""
+  ebucore_locator: Sort
+
+  """La largeur du media."""
+  ebucore_width: Sort
+
+  """L&#039;unité de la hauteur du media."""
+  ebucore_heightUnit: Sort
+
+  """La taille du fichier de la ressource. (en octet)"""
+  ebucore_fileSize: Sort
+
+  """La hauteur du media."""
+  ebucore_height: Sort
+}
+
+"""
+Permet d&#039;associer à un POI des équipements, service, infrastructures ou
+aménagements en y aggrégeant des informations comme l&#039;accès internet, le
+nombre d&#039;équipements proposés, si oui ou non cet équipement est inclus dans
+les tarifs des services du produit, ...
+"""
+type FeatureSpecification {
+  _uri: String
+
+  """L&#039;équipement ou service auquel cette spécification se rapporte"""
+  features: [Amenity]
+
+  """
+  Vrai si l&#039;équipement associé est payant (non inclus dans le tarif du service).
+  """
+  charged: [Boolean]
+
+  """Valeur, quantité minimum de la propriété concernée."""
+  schema_minValue: [Float]
+
+  """Valeur, quantité de la propriété concernée."""
+  schema_value: [Float]
+
+  """Valeur, quantité maximum de la propriété concernée."""
+  schema_maxValue: [Float]
+
+  """La disposition de la salle associée à cette spécification."""
+  hasLayout: [RoomLayout]
+  hasFloorSize: [schema_QuantitativeValue]
+
+  """Vrai si cette surface propose l&#039;air conditionné"""
+  airConditioning: [Boolean]
+
+  """Vrai si cette surface est non fumeur."""
+  noSmoking: [Boolean]
+
+  """Vrai si le produit propose un accès à internet."""
+  internetAccess: [Boolean]
+
+  """Vrai si les animaux sont acceptés dans ce lieu"""
+  petsAllowed: [Boolean]
+
+  """Le nombre de places assises sur la surface concernée"""
+  seatCount: [Int]
+
+  """Le nombre maximum de personnes possibles sur la surface concernée."""
+  occupancy: [Int]
+  rdf_type: [String]
+}
+
+"""
+Permet d&#039;associer à un POI des équipements, service, infrastructures ou
+aménagements en y aggrégeant des informations comme l&#039;accès internet, le
+nombre d&#039;équipements proposés, si oui ou non cet équipement est inclus dans
+les tarifs des services du produit, ...
+"""
+input FeatureSpecification_Filter {
+  _or: [FeatureSpecification_Filter]
+  _and: [FeatureSpecification_Filter]
+  _not: [FeatureSpecification_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """L&#039;équipement ou service auquel cette spécification se rapporte"""
+  features: Amenity_Filter
+
+  """
+  Vrai si l&#039;équipement associé est payant (non inclus dans le tarif du service).
+  """
+  charged: Filter
+
+  """Valeur, quantité minimum de la propriété concernée."""
+  schema_minValue: Filter
+
+  """Valeur, quantité de la propriété concernée."""
+  schema_value: Filter
+
+  """Valeur, quantité maximum de la propriété concernée."""
+  schema_maxValue: Filter
+
+  """La disposition de la salle associée à cette spécification."""
+  hasLayout: RoomLayout_Filter
+  hasFloorSize: schema_QuantitativeValue_Filter
+
+  """Vrai si cette surface propose l&#039;air conditionné"""
+  airConditioning: Filter
+
+  """Vrai si cette surface est non fumeur."""
+  noSmoking: Filter
+
+  """Vrai si le produit propose un accès à internet."""
+  internetAccess: Filter
+
+  """Vrai si les animaux sont acceptés dans ce lieu"""
+  petsAllowed: Filter
+
+  """Le nombre de places assises sur la surface concernée"""
+  seatCount: Filter
+
+  """Le nombre maximum de personnes possibles sur la surface concernée."""
+  occupancy: Filter
+  rdf_type: Filter
+}
+
+"""
+Permet d&#039;associer à un POI des équipements, service, infrastructures ou
+aménagements en y aggrégeant des informations comme l&#039;accès internet, le
+nombre d&#039;équipements proposés, si oui ou non cet équipement est inclus dans
+les tarifs des services du produit, ...
+"""
+input FeatureSpecification_Sort {
+  """L&#039;équipement ou service auquel cette spécification se rapporte"""
+  features: Amenity_Sort
+
+  """
+  Vrai si l&#039;équipement associé est payant (non inclus dans le tarif du service).
+  """
+  charged: Sort
+
+  """Valeur, quantité minimum de la propriété concernée."""
+  schema_minValue: Sort
+
+  """Valeur, quantité de la propriété concernée."""
+  schema_value: Sort
+
+  """Valeur, quantité maximum de la propriété concernée."""
+  schema_maxValue: Sort
+
+  """La disposition de la salle associée à cette spécification."""
+  hasLayout: RoomLayout_Sort
+  hasFloorSize: schema_QuantitativeValue_Sort
+
+  """Vrai si cette surface propose l&#039;air conditionné"""
+  airConditioning: Sort
+
+  """Vrai si cette surface est non fumeur."""
+  noSmoking: Sort
+
+  """Vrai si le produit propose un accès à internet."""
+  internetAccess: Sort
+
+  """Vrai si les animaux sont acceptés dans ce lieu"""
+  petsAllowed: Sort
+
+  """Le nombre de places assises sur la surface concernée"""
+  seatCount: Sort
+
+  """Le nombre maximum de personnes possibles sur la surface concernée."""
+  occupancy: Sort
+}
+
+"""Paramètre permettant de filtrer les résultats"""
+input Filter {
+  _eq: String
+  _gt: String
+  _gte: String
+  _lt: String
+  _lte: String
+  _ne: String
+  _text: String
+  _in: [String]
+  _nin: [String]
+  _and: [Filter]
+  _or: [Filter]
+  _not: [Filter]
+}
+
+type FoodProduct {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input FoodProduct_Filter {
+  _or: [FoodProduct_Filter]
+  _and: [FoodProduct_Filter]
+  _not: [FoodProduct_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input FoodProduct_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""Réalise une requête géographique sur la base d'une zone"""
+input GeoBounding {
+  sw_lng: String
+  sw_lat: String
+  ne_lng: String
+  ne_lat: String
+}
+
+"""
+Réalise une requête géographique sur la base de coordonnées et de distance.
+"""
+input GeoDistance {
+  lng: String
+  lat: String
+  distance: String
+}
+
+type GeographicReach {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input GeographicReach_Filter {
+  _or: [GeographicReach_Filter]
+  _and: [GeographicReach_Filter]
+  _not: [GeographicReach_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input GeographicReach_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type LandType {
+  _uri: String
+  hasLandTypeName: [LandTypeName]
+  proportion: [String]
+  rdf_type: [String]
+}
+
+input LandType_Filter {
+  _or: [LandType_Filter]
+  _and: [LandType_Filter]
+  _not: [LandType_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+  hasLandTypeName: LandTypeName_Filter
+  proportion: Filter
+  rdf_type: Filter
+}
+
+input LandType_Sort {
+  hasLandTypeName: LandTypeName_Sort
+  proportion: Sort
+}
+
+type LandTypeName {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input LandTypeName_Filter {
+  _or: [LandTypeName_Filter]
+  _and: [LandTypeName_Filter]
+  _not: [LandTypeName_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input LandTypeName_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type LangString {
+  """Literal value"""
+  value: String
+
+  """Literal language"""
+  lang: String
+}
+
+type LocomotionMode {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input LocomotionMode_Filter {
+  _or: [LocomotionMode_Filter]
+  _and: [LocomotionMode_Filter]
+  _not: [LocomotionMode_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input LocomotionMode_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Une Offre permet de consommer un Product. ex : la location d&#039;une chambre
+d&#039;hôtel, la visite d&#039;un musée, un cours de golf, ... Une Offre peut
+référencer une autre offre (un dîner au Restaurant peut être accessible via la
+location d&#039;une chambre d&#039;hôtel).
+"""
+type Offer {
+  _uri: String
+
+  """Les spécifications tarifaires de l&#039;offre concernée."""
+  schema_priceSpecification: [schema_PriceSpecification]
+
+  """Propose comme moyen de paiement pour l&#039;offre concernée."""
+  schema_acceptedPaymentMethod: [schema_PaymentMethod]
+  rdf_type: [String]
+}
+
+"""
+Une Offre permet de consommer un Product. ex : la location d&#039;une chambre
+d&#039;hôtel, la visite d&#039;un musée, un cours de golf, ... Une Offre peut
+référencer une autre offre (un dîner au Restaurant peut être accessible via la
+location d&#039;une chambre d&#039;hôtel).
+"""
+input Offer_Filter {
+  _or: [Offer_Filter]
+  _and: [Offer_Filter]
+  _not: [Offer_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Les spécifications tarifaires de l&#039;offre concernée."""
+  schema_priceSpecification: schema_PriceSpecification_Filter
+
+  """Propose comme moyen de paiement pour l&#039;offre concernée."""
+  schema_acceptedPaymentMethod: schema_PaymentMethod_Filter
+  rdf_type: Filter
+}
+
+"""
+Une Offre permet de consommer un Product. ex : la location d&#039;une chambre
+d&#039;hôtel, la visite d&#039;un musée, un cours de golf, ... Une Offre peut
+référencer une autre offre (un dîner au Restaurant peut être accessible via la
+location d&#039;une chambre d&#039;hôtel).
+"""
+input Offer_Sort {
+  """Les spécifications tarifaires de l&#039;offre concernée."""
+  schema_priceSpecification: schema_PriceSpecification_Sort
+
+  """Propose comme moyen de paiement pour l&#039;offre concernée."""
+  schema_acceptedPaymentMethod: schema_PaymentMethod_Sort
+}
+
+"""Une étape d&#039;itinéraire"""
+type olo_Slot {
+  _uri: String
+
+  """
+  Un produit dont ce produit est un composant. Ex: un camping pour un court de golf.
+  """
+  isAPartOf: [PointOfInterest]
+
+  """Le contenu de l&#039;élément de la liste ordonnancée."""
+  olo_item: [TourPath]
+
+  """a comme ordre de déroulement"""
+  olo_index: [Int]
+  rdf_type: [String]
+}
+
+"""Une étape d&#039;itinéraire"""
+input olo_Slot_Filter {
+  _or: [olo_Slot_Filter]
+  _and: [olo_Slot_Filter]
+  _not: [olo_Slot_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """
+  Un produit dont ce produit est un composant. Ex: un camping pour un court de golf.
+  """
+  isAPartOf: PointOfInterest_Filter
+
+  """Le contenu de l&#039;élément de la liste ordonnancée."""
+  olo_item: TourPath_Filter
+
+  """a comme ordre de déroulement"""
+  olo_index: Filter
+  rdf_type: Filter
+}
+
+"""Une étape d&#039;itinéraire"""
+input olo_Slot_Sort {
+  """
+  Un produit dont ce produit est un composant. Ex: un camping pour un court de golf.
+  """
+  isAPartOf: PointOfInterest_Sort
+
+  """Le contenu de l&#039;élément de la liste ordonnancée."""
+  olo_item: TourPath_Sort
+
+  """a comme ordre de déroulement"""
+  olo_index: Sort
+}
+
+"""Une audience composée d&#039;un groupe de personnes."""
+type PeopleAudience {
+  _uri: String
+
+  """
+  Le nombre maximum de personnes requises pour que l&#039;Audience soit valide.
+  Laisser cette propriété vide si aucun maximum n&#039;est requis.
+  """
+  requiredMaxPersonCount: [String]
+
+  """
+  Le nombre minimum de personnes requises pour que cette Audience soit valide.
+  Laisser cette propriété vide si aucun minimum n&#039;est requis.
+  """
+  requiredMinPersonCount: [String]
+
+  """Le genre suggéré."""
+  schema_suggestedGender: [schema_GenderType]
+
+  """L&#039;age maximum requis."""
+  schema_requiredMaxAge: [Int]
+
+  """L&#039;age minimum suggéré."""
+  schema_suggestedMinAge: [Int]
+
+  """L&#039;age maximum suggéré."""
+  schema_suggestedMaxAge: [Int]
+
+  """Le genre requis."""
+  schema_requiredGender: [schema_GenderType]
+
+  """L&#039;age minimum requis."""
+  schema_requiredMinAge: [Int]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""Une audience composée d&#039;un groupe de personnes."""
+input PeopleAudience_Filter {
+  _or: [PeopleAudience_Filter]
+  _and: [PeopleAudience_Filter]
+  _not: [PeopleAudience_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """
+  Le nombre maximum de personnes requises pour que l&#039;Audience soit valide.
+  Laisser cette propriété vide si aucun maximum n&#039;est requis.
+  """
+  requiredMaxPersonCount: Filter
+
+  """
+  Le nombre minimum de personnes requises pour que cette Audience soit valide.
+  Laisser cette propriété vide si aucun minimum n&#039;est requis.
+  """
+  requiredMinPersonCount: Filter
+
+  """Le genre suggéré."""
+  schema_suggestedGender: schema_GenderType_Filter
+
+  """L&#039;age maximum requis."""
+  schema_requiredMaxAge: Filter
+
+  """L&#039;age minimum suggéré."""
+  schema_suggestedMinAge: Filter
+
+  """L&#039;age maximum suggéré."""
+  schema_suggestedMaxAge: Filter
+
+  """Le genre requis."""
+  schema_requiredGender: schema_GenderType_Filter
+
+  """L&#039;age minimum requis."""
+  schema_requiredMinAge: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""Une audience composée d&#039;un groupe de personnes."""
+input PeopleAudience_Sort {
+  """
+  Le nombre maximum de personnes requises pour que l&#039;Audience soit valide.
+  Laisser cette propriété vide si aucun maximum n&#039;est requis.
+  """
+  requiredMaxPersonCount: Sort
+
+  """
+  Le nombre minimum de personnes requises pour que cette Audience soit valide.
+  Laisser cette propriété vide si aucun minimum n&#039;est requis.
+  """
+  requiredMinPersonCount: Sort
+
+  """Le genre suggéré."""
+  schema_suggestedGender: schema_GenderType_Sort
+
+  """L&#039;age maximum requis."""
+  schema_requiredMaxAge: Sort
+
+  """L&#039;age minimum suggéré."""
+  schema_suggestedMinAge: Sort
+
+  """L&#039;age maximum suggéré."""
+  schema_suggestedMaxAge: Sort
+
+  """Le genre requis."""
+  schema_requiredGender: schema_GenderType_Sort
+
+  """L&#039;age minimum requis."""
+  schema_requiredMinAge: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Une période est soit un intervalle de temps défini par une date et heure de
+début et de fin (ex: du 14/07/2016 à 00h au 14/08/2016 à 12h), soit une
+récurrence d&#039;intervalle (ex: tous les lundis et mercredi de 10h à 12h).
+Attention, Period n&#039;est pas similaire à schema:Event, car au sens
+schema.org, un Event est une manifestation qui peut proposer des schema:Offers.
+Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique. 
+"""
+type Period {
+  _uri: String
+
+  """
+  Utiliser cette propriété pour indiquer des informations complémentaires sur la période d&#039;ouverture.
+  """
+  openingDetails: [LangString]
+
+  """Le jour de la semaine auquel s&#039;applique cette période."""
+  appliesOnDay: [schema_DayOfWeek]
+
+  """
+  L&#039;heure à laquelle se termine l&#039;occurence de la période (hh:mm).
+  """
+  endTime: [String]
+
+  """
+  Date à laquelle la période se termine, sans réccurrence interne (aaaa-mm-jj).
+  """
+  endDate: [DateTime]
+
+  """
+  L&#039;heure à laquelle commence l&#039;occurence de la période (hh:mm).
+  """
+  startTime: [String]
+
+  """
+  Date à laquelle la période commence, sans récurrence interne (aaaa-mm-jj).
+  """
+  startDate: [DateTime]
+
+  """
+  Le numéro de la semaine sur laquelle s&#039;applique l&#039;horaire
+  d&#039;ouverture. On considère que si cette propriété n&#039;est pas
+  renseignée, alors l&#039;horaire s&#039;applique à toutes les semaines du mois.
+  """
+  weekOfMonth: [String]
+  rdf_type: [String]
+}
+
+"""
+Une période est soit un intervalle de temps défini par une date et heure de
+début et de fin (ex: du 14/07/2016 à 00h au 14/08/2016 à 12h), soit une
+récurrence d&#039;intervalle (ex: tous les lundis et mercredi de 10h à 12h).
+Attention, Period n&#039;est pas similaire à schema:Event, car au sens
+schema.org, un Event est une manifestation qui peut proposer des schema:Offers.
+Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique. 
+"""
+input Period_Filter {
+  _or: [Period_Filter]
+  _and: [Period_Filter]
+  _not: [Period_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """
+  Utiliser cette propriété pour indiquer des informations complémentaires sur la période d&#039;ouverture.
+  """
+  openingDetails: Filter
+
+  """Le jour de la semaine auquel s&#039;applique cette période."""
+  appliesOnDay: schema_DayOfWeek_Filter
+
+  """
+  L&#039;heure à laquelle se termine l&#039;occurence de la période (hh:mm).
+  """
+  endTime: Filter
+
+  """
+  Date à laquelle la période se termine, sans réccurrence interne (aaaa-mm-jj).
+  """
+  endDate: Filter
+
+  """
+  L&#039;heure à laquelle commence l&#039;occurence de la période (hh:mm).
+  """
+  startTime: Filter
+
+  """
+  Date à laquelle la période commence, sans récurrence interne (aaaa-mm-jj).
+  """
+  startDate: Filter
+
+  """
+  Le numéro de la semaine sur laquelle s&#039;applique l&#039;horaire
+  d&#039;ouverture. On considère que si cette propriété n&#039;est pas
+  renseignée, alors l&#039;horaire s&#039;applique à toutes les semaines du mois.
+  """
+  weekOfMonth: Filter
+  rdf_type: Filter
+}
+
+"""
+Une période est soit un intervalle de temps défini par une date et heure de
+début et de fin (ex: du 14/07/2016 à 00h au 14/08/2016 à 12h), soit une
+récurrence d&#039;intervalle (ex: tous les lundis et mercredi de 10h à 12h).
+Attention, Period n&#039;est pas similaire à schema:Event, car au sens
+schema.org, un Event est une manifestation qui peut proposer des schema:Offers.
+Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique. 
+"""
+input Period_Sort {
+  """
+  Utiliser cette propriété pour indiquer des informations complémentaires sur la période d&#039;ouverture.
+  """
+  openingDetails: Sort
+
+  """Le jour de la semaine auquel s&#039;applique cette période."""
+  appliesOnDay: schema_DayOfWeek_Sort
+
+  """
+  L&#039;heure à laquelle se termine l&#039;occurence de la période (hh:mm).
+  """
+  endTime: Sort
+
+  """
+  Date à laquelle la période se termine, sans réccurrence interne (aaaa-mm-jj).
+  """
+  endDate: Sort
+
+  """
+  L&#039;heure à laquelle commence l&#039;occurence de la période (hh:mm).
+  """
+  startTime: Sort
+
+  """
+  Date à laquelle la période commence, sans récurrence interne (aaaa-mm-jj).
+  """
+  startDate: Sort
+
+  """
+  Le numéro de la semaine sur laquelle s&#039;applique l&#039;horaire
+  d&#039;ouverture. On considère que si cette propriété n&#039;est pas
+  renseignée, alors l&#039;horaire s&#039;applique à toutes les semaines du mois.
+  """
+  weekOfMonth: Sort
+}
+
+type Place {
+  _uri: String
+
+  """L&#039;adresse postale du lieu concerné"""
+  schema_address: [schema_PostalAddress]
+
+  """Les coordonnées géographiques de la ressource"""
+  schema_geo: [schema_GeoCoordinates_schema_GeoShape]
+
+  """Les heures d&#039;ouverture d&#039;un lieu/service/produit."""
+  schema_openingHoursSpecification: [schema_OpeningHoursSpecification]
+
+  """Vrai si cette surface propose l&#039;air conditionné"""
+  airConditioning: [Boolean]
+
+  """Vrai si cette surface est non fumeur."""
+  noSmoking: [Boolean]
+  accessTips: [LangString]
+
+  """Vrai si le produit propose un accès à internet."""
+  internetAccess: [Boolean]
+
+  """
+  Nom de la station balnéaire, station de ski... quand elle diffère du nom officiel de la commune.
+  """
+  altInsee: [String]
+
+  """Vrai si les animaux sont acceptés dans ce lieu"""
+  petsAllowed: [Boolean]
+  rdf_type: [String]
+}
+
+input Place_Filter {
+  _or: [Place_Filter]
+  _and: [Place_Filter]
+  _not: [Place_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """L&#039;adresse postale du lieu concerné"""
+  schema_address: schema_PostalAddress_Filter
+
+  """Les coordonnées géographiques de la ressource"""
+  schema_geo: schema_GeoCoordinates_schema_GeoShape_Filter
+
+  """Les heures d&#039;ouverture d&#039;un lieu/service/produit."""
+  schema_openingHoursSpecification: schema_OpeningHoursSpecification_Filter
+
+  """Vrai si cette surface propose l&#039;air conditionné"""
+  airConditioning: Filter
+
+  """Vrai si cette surface est non fumeur."""
+  noSmoking: Filter
+  accessTips: Filter
+
+  """Vrai si le produit propose un accès à internet."""
+  internetAccess: Filter
+
+  """
+  Nom de la station balnéaire, station de ski... quand elle diffère du nom officiel de la commune.
+  """
+  altInsee: Filter
+
+  """Vrai si les animaux sont acceptés dans ce lieu"""
+  petsAllowed: Filter
+  rdf_type: Filter
+}
+
+input Place_Sort {
+  """L&#039;adresse postale du lieu concerné"""
+  schema_address: schema_PostalAddress_Sort
+
+  """Les coordonnées géographiques de la ressource"""
+  schema_geo: schema_GeoCoordinates_schema_GeoShape_Sort
+
+  """Les heures d&#039;ouverture d&#039;un lieu/service/produit."""
+  schema_openingHoursSpecification: schema_OpeningHoursSpecification_Sort
+
+  """Vrai si cette surface propose l&#039;air conditionné"""
+  airConditioning: Sort
+
+  """Vrai si cette surface est non fumeur."""
+  noSmoking: Sort
+  accessTips: Sort
+
+  """Vrai si le produit propose un accès à internet."""
+  internetAccess: Sort
+
+  """
+  Nom de la station balnéaire, station de ski... quand elle diffère du nom officiel de la commune.
+  """
+  altInsee: Sort
+
+  """Vrai si les animaux sont acceptés dans ce lieu"""
+  petsAllowed: Sort
+}
+
+"""
+Tout objet touristique qui mérite d&#039;être décrit et valorisé. Un POI (Point
+of Interest) est un élément touristique qui est géré par un Agent et qui peut
+être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
+Pratique, un Objet patrimonial
+"""
+type PointOfInterest {
+  _uri: String
+
+  """Description de la ressource."""
+  rdfs_comment: [LangString]
+
+  """
+  La classification de POI. Par exemple : festival, musée, chambre d’hôtes...
+  """
+  rdf_type: [String]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+
+  """
+  Un produit dont ce produit est un composant. Ex: un camping pour un court de golf.
+  """
+  isAPartOf: [PointOfInterest]
+
+  """La spécification des équipements et services que propose ce POI."""
+  hasFeature: [FeatureSpecification]
+
+  """Le thème auquel se rapporte, ou qu&#039;évoque ce POI."""
+  hasTheme: [Theme]
+
+  """Le thème environmental de POI."""
+  hasNeighborhood: [SpatialEnvironmentTheme]
+
+  """
+  L&#039;agent à contacter pour affaires liées à la direction / gestion de ce POI.
+  """
+  hasManagementContact: [Agent]
+
+  """L&#039;agent à contacter pour affaires générales relatives à ce POI."""
+  hasContact: [Agent]
+
+  """L&#039;agent qui a créé ce POI dans le système d&#039;information."""
+  hasBeenCreatedBy: [Agent]
+
+  """
+  Moyens de paiement et politique tarifaire (A la journée, Par personne, Tarifs..)
+  """
+  offers: [Offer]
+
+  """
+  Cette relation permet de relier deux POI entre eux lorsqu&#039;ils partagent une relation logique.
+  """
+  isReferencedBy: [PointOfInterest]
+
+  """
+  Un sous-produit de ce produit (par exemple si le produit est un composant de
+  celui-ci). Ex: un court de golf dans un camping.
+  """
+  hasPart: [PointOfInterest]
+
+  """
+  Le propriétaire de ce POI, ou a minima celui qui en propose les services.
+  """
+  isOwnedBy: [Agent]
+
+  """
+  La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+  """
+  isLocatedAt: [Place]
+
+  """L&#039;agent qui a publié ce POI dans le système d&#039;information."""
+  hasBeenPublishedBy: [Agent]
+
+  """La clientèle de de ce POI."""
+  hasClientTarget: [PeopleAudience]
+
+  """
+  L&#039;agent à contacter pour affaires de réservation relatives à ce POI.
+  """
+  hasBookingContact: [Agent]
+
+  """La portée géographique de ce POI : international... local."""
+  hasGeographicReach: [GeographicReach]
+
+  """L&#039;équipement ou service que ce POI propose."""
+  isEquippedWith: [Amenity]
+
+  """
+  L&#039;agent à contacter pour affaires administratives relatives à ce POI.
+  """
+  hasAdministrativeContact: [Agent]
+
+  """
+  Permet de relier un POI avec un autre POI similaire susceptible de plaire au
+  consommateur. Ex: Une piste de ski avec un loueur de skis.
+  """
+  suggests: [PointOfInterest]
+
+  """
+  L&#039;agent à contacter pour affaires liées à la communication liée à ce POI.
+  """
+  hasCommunicationContact: [Agent]
+
+  """
+  Description textuelle courte ou longue du POI pouvant être associée à une
+  audience. Par exemple, un POI peut avoir une description dédiée aux écoles et
+  une autre dédiée au grand public. Si une description n&#039;a aucune audience
+  renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
+  """
+  hasDescription: [Description]
+
+  """Un classement qui évalue ce POI."""
+  hasReview: [Review]
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: [ebucore_EditorialObject]
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: [ebucore_EditorialObject]
+
+  """Nombre de personnes pouvant être accueillies dans le POI"""
+  allowedPersons: [Int]
+
+  """
+  La date de création de la ressource n&#039;est pas privilégiée dans le
+  système, se baser davantage sur la date de publication : lastUpdate (aaaa-mm-jj)
+  """
+  creationDate: [DateTime]
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: [String]
+
+  """Vrai si le produit propose un accès aux personnes à mobilité réduite"""
+  reducedMobilityAccess: [Boolean]
+  lastUpdateDatatourisme: [DateTime]
+
+  """
+  Dispositions spéciales prises par l’entreprise ou le gestionnaire du site, par
+  exemple les modalités exceptionnelles d’accueil du public ou la fourniture des
+  services et prestations adaptées.
+  """
+  COVID19SpecialMeasures: [LangString]
+
+  """
+  Les langues proposées par l&#039;équipement d&#039;information. Il est
+  recommandé d&#039;utiliser comme valeur celles definies par la RFC 1766 qui
+  comprend un code de langage à deux caractères(venant du standard ISO 639),
+  éventuellement suivi d&#039;un code à deux lettres pour le pays (venant du
+  standard ISO 3166). Par exemple, &#039;en&#039; pour l&#039;anglais,
+  &#039;fr&#039; pour le français, ou&#039;en-uk&#039; pour l&#039;anglais
+  utilisé au Royaume-Uni.
+  """
+  availableLanguage: [String]
+  lastUpdate: [DateTime]
+
+  """La période sur laquelle se déroule cet évènement."""
+  takesPlaceAt: [Period]
+
+  """
+  Permet de référencer un produit qui est un consommable d&#039;un POI. Le
+  consommable ne peut avoir d&#039;existence propre (si le POI cible est
+  supprimé, le consommable doit l&#039;être également).
+  """
+  isConsumableFor: [PointOfInterest]
+
+  """
+  Détaille les caractéristiques de l&#039;itinéraire selon le mode de locomotion.
+  """
+  hasPracticeCondition: [PracticeCondition]
+
+  """Le type d&#039;itinéraire : A/R, boucle, itinérance."""
+  hasTourType: [TourType]
+  arrivedAt: [Place]
+
+  """
+  Définit les natures des terrains empruntés par l&#039;itinéraire avec une indication de proportion pour chacune.
+  """
+  hasLandType: [LandType]
+  markup: [LangString]
+
+  """Exprimé en mètres"""
+  negativeCumulDifference: [Float]
+
+  """
+  La distance entre le début et la fin d&#039;une étape ou du parcours entier. Exprimée en mètres.
+  """
+  tourDistance: [Float]
+
+  """Exprimé en mètres"""
+  positiveCumulDifference: [Float]
+
+  """
+  L&#039;altitude du point le plus haut sur le parcours. Exprimée en mètres.
+  """
+  maxAltitude: [Float]
+  duration: [String]
+
+  """La durée estimée du parcours ou de l&#039;étape. Exprimée en jours."""
+  durationDays: [Float]
+
+  """L&#039;altitude du point le plus bas sur le parcours."""
+  minAltitude: [Float]
+
+  """Un itinéraire peut être composé d&#039;une ou plusieurs étapes."""
+  olo_slot: [olo_Slot]
+  guided: [Boolean]
+  hasFloorSize: [schema_QuantitativeValue]
+
+  """Le type de mêts qui est proposé"""
+  providesFoodProduct: [FoodProduct]
+
+  """Vrai si la dégustation propose une vente à la propriété."""
+  saleOnSite: [Boolean]
+
+  """Le type de cuisine de cet établissement de restauration."""
+  providesCuisineOfType: [CuisineCategory]
+  allYouCanEat: [Boolean]
+  takeAway: [Boolean]
+  hasArchitecturalStyle: [ArchitecturalStyle]
+}
+
+"""
+Tout objet touristique qui mérite d&#039;être décrit et valorisé. Un POI (Point
+of Interest) est un élément touristique qui est géré par un Agent et qui peut
+être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
+Pratique, un Objet patrimonial
+"""
+input PointOfInterest_Filter {
+  _or: [PointOfInterest_Filter]
+  _and: [PointOfInterest_Filter]
+  _not: [PointOfInterest_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Description de la ressource."""
+  rdfs_comment: Filter
+
+  """
+  La classification de POI. Par exemple : festival, musée, chambre d’hôtes...
+  """
+  rdf_type: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+
+  """
+  Un produit dont ce produit est un composant. Ex: un camping pour un court de golf.
+  """
+  isAPartOf: PointOfInterest_Filter
+
+  """La spécification des équipements et services que propose ce POI."""
+  hasFeature: FeatureSpecification_Filter
+
+  """Le thème auquel se rapporte, ou qu&#039;évoque ce POI."""
+  hasTheme: Theme_Filter
+
+  """Le thème environmental de POI."""
+  hasNeighborhood: SpatialEnvironmentTheme_Filter
+
+  """
+  L&#039;agent à contacter pour affaires liées à la direction / gestion de ce POI.
+  """
+  hasManagementContact: Agent_Filter
+
+  """L&#039;agent à contacter pour affaires générales relatives à ce POI."""
+  hasContact: Agent_Filter
+
+  """L&#039;agent qui a créé ce POI dans le système d&#039;information."""
+  hasBeenCreatedBy: Agent_Filter
+
+  """
+  Moyens de paiement et politique tarifaire (A la journée, Par personne, Tarifs..)
+  """
+  offers: Offer_Filter
+
+  """
+  Cette relation permet de relier deux POI entre eux lorsqu&#039;ils partagent une relation logique.
+  """
+  isReferencedBy: PointOfInterest_Filter
+
+  """
+  Un sous-produit de ce produit (par exemple si le produit est un composant de
+  celui-ci). Ex: un court de golf dans un camping.
+  """
+  hasPart: PointOfInterest_Filter
+
+  """
+  Le propriétaire de ce POI, ou a minima celui qui en propose les services.
+  """
+  isOwnedBy: Agent_Filter
+
+  """
+  La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+  """
+  isLocatedAt: Place_Filter
+
+  """L&#039;agent qui a publié ce POI dans le système d&#039;information."""
+  hasBeenPublishedBy: Agent_Filter
+
+  """La clientèle de de ce POI."""
+  hasClientTarget: PeopleAudience_Filter
+
+  """
+  L&#039;agent à contacter pour affaires de réservation relatives à ce POI.
+  """
+  hasBookingContact: Agent_Filter
+
+  """La portée géographique de ce POI : international... local."""
+  hasGeographicReach: GeographicReach_Filter
+
+  """L&#039;équipement ou service que ce POI propose."""
+  isEquippedWith: Amenity_Filter
+
+  """
+  L&#039;agent à contacter pour affaires administratives relatives à ce POI.
+  """
+  hasAdministrativeContact: Agent_Filter
+
+  """
+  Permet de relier un POI avec un autre POI similaire susceptible de plaire au
+  consommateur. Ex: Une piste de ski avec un loueur de skis.
+  """
+  suggests: PointOfInterest_Filter
+
+  """
+  L&#039;agent à contacter pour affaires liées à la communication liée à ce POI.
+  """
+  hasCommunicationContact: Agent_Filter
+
+  """
+  Description textuelle courte ou longue du POI pouvant être associée à une
+  audience. Par exemple, un POI peut avoir une description dédiée aux écoles et
+  une autre dédiée au grand public. Si une description n&#039;a aucune audience
+  renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
+  """
+  hasDescription: Description_Filter
+
+  """Un classement qui évalue ce POI."""
+  hasReview: Review_Filter
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: ebucore_EditorialObject_Filter
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: ebucore_EditorialObject_Filter
+
+  """Nombre de personnes pouvant être accueillies dans le POI"""
+  allowedPersons: Filter
+
+  """
+  La date de création de la ressource n&#039;est pas privilégiée dans le
+  système, se baser davantage sur la date de publication : lastUpdate (aaaa-mm-jj)
+  """
+  creationDate: Filter
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Filter
+
+  """Vrai si le produit propose un accès aux personnes à mobilité réduite"""
+  reducedMobilityAccess: Filter
+  lastUpdateDatatourisme: Filter
+
+  """
+  Dispositions spéciales prises par l’entreprise ou le gestionnaire du site, par
+  exemple les modalités exceptionnelles d’accueil du public ou la fourniture des
+  services et prestations adaptées.
+  """
+  COVID19SpecialMeasures: Filter
+
+  """
+  Les langues proposées par l&#039;équipement d&#039;information. Il est
+  recommandé d&#039;utiliser comme valeur celles definies par la RFC 1766 qui
+  comprend un code de langage à deux caractères(venant du standard ISO 639),
+  éventuellement suivi d&#039;un code à deux lettres pour le pays (venant du
+  standard ISO 3166). Par exemple, &#039;en&#039; pour l&#039;anglais,
+  &#039;fr&#039; pour le français, ou&#039;en-uk&#039; pour l&#039;anglais
+  utilisé au Royaume-Uni.
+  """
+  availableLanguage: Filter
+  lastUpdate: Filter
+
+  """La période sur laquelle se déroule cet évènement."""
+  takesPlaceAt: Period_Filter
+
+  """
+  Permet de référencer un produit qui est un consommable d&#039;un POI. Le
+  consommable ne peut avoir d&#039;existence propre (si le POI cible est
+  supprimé, le consommable doit l&#039;être également).
+  """
+  isConsumableFor: PointOfInterest_Filter
+
+  """
+  Détaille les caractéristiques de l&#039;itinéraire selon le mode de locomotion.
+  """
+  hasPracticeCondition: PracticeCondition_Filter
+
+  """Le type d&#039;itinéraire : A/R, boucle, itinérance."""
+  hasTourType: TourType_Filter
+  arrivedAt: Place_Filter
+
+  """
+  Définit les natures des terrains empruntés par l&#039;itinéraire avec une indication de proportion pour chacune.
+  """
+  hasLandType: LandType_Filter
+  markup: Filter
+
+  """Exprimé en mètres"""
+  negativeCumulDifference: Filter
+
+  """
+  La distance entre le début et la fin d&#039;une étape ou du parcours entier. Exprimée en mètres.
+  """
+  tourDistance: Filter
+
+  """Exprimé en mètres"""
+  positiveCumulDifference: Filter
+
+  """
+  L&#039;altitude du point le plus haut sur le parcours. Exprimée en mètres.
+  """
+  maxAltitude: Filter
+  duration: Filter
+
+  """La durée estimée du parcours ou de l&#039;étape. Exprimée en jours."""
+  durationDays: Filter
+
+  """L&#039;altitude du point le plus bas sur le parcours."""
+  minAltitude: Filter
+
+  """Un itinéraire peut être composé d&#039;une ou plusieurs étapes."""
+  olo_slot: olo_Slot_Filter
+  guided: Filter
+  hasFloorSize: schema_QuantitativeValue_Filter
+
+  """Le type de mêts qui est proposé"""
+  providesFoodProduct: FoodProduct_Filter
+
+  """Vrai si la dégustation propose une vente à la propriété."""
+  saleOnSite: Filter
+
+  """Le type de cuisine de cet établissement de restauration."""
+  providesCuisineOfType: CuisineCategory_Filter
+  allYouCanEat: Filter
+  takeAway: Filter
+  hasArchitecturalStyle: ArchitecturalStyle_Filter
+}
+
+type PointOfInterest_ResultSet {
+  total: Int
+  results: [PointOfInterest]
+  query: String
+  stats: Statistics
+}
+
+"""
+Tout objet touristique qui mérite d&#039;être décrit et valorisé. Un POI (Point
+of Interest) est un élément touristique qui est géré par un Agent et qui peut
+être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
+Pratique, un Objet patrimonial
+"""
+input PointOfInterest_Sort {
+  """Description de la ressource."""
+  rdfs_comment: Sort
+
+  """
+  La classification de POI. Par exemple : festival, musée, chambre d’hôtes...
+  """
+  rdf_type: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+
+  """
+  Un produit dont ce produit est un composant. Ex: un camping pour un court de golf.
+  """
+  isAPartOf: PointOfInterest_Sort
+
+  """La spécification des équipements et services que propose ce POI."""
+  hasFeature: FeatureSpecification_Sort
+
+  """Le thème auquel se rapporte, ou qu&#039;évoque ce POI."""
+  hasTheme: Theme_Sort
+
+  """Le thème environmental de POI."""
+  hasNeighborhood: SpatialEnvironmentTheme_Sort
+
+  """
+  L&#039;agent à contacter pour affaires liées à la direction / gestion de ce POI.
+  """
+  hasManagementContact: Agent_Sort
+
+  """L&#039;agent à contacter pour affaires générales relatives à ce POI."""
+  hasContact: Agent_Sort
+
+  """L&#039;agent qui a créé ce POI dans le système d&#039;information."""
+  hasBeenCreatedBy: Agent_Sort
+
+  """
+  Moyens de paiement et politique tarifaire (A la journée, Par personne, Tarifs..)
+  """
+  offers: Offer_Sort
+
+  """
+  Cette relation permet de relier deux POI entre eux lorsqu&#039;ils partagent une relation logique.
+  """
+  isReferencedBy: PointOfInterest_Sort
+
+  """
+  Un sous-produit de ce produit (par exemple si le produit est un composant de
+  celui-ci). Ex: un court de golf dans un camping.
+  """
+  hasPart: PointOfInterest_Sort
+
+  """
+  Le propriétaire de ce POI, ou a minima celui qui en propose les services.
+  """
+  isOwnedBy: Agent_Sort
+
+  """
+  La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+  """
+  isLocatedAt: Place_Sort
+
+  """L&#039;agent qui a publié ce POI dans le système d&#039;information."""
+  hasBeenPublishedBy: Agent_Sort
+
+  """La clientèle de de ce POI."""
+  hasClientTarget: PeopleAudience_Sort
+
+  """
+  L&#039;agent à contacter pour affaires de réservation relatives à ce POI.
+  """
+  hasBookingContact: Agent_Sort
+
+  """La portée géographique de ce POI : international... local."""
+  hasGeographicReach: GeographicReach_Sort
+
+  """L&#039;équipement ou service que ce POI propose."""
+  isEquippedWith: Amenity_Sort
+
+  """
+  L&#039;agent à contacter pour affaires administratives relatives à ce POI.
+  """
+  hasAdministrativeContact: Agent_Sort
+
+  """
+  Permet de relier un POI avec un autre POI similaire susceptible de plaire au
+  consommateur. Ex: Une piste de ski avec un loueur de skis.
+  """
+  suggests: PointOfInterest_Sort
+
+  """
+  L&#039;agent à contacter pour affaires liées à la communication liée à ce POI.
+  """
+  hasCommunicationContact: Agent_Sort
+
+  """
+  Description textuelle courte ou longue du POI pouvant être associée à une
+  audience. Par exemple, un POI peut avoir une description dédiée aux écoles et
+  une autre dédiée au grand public. Si une description n&#039;a aucune audience
+  renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
+  """
+  hasDescription: Description_Sort
+
+  """Un classement qui évalue ce POI."""
+  hasReview: Review_Sort
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: ebucore_EditorialObject_Sort
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: ebucore_EditorialObject_Sort
+
+  """Nombre de personnes pouvant être accueillies dans le POI"""
+  allowedPersons: Sort
+
+  """
+  La date de création de la ressource n&#039;est pas privilégiée dans le
+  système, se baser davantage sur la date de publication : lastUpdate (aaaa-mm-jj)
+  """
+  creationDate: Sort
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Sort
+
+  """Vrai si le produit propose un accès aux personnes à mobilité réduite"""
+  reducedMobilityAccess: Sort
+  lastUpdateDatatourisme: Sort
+
+  """
+  Dispositions spéciales prises par l’entreprise ou le gestionnaire du site, par
+  exemple les modalités exceptionnelles d’accueil du public ou la fourniture des
+  services et prestations adaptées.
+  """
+  COVID19SpecialMeasures: Sort
+
+  """
+  Les langues proposées par l&#039;équipement d&#039;information. Il est
+  recommandé d&#039;utiliser comme valeur celles definies par la RFC 1766 qui
+  comprend un code de langage à deux caractères(venant du standard ISO 639),
+  éventuellement suivi d&#039;un code à deux lettres pour le pays (venant du
+  standard ISO 3166). Par exemple, &#039;en&#039; pour l&#039;anglais,
+  &#039;fr&#039; pour le français, ou&#039;en-uk&#039; pour l&#039;anglais
+  utilisé au Royaume-Uni.
+  """
+  availableLanguage: Sort
+  lastUpdate: Sort
+
+  """La période sur laquelle se déroule cet évènement."""
+  takesPlaceAt: Period_Sort
+
+  """
+  Permet de référencer un produit qui est un consommable d&#039;un POI. Le
+  consommable ne peut avoir d&#039;existence propre (si le POI cible est
+  supprimé, le consommable doit l&#039;être également).
+  """
+  isConsumableFor: PointOfInterest_Sort
+
+  """
+  Détaille les caractéristiques de l&#039;itinéraire selon le mode de locomotion.
+  """
+  hasPracticeCondition: PracticeCondition_Sort
+
+  """Le type d&#039;itinéraire : A/R, boucle, itinérance."""
+  hasTourType: TourType_Sort
+  arrivedAt: Place_Sort
+
+  """
+  Définit les natures des terrains empruntés par l&#039;itinéraire avec une indication de proportion pour chacune.
+  """
+  hasLandType: LandType_Sort
+  markup: Sort
+
+  """Exprimé en mètres"""
+  negativeCumulDifference: Sort
+
+  """
+  La distance entre le début et la fin d&#039;une étape ou du parcours entier. Exprimée en mètres.
+  """
+  tourDistance: Sort
+
+  """Exprimé en mètres"""
+  positiveCumulDifference: Sort
+
+  """
+  L&#039;altitude du point le plus haut sur le parcours. Exprimée en mètres.
+  """
+  maxAltitude: Sort
+  duration: Sort
+
+  """La durée estimée du parcours ou de l&#039;étape. Exprimée en jours."""
+  durationDays: Sort
+
+  """L&#039;altitude du point le plus bas sur le parcours."""
+  minAltitude: Sort
+
+  """Un itinéraire peut être composé d&#039;une ou plusieurs étapes."""
+  olo_slot: olo_Slot_Sort
+  guided: Sort
+  hasFloorSize: schema_QuantitativeValue_Sort
+
+  """Le type de mêts qui est proposé"""
+  providesFoodProduct: FoodProduct_Sort
+
+  """Vrai si la dégustation propose une vente à la propriété."""
+  saleOnSite: Sort
+
+  """Le type de cuisine de cet établissement de restauration."""
+  providesCuisineOfType: CuisineCategory_Sort
+  allYouCanEat: Sort
+  takeAway: Sort
+  hasArchitecturalStyle: ArchitecturalStyle_Sort
+}
+
+"""
+Détail des caractéristiques de l&#039;itinéraire selon le mode de locomotion.
+"""
+type PracticeCondition {
+  _uri: String
+
+  """Mode de locomotion praticable pour suivre cet itinéraire"""
+  hasLocomotionMode: [LocomotionMode]
+  hasDifficultyLevel: [DifficultyLevel]
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: [ebucore_EditorialObject]
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: [ebucore_EditorialObject]
+  practicalTips: [LangString]
+  duration: [String]
+
+  """La durée estimée du parcours ou de l&#039;étape. Exprimée en jours."""
+  durationDays: [Float]
+  rdf_type: [String]
+}
+
+"""
+Détail des caractéristiques de l&#039;itinéraire selon le mode de locomotion.
+"""
+input PracticeCondition_Filter {
+  _or: [PracticeCondition_Filter]
+  _and: [PracticeCondition_Filter]
+  _not: [PracticeCondition_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Mode de locomotion praticable pour suivre cet itinéraire"""
+  hasLocomotionMode: LocomotionMode_Filter
+  hasDifficultyLevel: DifficultyLevel_Filter
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: ebucore_EditorialObject_Filter
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: ebucore_EditorialObject_Filter
+  practicalTips: Filter
+  duration: Filter
+
+  """La durée estimée du parcours ou de l&#039;étape. Exprimée en jours."""
+  durationDays: Filter
+  rdf_type: Filter
+}
+
+"""
+Détail des caractéristiques de l&#039;itinéraire selon le mode de locomotion.
+"""
+input PracticeCondition_Sort {
+  """Mode de locomotion praticable pour suivre cet itinéraire"""
+  hasLocomotionMode: LocomotionMode_Sort
+  hasDifficultyLevel: DifficultyLevel_Sort
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: ebucore_EditorialObject_Sort
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: ebucore_EditorialObject_Sort
+  practicalTips: Sort
+  duration: Sort
+
+  """La durée estimée du parcours ou de l&#039;étape. Exprimée en jours."""
+  durationDays: Sort
+}
+
+"""
+Le mode de tarification. ex : Abonnement, à la journée, par personne, ...
+"""
+type PricingMode {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Le mode de tarification. ex : Abonnement, à la journée, par personne, ...
+"""
+input PricingMode_Filter {
+  _or: [PricingMode_Filter]
+  _and: [PricingMode_Filter]
+  _not: [PricingMode_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""
+Le mode de tarification. ex : Abonnement, à la journée, par personne, ...
+"""
+input PricingMode_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""Prestation sur laquelle s&#039;applique le tarif : Menu, Bungalow..."""
+type PricingOffer {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""Prestation sur laquelle s&#039;applique le tarif : Menu, Bungalow..."""
+input PricingOffer_Filter {
+  _or: [PricingOffer_Filter]
+  _and: [PricingOffer_Filter]
+  _not: [PricingOffer_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""Prestation sur laquelle s&#039;applique le tarif : Menu, Bungalow..."""
+input PricingOffer_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Une politique de tarification détermine les conditions de consommation : plein tarif (Générique), tarif réduit ...
+"""
+type PricingPolicy {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Une politique de tarification détermine les conditions de consommation : plein tarif (Générique), tarif réduit ...
+"""
+input PricingPolicy_Filter {
+  _or: [PricingPolicy_Filter]
+  _and: [PricingPolicy_Filter]
+  _not: [PricingPolicy_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""
+Une politique de tarification détermine les conditions de consommation : plein tarif (Générique), tarif réduit ...
+"""
+input PricingPolicy_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""La saison tarifaire. ex : Haute saison ..."""
+type PricingSeason {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""La saison tarifaire. ex : Haute saison ..."""
+input PricingSeason_Filter {
+  _or: [PricingSeason_Filter]
+  _and: [PricingSeason_Filter]
+  _not: [PricingSeason_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""La saison tarifaire. ex : Haute saison ..."""
+input PricingSeason_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""Valeur associée à un Classement."""
+type Rating {
+  _uri: String
+
+  """Le système de classement qui propose cette valeur."""
+  isRatingProvidedBy: [ReviewSystem]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""Valeur associée à un Classement."""
+input Rating_Filter {
+  _or: [Rating_Filter]
+  _and: [Rating_Filter]
+  _not: [Rating_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Le système de classement qui propose cette valeur."""
+  isRatingProvidedBy: ReviewSystem_Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""Valeur associée à un Classement."""
+input Rating_Sort {
+  """Le système de classement qui propose cette valeur."""
+  isRatingProvidedBy: ReviewSystem_Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Les régions constituent la première division adminsitrative en France. Ex:
+Bretagne Guadeloupe, Auvergne-Rhône-Alpes, ... Une région possède un code INSEE.
+"""
+type Region {
+  _uri: String
+
+  """est une subdivision du pays objet"""
+  isPartOfCountry: [schema_Country]
+
+  """Code INSEE de la division administrative"""
+  insee: [String]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Les régions constituent la première division adminsitrative en France. Ex:
+Bretagne Guadeloupe, Auvergne-Rhône-Alpes, ... Une région possède un code INSEE.
+"""
+input Region_Filter {
+  _or: [Region_Filter]
+  _and: [Region_Filter]
+  _not: [Region_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """est une subdivision du pays objet"""
+  isPartOfCountry: schema_Country_Filter
+
+  """Code INSEE de la division administrative"""
+  insee: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""
+Les régions constituent la première division adminsitrative en France. Ex:
+Bretagne Guadeloupe, Auvergne-Rhône-Alpes, ... Une région possède un code INSEE.
+"""
+input Region_Sort {
+  """est une subdivision du pays objet"""
+  isPartOfCountry: schema_Country_Sort
+
+  """Code INSEE de la division administrative"""
+  insee: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""
+Un classement permet d&#039;associer une valeur de classement à un POI. Ex: 3
+étoiles, 4 Epis, Plus beau village de France, ...
+"""
+type Review {
+  _uri: String
+
+  """La valeur d&#039;un classement."""
+  hasReviewValue: [Rating]
+
+  """La date à laquelle le classement a été délivré (aaaa-mm-jj)."""
+  reviewDeliveryDate: [DateTime]
+  reviewApprovalNumber: [String]
+
+  """Vrai si le classement est en cours."""
+  pending: [Boolean]
+
+  """La date à laquelle le classement expirera (aaaa-mm-jj)."""
+  reviewExpirationDate: [DateTime]
+
+  """La date de la première publication."""
+  schema_datePublished: [DateTime]
+  rdf_type: [String]
+}
+
+"""
+Un classement permet d&#039;associer une valeur de classement à un POI. Ex: 3
+étoiles, 4 Epis, Plus beau village de France, ...
+"""
+input Review_Filter {
+  _or: [Review_Filter]
+  _and: [Review_Filter]
+  _not: [Review_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """La valeur d&#039;un classement."""
+  hasReviewValue: Rating_Filter
+
+  """La date à laquelle le classement a été délivré (aaaa-mm-jj)."""
+  reviewDeliveryDate: Filter
+  reviewApprovalNumber: Filter
+
+  """Vrai si le classement est en cours."""
+  pending: Filter
+
+  """La date à laquelle le classement expirera (aaaa-mm-jj)."""
+  reviewExpirationDate: Filter
+
+  """La date de la première publication."""
+  schema_datePublished: Filter
+  rdf_type: Filter
+}
+
+"""
+Un classement permet d&#039;associer une valeur de classement à un POI. Ex: 3
+étoiles, 4 Epis, Plus beau village de France, ...
+"""
+input Review_Sort {
+  """La valeur d&#039;un classement."""
+  hasReviewValue: Rating_Sort
+
+  """La date à laquelle le classement a été délivré (aaaa-mm-jj)."""
+  reviewDeliveryDate: Sort
+  reviewApprovalNumber: Sort
+
+  """Vrai si le classement est en cours."""
+  pending: Sort
+
+  """La date à laquelle le classement expirera (aaaa-mm-jj)."""
+  reviewExpirationDate: Sort
+
+  """La date de la première publication."""
+  schema_datePublished: Sort
+}
+
+"""
+Un système de classement décrit les valeurs possibles d&#039;un classement
+donné. Un système de classement est généralement éligible à un type de POI
+donné. ex: Guide Michelin, Plus beaux villages de France, ...
+"""
+type ReviewSystem {
+  _uri: String
+
+  """Les valeurs que ce système de classement autorise."""
+  allowsRating: [Rating]
+
+  """
+  La durée de validité d&#039;un classement, depuis sa reviewDeliveryDate. Exprimée en nombre de jours.
+  """
+  reviewValidityDuration: [Int]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+
+  """La pire valeur que ce système de classement propose."""
+  worstRating: [Int]
+
+  """Le score le plus haut que le système de classement propose."""
+  bestRating: [Int]
+  rdf_type: [String]
+}
+
+"""
+Un système de classement décrit les valeurs possibles d&#039;un classement
+donné. Un système de classement est généralement éligible à un type de POI
+donné. ex: Guide Michelin, Plus beaux villages de France, ...
+"""
+input ReviewSystem_Filter {
+  _or: [ReviewSystem_Filter]
+  _and: [ReviewSystem_Filter]
+  _not: [ReviewSystem_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Les valeurs que ce système de classement autorise."""
+  allowsRating: Rating_Filter
+
+  """
+  La durée de validité d&#039;un classement, depuis sa reviewDeliveryDate. Exprimée en nombre de jours.
+  """
+  reviewValidityDuration: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+
+  """La pire valeur que ce système de classement propose."""
+  worstRating: Filter
+
+  """Le score le plus haut que le système de classement propose."""
+  bestRating: Filter
+  rdf_type: Filter
+}
+
+"""
+Un système de classement décrit les valeurs possibles d&#039;un classement
+donné. Un système de classement est généralement éligible à un type de POI
+donné. ex: Guide Michelin, Plus beaux villages de France, ...
+"""
+input ReviewSystem_Sort {
+  """Les valeurs que ce système de classement autorise."""
+  allowsRating: Rating_Sort
+
+  """
+  La durée de validité d&#039;un classement, depuis sa reviewDeliveryDate. Exprimée en nombre de jours.
+  """
+  reviewValidityDuration: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+
+  """La pire valeur que ce système de classement propose."""
+  worstRating: Sort
+
+  """Le score le plus haut que le système de classement propose."""
+  bestRating: Sort
+}
+
+"""La disposition de la salle. Ex: en banquet, en U, en cocktail, ..."""
+type RoomLayout {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""La disposition de la salle. Ex: en banquet, en U, en cocktail, ..."""
+input RoomLayout_Filter {
+  _or: [RoomLayout_Filter]
+  _and: [RoomLayout_Filter]
+  _not: [RoomLayout_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""La disposition de la salle. Ex: en banquet, en U, en cocktail, ..."""
+input RoomLayout_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type schema_Country {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input schema_Country_Filter {
+  _or: [schema_Country_Filter]
+  _and: [schema_Country_Filter]
+  _not: [schema_Country_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input schema_Country_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type schema_DayOfWeek {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input schema_DayOfWeek_Filter {
+  _or: [schema_DayOfWeek_Filter]
+  _and: [schema_DayOfWeek_Filter]
+  _not: [schema_DayOfWeek_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input schema_DayOfWeek_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""Le genre d&#039;une personne."""
+type schema_GenderType {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""Le genre d&#039;une personne."""
+input schema_GenderType_Filter {
+  _or: [schema_GenderType_Filter]
+  _and: [schema_GenderType_Filter]
+  _not: [schema_GenderType_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""Le genre d&#039;une personne."""
+input schema_GenderType_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type schema_GeoCoordinates_schema_GeoShape {
+  _uri: String
+
+  """Valeur de la longitude de la ressource."""
+  schema_longitude: [Float]
+
+  """Valeur de l&#039;altitude de la ressource."""
+  schema_elevation: [Float]
+
+  """Valeur de la latitude de la ressource."""
+  schema_latitude: [Float]
+
+  """
+  Un polygone est la zone entourée par un chemin point-à-point pour lequel les
+  points de départ et de fin sont identiques. Un polygone est exprimé sous la
+  forme d&#039;une série de quatre points délimités par espace ou plus où le
+  premier et le dernier point sont identiques.
+  """
+  schema_polygon: [String]
+
+  """
+  Une ligne est un chemin point à point composé de deux points ou plus. Une
+  ligne est exprimée sous la forme d&#039;une série de deux ou plusieurs objets
+  point séparés par un caractère espace.
+  """
+  schema_line: [String]
+
+  """
+  Un cercle est la zone circulaire d&#039;un rayon spécifié, centré à une
+  latitude et à une longitude spécifiées. Un cercle est exprimé en paire suivi
+  d&#039;un rayon en mètres.
+  """
+  schema_circle: [String]
+
+  """
+  Une boîte est une zone définie par le rectangle formé par deux points. Le
+  premier point est le coin inférieur, le deuxième point est le coin supérieur.
+  Une boîte est exprimée en deux points séparés par un caractère espace.
+  """
+  schema_box: [String]
+  rdf_type: [String]
+}
+
+input schema_GeoCoordinates_schema_GeoShape_Filter {
+  _or: [schema_GeoCoordinates_schema_GeoShape_Filter]
+  _and: [schema_GeoCoordinates_schema_GeoShape_Filter]
+  _not: [schema_GeoCoordinates_schema_GeoShape_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Valeur de la longitude de la ressource."""
+  schema_longitude: Filter
+
+  """Valeur de l&#039;altitude de la ressource."""
+  schema_elevation: Filter
+
+  """Valeur de la latitude de la ressource."""
+  schema_latitude: Filter
+
+  """
+  Un polygone est la zone entourée par un chemin point-à-point pour lequel les
+  points de départ et de fin sont identiques. Un polygone est exprimé sous la
+  forme d&#039;une série de quatre points délimités par espace ou plus où le
+  premier et le dernier point sont identiques.
+  """
+  schema_polygon: Filter
+
+  """
+  Une ligne est un chemin point à point composé de deux points ou plus. Une
+  ligne est exprimée sous la forme d&#039;une série de deux ou plusieurs objets
+  point séparés par un caractère espace.
+  """
+  schema_line: Filter
+
+  """
+  Un cercle est la zone circulaire d&#039;un rayon spécifié, centré à une
+  latitude et à une longitude spécifiées. Un cercle est exprimé en paire suivi
+  d&#039;un rayon en mètres.
+  """
+  schema_circle: Filter
+
+  """
+  Une boîte est une zone définie par le rectangle formé par deux points. Le
+  premier point est le coin inférieur, le deuxième point est le coin supérieur.
+  Une boîte est exprimée en deux points séparés par un caractère espace.
+  """
+  schema_box: Filter
+  rdf_type: Filter
+}
+
+input schema_GeoCoordinates_schema_GeoShape_Sort {
+  """Valeur de la longitude de la ressource."""
+  schema_longitude: Sort
+
+  """Valeur de l&#039;altitude de la ressource."""
+  schema_elevation: Sort
+
+  """Valeur de la latitude de la ressource."""
+  schema_latitude: Sort
+
+  """
+  Un polygone est la zone entourée par un chemin point-à-point pour lequel les
+  points de départ et de fin sont identiques. Un polygone est exprimé sous la
+  forme d&#039;une série de quatre points délimités par espace ou plus où le
+  premier et le dernier point sont identiques.
+  """
+  schema_polygon: Sort
+
+  """
+  Une ligne est un chemin point à point composé de deux points ou plus. Une
+  ligne est exprimée sous la forme d&#039;une série de deux ou plusieurs objets
+  point séparés par un caractère espace.
+  """
+  schema_line: Sort
+
+  """
+  Un cercle est la zone circulaire d&#039;un rayon spécifié, centré à une
+  latitude et à une longitude spécifiées. Un cercle est exprimé en paire suivi
+  d&#039;un rayon en mètres.
+  """
+  schema_circle: Sort
+
+  """
+  Une boîte est une zone définie par le rectangle formé par deux points. Le
+  premier point est le coin inférieur, le deuxième point est le coin supérieur.
+  Une boîte est exprimée en deux points séparés par un caractère espace.
+  """
+  schema_box: Sort
+}
+
+type schema_OpeningHoursSpecification {
+  _uri: String
+
+  """
+  Le jour de la semaine pour laquelle ces heures d&#039;ouverture sont valides.
+  """
+  schema_dayOfWeek: [schema_DayOfWeek]
+  additionalInformation: [LangString]
+
+  """
+  L&#039;heure de fermeture du lieu ou du service le (s) jour (s) donné (s) de la semaine.
+  """
+  schema_closes: [String]
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: [String]
+
+  """La date de fin de la période d&#039;ouverture (aaaa-mm-jjThh:mm:ss)."""
+  schema_validThrough: [DateTime]
+
+  """La date de début de la période d&#039;ouverture (aaaa-mm-jjThh:mm:ss)."""
+  schema_validFrom: [DateTime]
+
+  """
+  L&#039;heure d&#039;ouverture du lieu ou du service le (s) jour (s) donné (s) de la semaine.
+  """
+  schema_opens: [String]
+
+  """
+  Le numéro de la semaine sur laquelle s&#039;applique l&#039;horaire
+  d&#039;ouverture. On considère que si cette propriété n&#039;est pas
+  renseignée, alors l&#039;horaire s&#039;applique à toutes les semaines du mois.
+  """
+  weekOfMonth: [String]
+  rdf_type: [String]
+}
+
+input schema_OpeningHoursSpecification_Filter {
+  _or: [schema_OpeningHoursSpecification_Filter]
+  _and: [schema_OpeningHoursSpecification_Filter]
+  _not: [schema_OpeningHoursSpecification_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """
+  Le jour de la semaine pour laquelle ces heures d&#039;ouverture sont valides.
+  """
+  schema_dayOfWeek: schema_DayOfWeek_Filter
+  additionalInformation: Filter
+
+  """
+  L&#039;heure de fermeture du lieu ou du service le (s) jour (s) donné (s) de la semaine.
+  """
+  schema_closes: Filter
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Filter
+
+  """La date de fin de la période d&#039;ouverture (aaaa-mm-jjThh:mm:ss)."""
+  schema_validThrough: Filter
+
+  """La date de début de la période d&#039;ouverture (aaaa-mm-jjThh:mm:ss)."""
+  schema_validFrom: Filter
+
+  """
+  L&#039;heure d&#039;ouverture du lieu ou du service le (s) jour (s) donné (s) de la semaine.
+  """
+  schema_opens: Filter
+
+  """
+  Le numéro de la semaine sur laquelle s&#039;applique l&#039;horaire
+  d&#039;ouverture. On considère que si cette propriété n&#039;est pas
+  renseignée, alors l&#039;horaire s&#039;applique à toutes les semaines du mois.
+  """
+  weekOfMonth: Filter
+  rdf_type: Filter
+}
+
+input schema_OpeningHoursSpecification_Sort {
+  """
+  Le jour de la semaine pour laquelle ces heures d&#039;ouverture sont valides.
+  """
+  schema_dayOfWeek: schema_DayOfWeek_Sort
+  additionalInformation: Sort
+
+  """
+  L&#039;heure de fermeture du lieu ou du service le (s) jour (s) donné (s) de la semaine.
+  """
+  schema_closes: Sort
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Sort
+
+  """La date de fin de la période d&#039;ouverture (aaaa-mm-jjThh:mm:ss)."""
+  schema_validThrough: Sort
+
+  """La date de début de la période d&#039;ouverture (aaaa-mm-jjThh:mm:ss)."""
+  schema_validFrom: Sort
+
+  """
+  L&#039;heure d&#039;ouverture du lieu ou du service le (s) jour (s) donné (s) de la semaine.
+  """
+  schema_opens: Sort
+
+  """
+  Le numéro de la semaine sur laquelle s&#039;applique l&#039;horaire
+  d&#039;ouverture. On considère que si cette propriété n&#039;est pas
+  renseignée, alors l&#039;horaire s&#039;applique à toutes les semaines du mois.
+  """
+  weekOfMonth: Sort
+}
+
+type schema_PaymentMethod {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input schema_PaymentMethod_Filter {
+  _or: [schema_PaymentMethod_Filter]
+  _and: [schema_PaymentMethod_Filter]
+  _not: [schema_PaymentMethod_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input schema_PaymentMethod_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""Adresse postale"""
+type schema_PostalAddress {
+  _uri: String
+
+  """La ville en format texte."""
+  schema_addressLocality: [String]
+
+  """Le code postal d&#039;une adresse."""
+  schema_postalCode: [String]
+
+  """Le nom de rue incluant le numéro d&#039;une adresse."""
+  schema_streetAddress: [String]
+
+  """Le numéro de la boîte postale."""
+  schema_postOfficeBoxNumber: [String]
+
+  """La localité de cette addresse (code INSEE de la commune)"""
+  hasAddressCity: [City]
+
+  """
+  Le CEDEX (ou Courrier d&#039;Entreprise à Distribution EXceptionnelle), composé de 5 chiffres.
+  """
+  cedex: [String]
+  rdf_type: [String]
+}
+
+"""Adresse postale"""
+input schema_PostalAddress_Filter {
+  _or: [schema_PostalAddress_Filter]
+  _and: [schema_PostalAddress_Filter]
+  _not: [schema_PostalAddress_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """La ville en format texte."""
+  schema_addressLocality: Filter
+
+  """Le code postal d&#039;une adresse."""
+  schema_postalCode: Filter
+
+  """Le nom de rue incluant le numéro d&#039;une adresse."""
+  schema_streetAddress: Filter
+
+  """Le numéro de la boîte postale."""
+  schema_postOfficeBoxNumber: Filter
+
+  """La localité de cette addresse (code INSEE de la commune)"""
+  hasAddressCity: City_Filter
+
+  """
+  Le CEDEX (ou Courrier d&#039;Entreprise à Distribution EXceptionnelle), composé de 5 chiffres.
+  """
+  cedex: Filter
+  rdf_type: Filter
+}
+
+"""Adresse postale"""
+input schema_PostalAddress_Sort {
+  """La ville en format texte."""
+  schema_addressLocality: Sort
+
+  """Le code postal d&#039;une adresse."""
+  schema_postalCode: Sort
+
+  """Le nom de rue incluant le numéro d&#039;une adresse."""
+  schema_streetAddress: Sort
+
+  """Le numéro de la boîte postale."""
+  schema_postOfficeBoxNumber: Sort
+
+  """La localité de cette addresse (code INSEE de la commune)"""
+  hasAddressCity: City_Sort
+
+  """
+  Le CEDEX (ou Courrier d&#039;Entreprise à Distribution EXceptionnelle), composé de 5 chiffres.
+  """
+  cedex: Sort
+}
+
+type schema_PriceSpecification {
+  _uri: String
+
+  """La quantité disponible pour ce tarif."""
+  schema_eligibleQuantity: [String]
+
+  """Valeur du tarif maximum."""
+  schema_maxPrice: [Float]
+  additionalInformation: [LangString]
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: [String]
+
+  """La devise en 3 lettres (format ISO 4217). Exemple: EUR ."""
+  schema_priceCurrency: [String]
+
+  """Valeur du tarif."""
+  schema_price: [Float]
+  name: [LangString]
+
+  """Valeur du tarif minimum."""
+  schema_minPrice: [Float]
+
+  """
+  Mode d&#039;application du tarif. Des exemples de mode d&#039;application de tarif sont : A la journée, Par personne, etc.
+  """
+  hasPricingMode: [PricingMode]
+
+  """La période sur laquelle s&#039;applique ce tarif."""
+  appliesOnPeriod: [Period]
+
+  """La politique de prix qui s&#039;applique. Ex: Plein tarif."""
+  hasEligiblePolicy: [PricingPolicy]
+
+  """
+  Le type de public auquel ce prix s&#039;applique. ex: Adolescents, Adultes, ...
+  """
+  hasEligibleAudience: [PeopleAudience]
+
+  """Prestation sur laquelle s&#039;applique la spécification tarifaire."""
+  hasPricingOffer: [PricingOffer]
+
+  """Saison à laquelle s&#039;applique la spécification tarifaire."""
+  hasPricingSeason: [PricingSeason]
+  rdf_type: [String]
+}
+
+input schema_PriceSpecification_Filter {
+  _or: [schema_PriceSpecification_Filter]
+  _and: [schema_PriceSpecification_Filter]
+  _not: [schema_PriceSpecification_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """La quantité disponible pour ce tarif."""
+  schema_eligibleQuantity: Filter
+
+  """Valeur du tarif maximum."""
+  schema_maxPrice: Filter
+  additionalInformation: Filter
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Filter
+
+  """La devise en 3 lettres (format ISO 4217). Exemple: EUR ."""
+  schema_priceCurrency: Filter
+
+  """Valeur du tarif."""
+  schema_price: Filter
+  name: Filter
+
+  """Valeur du tarif minimum."""
+  schema_minPrice: Filter
+
+  """
+  Mode d&#039;application du tarif. Des exemples de mode d&#039;application de tarif sont : A la journée, Par personne, etc.
+  """
+  hasPricingMode: PricingMode_Filter
+
+  """La période sur laquelle s&#039;applique ce tarif."""
+  appliesOnPeriod: Period_Filter
+
+  """La politique de prix qui s&#039;applique. Ex: Plein tarif."""
+  hasEligiblePolicy: PricingPolicy_Filter
+
+  """
+  Le type de public auquel ce prix s&#039;applique. ex: Adolescents, Adultes, ...
+  """
+  hasEligibleAudience: PeopleAudience_Filter
+
+  """Prestation sur laquelle s&#039;applique la spécification tarifaire."""
+  hasPricingOffer: PricingOffer_Filter
+
+  """Saison à laquelle s&#039;applique la spécification tarifaire."""
+  hasPricingSeason: PricingSeason_Filter
+  rdf_type: Filter
+}
+
+input schema_PriceSpecification_Sort {
+  """La quantité disponible pour ce tarif."""
+  schema_eligibleQuantity: Sort
+
+  """Valeur du tarif maximum."""
+  schema_maxPrice: Sort
+  additionalInformation: Sort
+
+  """Identifiant de la ressource chez le producteur."""
+  dc_identifier: Sort
+
+  """La devise en 3 lettres (format ISO 4217). Exemple: EUR ."""
+  schema_priceCurrency: Sort
+
+  """Valeur du tarif."""
+  schema_price: Sort
+  name: Sort
+
+  """Valeur du tarif minimum."""
+  schema_minPrice: Sort
+
+  """
+  Mode d&#039;application du tarif. Des exemples de mode d&#039;application de tarif sont : A la journée, Par personne, etc.
+  """
+  hasPricingMode: PricingMode_Sort
+
+  """La période sur laquelle s&#039;applique ce tarif."""
+  appliesOnPeriod: Period_Sort
+
+  """La politique de prix qui s&#039;applique. Ex: Plein tarif."""
+  hasEligiblePolicy: PricingPolicy_Sort
+
+  """
+  Le type de public auquel ce prix s&#039;applique. ex: Adolescents, Adultes, ...
+  """
+  hasEligibleAudience: PeopleAudience_Sort
+
+  """Prestation sur laquelle s&#039;applique la spécification tarifaire."""
+  hasPricingOffer: PricingOffer_Sort
+
+  """Saison à laquelle s&#039;applique la spécification tarifaire."""
+  hasPricingSeason: PricingSeason_Sort
+}
+
+"""Une valeur associée à une unité."""
+type schema_QuantitativeValue {
+  _uri: String
+
+  """Valeur, quantité minimum de la propriété concernée."""
+  schema_minValue: [Float]
+
+  """Précise l&#039;unité de la valeur associée."""
+  schema_unitText: [String]
+
+  """Valeur, quantité de la propriété concernée."""
+  schema_value: [Float]
+
+  """Valeur, quantité maximum de la propriété concernée."""
+  schema_maxValue: [Float]
+  rdf_type: [String]
+}
+
+"""Une valeur associée à une unité."""
+input schema_QuantitativeValue_Filter {
+  _or: [schema_QuantitativeValue_Filter]
+  _and: [schema_QuantitativeValue_Filter]
+  _not: [schema_QuantitativeValue_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Valeur, quantité minimum de la propriété concernée."""
+  schema_minValue: Filter
+
+  """Précise l&#039;unité de la valeur associée."""
+  schema_unitText: Filter
+
+  """Valeur, quantité de la propriété concernée."""
+  schema_value: Filter
+
+  """Valeur, quantité maximum de la propriété concernée."""
+  schema_maxValue: Filter
+  rdf_type: Filter
+}
+
+"""Une valeur associée à une unité."""
+input schema_QuantitativeValue_Sort {
+  """Valeur, quantité minimum de la propriété concernée."""
+  schema_minValue: Sort
+
+  """Précise l&#039;unité de la valeur associée."""
+  schema_unitText: Sort
+
+  """Valeur, quantité de la propriété concernée."""
+  schema_value: Sort
+
+  """Valeur, quantité maximum de la propriété concernée."""
+  schema_maxValue: Sort
+}
+
+"""Permet d'ordonner les résulats."""
+input Sort {
+  order: String
+}
+
+type SpatialEnvironmentTheme {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+input SpatialEnvironmentTheme_Filter {
+  _or: [SpatialEnvironmentTheme_Filter]
+  _and: [SpatialEnvironmentTheme_Filter]
+  _not: [SpatialEnvironmentTheme_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+input SpatialEnvironmentTheme_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+type Statistics {
+  execution: Float
+  count: Float
+  hydration: Float
+  total: Float
+}
+
+"""
+Un thème est un sujet auquel un POI peut se rapporter. Ex: la peinture, l&#039;histoire, le textile, ...
+"""
+type Theme {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""
+Un thème est un sujet auquel un POI peut se rapporter. Ex: la peinture, l&#039;histoire, le textile, ...
+"""
+input Theme_Filter {
+  _or: [Theme_Filter]
+  _and: [Theme_Filter]
+  _not: [Theme_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""
+Un thème est un sujet auquel un POI peut se rapporter. Ex: la peinture, l&#039;histoire, le textile, ...
+"""
+input Theme_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+
+"""Le détail d&#039;une étape d&#039;itinéraire."""
+type TourPath {
+  _uri: String
+
+  """Description longue de la ressource."""
+  dc_description: [LangString]
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  arrivedAt: [Place]
+
+  """
+  La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+  """
+  isLocatedAt: [Place]
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: [ebucore_EditorialObject]
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: [ebucore_EditorialObject]
+  markup: [LangString]
+
+  """Exprimé en mètres"""
+  negativeCumulDifference: [Float]
+
+  """
+  La distance entre le début et la fin d&#039;une étape ou du parcours entier. Exprimée en mètres.
+  """
+  tourDistance: [Float]
+
+  """Exprimé en mètres"""
+  positiveCumulDifference: [Float]
+
+  """
+  L&#039;altitude du point le plus haut sur le parcours. Exprimée en mètres.
+  """
+  maxAltitude: [Float]
+
+  """L&#039;altitude du point le plus bas sur le parcours."""
+  minAltitude: [Float]
+  rdf_type: [String]
+}
+
+"""Le détail d&#039;une étape d&#039;itinéraire."""
+input TourPath_Filter {
+  _or: [TourPath_Filter]
+  _and: [TourPath_Filter]
+  _not: [TourPath_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Description longue de la ressource."""
+  dc_description: Filter
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  arrivedAt: Place_Filter
+
+  """
+  La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+  """
+  isLocatedAt: Place_Filter
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: ebucore_EditorialObject_Filter
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: ebucore_EditorialObject_Filter
+  markup: Filter
+
+  """Exprimé en mètres"""
+  negativeCumulDifference: Filter
+
+  """
+  La distance entre le début et la fin d&#039;une étape ou du parcours entier. Exprimée en mètres.
+  """
+  tourDistance: Filter
+
+  """Exprimé en mètres"""
+  positiveCumulDifference: Filter
+
+  """
+  L&#039;altitude du point le plus haut sur le parcours. Exprimée en mètres.
+  """
+  maxAltitude: Filter
+
+  """L&#039;altitude du point le plus bas sur le parcours."""
+  minAltitude: Filter
+  rdf_type: Filter
+}
+
+"""Le détail d&#039;une étape d&#039;itinéraire."""
+input TourPath_Sort {
+  """Description longue de la ressource."""
+  dc_description: Sort
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+  arrivedAt: Place_Sort
+
+  """
+  La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+  """
+  isLocatedAt: Place_Sort
+
+  """Un média considéré comme représentation principale du POI."""
+  hasMainRepresentation: ebucore_EditorialObject_Sort
+
+  """
+  Une représentation est un Media qui est lié à un POI. ex : une photo d&#039;un POI, un document PDF promotionnel, ...
+  """
+  hasRepresentation: ebucore_EditorialObject_Sort
+  markup: Sort
+
+  """Exprimé en mètres"""
+  negativeCumulDifference: Sort
+
+  """
+  La distance entre le début et la fin d&#039;une étape ou du parcours entier. Exprimée en mètres.
+  """
+  tourDistance: Sort
+
+  """Exprimé en mètres"""
+  positiveCumulDifference: Sort
+
+  """
+  L&#039;altitude du point le plus haut sur le parcours. Exprimée en mètres.
+  """
+  maxAltitude: Sort
+
+  """L&#039;altitude du point le plus bas sur le parcours."""
+  minAltitude: Sort
+}
+
+"""Une typologie avec laquelle un itinéraire peut être typé."""
+type TourType {
+  _uri: String
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: [LangString]
+  rdf_type: [String]
+}
+
+"""Une typologie avec laquelle un itinéraire peut être typé."""
+input TourType_Filter {
+  _or: [TourType_Filter]
+  _and: [TourType_Filter]
+  _not: [TourType_Filter]
+  _eq: String
+  _in: [String]
+  _nin: [String]
+  _geo_distance: GeoDistance
+  _geo_bounding: GeoBounding
+
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Filter
+  rdf_type: Filter
+}
+
+"""Une typologie avec laquelle un itinéraire peut être typé."""
+input TourType_Sort {
+  """Etiquette courte décrivant la ressource."""
+  rdfs_label: Sort
+}
+

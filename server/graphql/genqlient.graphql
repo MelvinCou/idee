@@ -1,0 +1,5 @@
+query GetTotal {
+  poi {
+    total
+  }
+}
