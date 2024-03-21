@@ -7,9 +7,9 @@ services:
     environment:
       JAVA_OPTS: "-Xms1g -Xmx4g"
     volumes:
-      - ./database/dataset:/docker-entrypoint-initdb.d
+      - ./datatourisme/dataset:/docker-entrypoint-initdb.d
   datatourisme:
-    build: database
+    build: datatourisme
     restart: always
     ports:
       - 8081:80
