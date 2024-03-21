@@ -27,28 +27,25 @@ import (
 //	@contact.email				support@swagger.io
 //	@license.name				Apache 2.0
 //	@license.url				http://www.apache.org/licenses/LICENSE-2.0.html
-//	@host						localhost:8080/api
-//	@BasePath					/api
 //	@securityDefinitions.basic	BasicAuth
 //	@externalDocs.description	OpenAPI
 //	@externalDocs.url			https://swagger.io/resources/open-api/
 func main() {
-	// Do not handle error
+	// Get .env file. Do not handle error: using environnement variables by default
 	if err := godotenv.Load(); err != nil {
 		log.Println("No .env file. using environnement variables")
 	}
 	datatourisme := os.Getenv("DATATOURISME_URI")
-	log.Println(datatourisme)
 	if datatourisme == "" {
 		log.Fatal("Please set DATATOURISME_URI")
 	}
 	datatourismeClient := http.Client{}
 	g.Client = graphql.NewClient(datatourisme, &datatourismeClient)
-	log.Println(g.Client)
 
 	r := gin.Default()
 	r.Use(cors.Default())
-	docs.SwaggerInfo.BasePath = "/"
+	docs.SwaggerInfo.BasePath = "/api"
+	docs.SwaggerInfo.Host = os.Getenv("SWAGGER_HOST")
 
 	api := r.Group("/api")
 
