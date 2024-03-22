@@ -28,7 +28,14 @@
 	"forwardPorts": [
 		5173,
 		8080
-	]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vuetifyjs.vuetify-vscode"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
