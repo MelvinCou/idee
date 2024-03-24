@@ -1,4 +1,10 @@
 definitions:
+  graphql.Error:
+    properties:
+      error:
+        example: string
+        type: string
+    type: object
   graphql.GetTotalPoiPointOfInterest_ResultSet:
     properties:
       total:
@@ -73,7 +79,7 @@ paths:
         "500":
           description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/graphql.Error'
       summary: Total
       tags:
       - graphql

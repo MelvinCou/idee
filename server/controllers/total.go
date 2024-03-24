@@ -15,12 +15,13 @@ import (
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	graphql.GetTotalResponse
-//	@Failure		500	{string}	string	"Internal Server Error"
+//	@Failure		500	{object}	graphql.Error
 //	@Router			/total [get]
 func Total(ctx *gin.Context) {
 	r, err := graphql.GetTotal(ctx, graphql.Client)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err.Error())
+		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
+	} else {
+		ctx.JSON(http.StatusOK, r)
 	}
-	ctx.JSON(http.StatusOK, r)
 }
