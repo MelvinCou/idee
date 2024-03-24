@@ -89,7 +89,7 @@ const docTemplate = `{
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/graphql.Error"
                         }
                     }
                 }
@@ -97,6 +97,15 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "graphql.Error": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "string"
+                }
+            }
+        },
         "graphql.GetTotalPoiPointOfInterest_ResultSet": {
             "type": "object",
             "properties": {
