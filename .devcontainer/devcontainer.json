@@ -29,7 +29,14 @@
 	"forwardPorts": [
 		5173,
 		8080
-	]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bradlc.vscode-tailwindcss"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
