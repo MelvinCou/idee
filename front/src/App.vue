@@ -26,7 +26,9 @@ const githubOAuth2 = async () => {
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      <button class="bg-blue-800 px-2 py-2 text-white" @click="githubOAuth2">GITHUB CONNECTION</button>
+      <button class="bg-blue-800 px-2 py-2 text-white" @click="githubOAuth2">
+        GITHUB CONNECTION
+      </button>
       <h1 class="blue">The ping request: {{ ping }}</h1>
 
       <h1 class="bg-red-700 text-3xl font-bold text-amber-950 underline">Hello world!</h1>

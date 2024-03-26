@@ -46,8 +46,8 @@ func main() {
 
 	// Middleware CORS
 	r.Use(func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173") // Autoriser les requêtes depuis http://localhost:5173
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")             // Autoriser l'envoi de cookies
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 
@@ -94,18 +94,7 @@ func main() {
 //	@Failure		500	{string}	string	"Internal Server Error"
 //	@Router			/ping [get]
 func Ping(ctx *gin.Context) {
-	cookie, err := ctx.Request.Cookie("access_token")
-
-	if err != nil {
-		// Gérer l'erreur si le cookie n'est pas présent ou s'il y a une erreur lors de la récupération du cookie
-		ctx.String(http.StatusUnauthorized, "Unauthorized")
-		return
-	}
-
-	// Accéder à la valeur du cookie
-	accessToken := cookie.Value
-
-	ctx.JSON(http.StatusOK, Response{Message: accessToken})
+	ctx.JSON(http.StatusOK, Response{Message: "pong"})
 }
 
 type Response struct {
