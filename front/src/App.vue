@@ -15,7 +15,7 @@ const getPing = async () => {
 getPing();
 
 const githubOAuth2 = async () => {
-  window.location.href = "http://localhost:8080/github_login";
+  window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
 };
 </script>
 
