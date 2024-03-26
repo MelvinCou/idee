@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
+	"server/configs"
 	"server/controllers"
 	docs "server/docs"
 	g "server/graphql"
@@ -43,7 +43,24 @@ func main() {
 	g.Client = graphql.NewClient(datatourisme, &datatourismeClient)
 
 	r := gin.Default()
-	r.Use(cors.Default())
+
+	// Middleware CORS
+	r.Use(func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173") // Autoriser les requêtes depuis http://localhost:5173
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")             // Autoriser l'envoi de cookies
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusOK)
+			return
+		}
+
+		c.Next()
+	})
+
+	configs.GithubConfig()
+
 	docs.SwaggerInfo.BasePath = "/api"
 	docs.SwaggerInfo.Host = os.Getenv("SWAGGER_HOST")
 
@@ -53,6 +70,9 @@ func main() {
 		api.GET("/ping", Ping)
 		api.GET("/total", controllers.Total)
 	}
+
+	r.GET("/github_login", controllers.GithubLogin)
+	r.GET("/github_callback", controllers.GithubCallback)
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
@@ -74,7 +94,18 @@ func main() {
 //	@Failure		500	{string}	string	"Internal Server Error"
 //	@Router			/ping [get]
 func Ping(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, Response{Message: "pong"})
+	cookie, err := ctx.Request.Cookie("access_token")
+
+	if err != nil {
+		// Gérer l'erreur si le cookie n'est pas présent ou s'il y a une erreur lors de la récupération du cookie
+		ctx.String(http.StatusUnauthorized, "Unauthorized")
+		return
+	}
+
+	// Accéder à la valeur du cookie
+	accessToken := cookie.Value
+
+	ctx.JSON(http.StatusOK, Response{Message: accessToken})
 }
 
 type Response struct {
