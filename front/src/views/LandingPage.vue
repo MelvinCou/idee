@@ -1,10 +1,10 @@
 <template>
   <div class="LandingPage">
     <div class="text-content">
-      <h1>You'll never travel without our trip planner again</h1>
+      <h1>Embark on a Journey & plan your trip</h1>
       <p class="subheading">
-        Travel planning at its best. Build, organize, and map your custom itineraries in a free travel app designed for
-        vacations & road trips, powered by our trip planner AI.
+        Discover the art of travel — an adventure designed by your desires. 
+        Navigate, personalize, and cherish your travel experiences, all within one intuitive app.
       </p>
 
       <v-autocomplete v-model="selectedDestination" :items="destinations" label="Search destinations" solo hide-details
@@ -12,7 +12,7 @@
       </v-autocomplete>
 
       <div class="date-picker-container">
-        <VueDatePicker v-model="date" range class="date-picker" :placeholder="{start: 'Start date', end: 'End date'}"  :enable-time-picker="false" auto-apply/>
+        <VueDatePicker v-model="date" range class="date-picker" :enable-time-picker="false" auto-apply :min-date="new Date()" prevent-min-max-navigation/>
       </div>
       <v-btn large color="red" dark class="mb-2">
         Start planning
@@ -34,10 +34,6 @@ export default {
     destinations: [ // TO replace with actual data
       'Paris', 'New York', 'Tokyo', 'London', 'Sydney'
     ],
-    date: {
-      start: null,
-      end: null
-    }
   }),
 }
 </script>
