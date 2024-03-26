@@ -27,6 +27,7 @@ export class Ping<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
       method: "GET",
       type: ContentType.Json,
       format: "json",
+      credentials: "include",
       ...params,
     });
 }
