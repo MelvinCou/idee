@@ -36,13 +36,41 @@ func GithubCallback(c *gin.Context) {
 		Value:    token.AccessToken,
 		Path:     "/",
 		HttpOnly: true,
-		Secure:   true, // Assurez-vous que Secure est activé pour les connexions HTTPS uniquement
-		SameSite: http.SameSiteStrictMode, // Vous pouvez choisir entre SameSiteStrictMode, SameSiteLaxMode, ou SameSiteNoneMode selon vos besoins
+		// Secure:   true, // Need to be true if https is active
+		SameSite: http.SameSiteStrictMode, // You can choose SameSiteStrictMode, SameSiteLaxMode, or SameSiteNoneMode dependings on your need
 	}
 
-	// Ajoutez le cookie à la réponse
+	// Send cookie
 	http.SetCookie(c.Writer, &cookie)
 
-	// Redirection de l'utilisateur vers le frontend avec le jeton d'accès dans l'URL
+	// Redirect user to the frontend
 	c.Redirect(http.StatusFound, "http://localhost:5173")
 }
+
+// Ping godoc
+//
+//	@Summary		GithubPOC
+//	@Description	Get cookie from header and check if 401
+//	@Tags			github_poc
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	Response
+//	@Failure		400	{string}	string	"Bad Request"
+//	@Failure		401	{string}	string	"Unauthorized"
+//	@Failure		404	{string}	string	"Not Found"
+//	@Failure		500	{string}	string	"Internal Server Error"
+//	@Router			/ping [get]
+// func GithubPOC(ctx *gin.Context) {
+// 	cookie, err := ctx.Request.Cookie("access_token")
+
+// 	if err != nil {
+// 		// Manage error if cookie access_token is not present
+// 		ctx.String(http.StatusUnauthorized, "Unauthorized")
+// 		return
+// 	}
+
+// 	// Get cookie value
+// 	accessToken := cookie.Value
+
+// 	ctx.JSON(http.StatusOK, Response{Message: accessToken})
+// }
