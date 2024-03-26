@@ -1,17 +1,21 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
+	"server/controllers"
 	docs "server/docs"
+	g "server/graphql"
 
+	"github.com/Khan/genqlient/graphql"
 	swaggerFiles "github.com/swaggo/files"
-
-	"fmt"
 )
 
 //	@title						Idee API
@@ -23,26 +27,37 @@ import (
 //	@contact.email				support@swagger.io
 //	@license.name				Apache 2.0
 //	@license.url				http://www.apache.org/licenses/LICENSE-2.0.html
-//	@host						localhost:8080
-//	@BasePath					/api
 //	@securityDefinitions.basic	BasicAuth
 //	@externalDocs.description	OpenAPI
 //	@externalDocs.url			https://swagger.io/resources/open-api/
 func main() {
+	// Get .env file. Do not handle error: using environnement variables by default
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file. using environnement variables")
+	}
+	datatourisme := os.Getenv("DATATOURISME_URI")
+	if datatourisme == "" {
+		log.Fatal("Please set DATATOURISME_URI")
+	}
+	datatourismeClient := http.Client{}
+	g.Client = graphql.NewClient(datatourisme, &datatourismeClient)
+
 	r := gin.Default()
 	r.Use(cors.Default())
-	docs.SwaggerInfo.BasePath = "/"
+	docs.SwaggerInfo.BasePath = "/api"
+	docs.SwaggerInfo.Host = os.Getenv("SWAGGER_HOST")
 
 	api := r.Group("/api")
 
 	{
 		api.GET("/ping", Ping)
+		api.GET("/total", controllers.Total)
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	if err := r.Run(); err != nil { // listen and serve on 0.0.0.0:8080
-		fmt.Printf("%+v\n", err)
+		log.Printf("%+v\n", err)
 	}
 }
 

@@ -1,5 +1,20 @@
-basePath: /api
 definitions:
+  graphql.Error:
+    properties:
+      error:
+        example: string
+        type: string
+    type: object
+  graphql.GetTotalPoiPointOfInterest_ResultSet:
+    properties:
+      total:
+        type: integer
+    type: object
+  graphql.GetTotalResponse:
+    properties:
+      poi:
+        $ref: '#/definitions/graphql.GetTotalPoiPointOfInterest_ResultSet'
+    type: object
   main.Response:
     properties:
       message:
@@ -9,7 +24,6 @@ definitions:
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
-host: localhost:8080
 info:
   contact:
     email: support@swagger.io
@@ -50,6 +64,25 @@ paths:
       summary: Ping
       tags:
       - ping
+  /total:
+    get:
+      consumes:
+      - application/json
+      description: Get total number of objets in database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/graphql.GetTotalResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/graphql.Error'
+      summary: Total
+      tags:
+      - graphql
 securityDefinitions:
   BasicAuth:
     type: basic

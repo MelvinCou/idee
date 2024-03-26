@@ -65,9 +65,63 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/total": {
+            "get": {
+                "description": "Get total number of objets in database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "Total",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.GetTotalResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "graphql.Error": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "string"
+                }
+            }
+        },
+        "graphql.GetTotalPoiPointOfInterest_ResultSet": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "graphql.GetTotalResponse": {
+            "type": "object",
+            "properties": {
+                "poi": {
+                    "$ref": "#/definitions/graphql.GetTotalPoiPointOfInterest_ResultSet"
+                }
+            }
+        },
         "main.Response": {
             "type": "object",
             "properties": {
@@ -92,8 +146,8 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
-	BasePath:         "/api",
+	Host:             "",
+	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Idee API",
 	Description:      "This is the API of the Idee project!",
