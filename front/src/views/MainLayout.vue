@@ -1,45 +1,89 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer class="bg-blue" v-model="drawer">
-      <!-- Content -->
-    </v-navigation-drawer>
-
-    <v-app-bar class="bg-black">
-      <v-app-bar-nav-icon class="bg-red" @click="drawer = !drawer"></v-app-bar-nav-icon>
-
+    <v-app-bar color="black">
       <v-app-bar-title>Fox explorer</v-app-bar-title>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-menu min-width="200px" rounded>
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props">
+            <v-avatar color="brown" size="large">
+              <span class="text-h5">{{ user.initials }}</span>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-text>
+            <div class="mx-auto text-center">
+              <v-avatar color="brown">
+                <span class="text-h5">{{ user.initials }}</span>
+              </v-avatar>
+              <h3>{{ user.fullName }}</h3>
+              <p class="text-caption mt-1">
+                {{ user.email }}
+              </p>
+              <v-divider class="my-3"></v-divider>
+              <v-btn variant="text" rounded> Edit Account </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn variant="text" rounded> Disconnect </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
     </v-app-bar>
 
     <v-main>
       <!-- Content -->
-      <v-row>
-        <v-col cols="12" sm="12"  md="3"  >
-          <v-data-iterator :items="[1, 2, 3, 4, 5]" class="bg-pink ">
+      <v-layout full-height>
+        <v-row>
+          <v-navigation-drawer color="pink">
+            <v-data-iterator :items="[1, 2, 3, 4, 5]">
               <template v-slot:default="{ items }">
-                <v-row>
-                  <v-col v-for="item in items" :key="item.raw.name" >
+                <template v-for="(item, i) in items" :key="i">
+                  <div class="m-1.5">
                     <v-card
-                      subtitle="This is an event"
+                      subtitle="This is an event i"
                       text="This is content"
                       title="This is a title"
-                      width="300"
                     ></v-card>
-                  </v-col>
-                </v-row>
+                  </div>
+                  <br />
+                </template>
               </template>
-          </v-data-iterator>
-        </v-col>
-        <v-col class="bg-yellow" >
-          <v-sheet :height="200" :width="200" color="red-lighten-3"></v-sheet>
-        </v-col>
-      </v-row>
-
+            </v-data-iterator>
+          </v-navigation-drawer>
+          <v-col>
+            <v-sheet :height="200" :width="200" color="red-lighten-3"></v-sheet>
+          </v-col>
+        </v-row>
+      </v-layout>
     </v-main>
   </v-app>
 </template>
 
-<script setup>
+<style scoped>
+.app-bar {
+  color: black;
+}
+.nav-icon {
+  background-color: rebeccapurple;
+}
+.bar-title {
+  background-color: aliceblue;
+}
+</style>
+
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const drawer = ref(false) // Changed from null to false to match the expected type for v-model
+const user = ref({
+  initials: 'JD',
+  fullName: 'John Doe',
+  email: 'john.doe@doe.com'
+})
 </script>
