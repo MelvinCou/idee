@@ -7,17 +7,17 @@
         vacations & road trips, powered by our trip planner AI.
       </p>
 
-
-      
-
       <v-autocomplete v-model="selectedDestination" :items="destinations" label="Search destinations" solo hide-details
-        class="search-destination" append-icon="mdi-magnify"></v-autocomplete>
+        class="search-destination" append-icon="mdi-magnify">
+      </v-autocomplete>
+
+      <div class="date-picker-container">
+        <VueDatePicker v-model="date" range class="date-picker" :placeholder="{start: 'Start date', end: 'End date'}"  :enable-time-picker="false" auto-apply/>
+      </div>
       <v-btn large color="red" dark class="mb-2">
         Start planning
       </v-btn>
-      <v-btn large outlined color="white" class="mb-2">
-        Get the app
-      </v-btn>
+
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@
 <script>
 import background from '../assets/images/BG.jpeg';
 
+
 export default {
   data: () => ({
     backgroundImage: background,
@@ -33,6 +34,10 @@ export default {
     destinations: [ // TO replace with actual data
       'Paris', 'New York', 'Tokyo', 'London', 'Sydney'
     ],
+    date: {
+      start: null,
+      end: null
+    }
   }),
 }
 </script>
@@ -56,7 +61,6 @@ export default {
 .text-content {
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Optional: Adds readability */
   border-radius: 8px;
   /* Optional: Rounds the corners of the text background */
 }
@@ -65,4 +69,15 @@ export default {
   margin: 20px 0;
   /* Spacing above and below the search input */
 }
+
+.date-picker-container {
+  margin: 20px 0; /* Consistent with the search bar margin */
+}
+
+.date-picker {
+  background-color: white; /* Assuming a light theme for the date picker */
+  border-radius: 4px; /* To match your design's rounded corners */
+  color: #000; /* Text color for the date picker */
+}
+
 </style>

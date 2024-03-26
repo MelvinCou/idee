@@ -2,6 +2,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 // Vuetify
 import 'vuetify/styles'; // Import Vuetify styles
@@ -25,6 +27,9 @@ app.config.globalProperties.$api_url = import.meta.env.VITE_API_URL;
 app.use(createPinia()); // State management
 app.use(router); // Vue Router
 app.use(vuetify); // Vuetify
+
+// DatePicker component
+app.component('VueDatePicker', VueDatePicker);
 
 // Mount the app to the DOM
 app.mount("#app");
