@@ -2,7 +2,26 @@
 
 Original repository: https://github.com/MelvinCou/idee
 
+## Root project
+For contributor, before commit any lines, you need to have pre-commit and launch this
+
+> [!Important]
+> If you doesn't have pre-commit installed : https://pre-commit.com/
+
+```sh
+pre-commit install
+```
+
 ## Server
+
+> [!Important]
+> You need to install some go CLI tools
+```sh
+go install github.com/cosmtrek/air@latest
+go install github.com/swaggo/swag/cmd/swag@v1.8.11
+go install github.com/Khan/genqlient@latest
+```
+
 
 Setup datatourisme database:
 
