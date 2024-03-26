@@ -9,6 +9,19 @@
  * ---------------------------------------------------------------
  */
 
+export interface GraphqlError {
+  /** @example "string" */
+  error?: string;
+}
+
+export interface GraphqlGetTotalPoiPointOfInterestResultSet {
+  total?: number;
+}
+
+export interface GraphqlGetTotalResponse {
+  poi?: GraphqlGetTotalPoiPointOfInterestResultSet;
+}
+
 export interface MainResponse {
   /** @example "pong" */
   message?: string;

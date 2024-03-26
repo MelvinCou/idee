@@ -47,7 +47,7 @@ func GithubCallback(c *gin.Context) {
 	c.Redirect(http.StatusFound, "http://localhost:5173")
 }
 
-// Ping godoc
+// GithubPOC godoc
 //
 //	@Summary		GithubPOC
 //	@Description	Get cookie from header and check if 401

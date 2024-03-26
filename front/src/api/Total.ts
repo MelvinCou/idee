@@ -9,21 +9,21 @@
  * ---------------------------------------------------------------
  */
 
-import { MainResponse } from "./data-contracts";
+import { GraphqlError, GraphqlGetTotalResponse } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Ping<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Total<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
-   * @description Ping the server
+   * @description Get total number of objets in database
    *
-   * @tags ping
-   * @name PingList
-   * @summary Ping
-   * @request GET:/ping
+   * @tags graphql
+   * @name TotalList
+   * @summary Total
+   * @request GET:/total
    */
-  pingList = (params: RequestParams = {}) =>
-    this.request<MainResponse, string>({
-      path: `/ping`,
+  totalList = (params: RequestParams = {}) =>
+    this.request<GraphqlGetTotalResponse, GraphqlError>({
+      path: `/total`,
       method: "GET",
       type: ContentType.Json,
       format: "json",
