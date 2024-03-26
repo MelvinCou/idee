@@ -20,6 +20,8 @@ import LandingPage from "./views/LandingPage.vue";
 import { Ping } from "./api/Ping";
 import { ref } from "vue";
 </script>
+
+
 <template>
   <v-app>
     <!-- Sizes your content based upon application components -->

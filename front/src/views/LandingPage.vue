@@ -100,6 +100,7 @@ const showDateAndDestination = () => {
   /* Text color for the date picker */
 }
 
+
 .date-picker-container {
   padding-right: 40px;
 }
