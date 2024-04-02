@@ -68,7 +68,6 @@ const showDateAndDestination = () => {
 };
 </script>
 
-
 <style scoped>
 .LandingPage {
   min-height: 100vh;
@@ -99,7 +98,6 @@ const showDateAndDestination = () => {
   color: #000;
   /* Text color for the date picker */
 }
-
 
 .date-picker-container {
   padding-right: 40px;
