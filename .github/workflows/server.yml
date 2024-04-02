@@ -15,6 +15,8 @@ permissions:
 jobs:
   server:
     runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
     defaults:
       run:
         working-directory: server
@@ -37,4 +39,4 @@ jobs:
           swag init
           go build
       - name: Run unit tests
-        run: go test
+        run: ./test.sh
