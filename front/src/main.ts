@@ -5,6 +5,8 @@ import router from "./router";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import 'leaflet/dist/leaflet.css';
+import '../node_modules/mapbox-gl/dist/mapbox-gl.css';
+
 
 // Vuetify
 import "vuetify/styles"; // Import Vuetify styles

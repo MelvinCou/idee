@@ -3,20 +3,24 @@
     <div class="text-content">
       <h1>Embark on a Journey & plan your trip</h1>
       <p class="subheading">
-        Discover the art of travel — an adventure designed by your desires. Navigate, personalize,
-        and cherish your travel experiences, all within one intuitive app.
+        Discover the art of travel — an adventure designed by your desires. Navigate,
+        personalize, and cherish your travel experiences, all within one intuitive app.
       </p>
 
-      <v-autocomplete
-        v-model="selectedDestination"
-        :items="destinations"
-        label="Search destinations"
-        solo
-        hide-details
-        class="search-destination"
-        append-icon="mdi-magnify"
-        variant="solo-filled">
-      </v-autocomplete>
+      <template>
+        <v-autocomplete
+          v-model="selectedDestination"
+          :items="destinations"
+          label="Search destinations"
+          solo
+          hide-details
+          class="search-destination"
+          append-icon="mdi-magnify"
+          @input="fetchDestinations(selectedDestination)"
+          variant="solo-filled"
+        >
+        </v-autocomplete>
+      </template>
 
       <div class="date-picker-container">
         <VueDatePicker
@@ -28,7 +32,8 @@
           auto-apply
           :min-date="new Date()"
           prevent-min-max-navigation
-          ref="datepicker" />
+          ref="datepicker"
+        />
       </div>
 
       <v-btn @click="showDateAndDestination" large color="red" dark class="mb-2">
@@ -42,9 +47,13 @@
 import { ref, onMounted } from "vue";
 import type { DatePickerInstance } from "@vuepic/vue-datepicker";
 
+
+import { useDestinationsStore } from "@/stores/destinationsStore";
+
+
 const date = ref([]);
 const selectedDestination = ref("");
-const destinations = ["Paris", "New York", "Tokyo", "London", "Sydney"];
+const { destinations, fetchDestinations } = useDestinationsStore();
 
 const datepicker = ref<DatePickerInstance>(null);
 
@@ -55,7 +64,9 @@ onMounted(() => {
 });
 
 const showDateAndDestination = () => {
-  const formattedDate = date.value.map((d) => d.toISOString().substring(0, 10)).join(" à ");
+  const formattedDate = date.value
+    .map((d) => d.toISOString().substring(0, 10))
+    .join(" à ");
   const message = `La destination sélectionnée est : ${selectedDestination.value}\nLa date sélectionnée est : ${formattedDate}`;
   console.log(message);
 };

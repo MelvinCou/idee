@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LandingPage from "../views/LandingPage.vue";
-import InteractiveMap from "../views/InteractiveMap.vue"
+import LandingPage from "@/views/LandingPage.vue";
+import InteractiveMap from "@/views/InteractiveMap.vue"
+import MapView from "@/views/MapView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/map",
       name: "map",
       component: InteractiveMap,
+    },
+    {
+      path: "/map2",
+      name: "map2",
+      component: MapView,
     }
   ]
 });
