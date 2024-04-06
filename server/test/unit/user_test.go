@@ -1,26 +1,31 @@
 package unit
 
 import (
-	"flag"
-	"server/models"
-	"server/services"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/integration/mtest"
+
+	"server/models"
+	"server/services"
 )
 
-// In case of launching test in your computer, you can use the following commented code and update test.sh file with -MONGODB_URI=uri
-func init() {
-    flag.StringVar(&MONGODB_URI, "MONGODB_URI", "", "Database mongodb_uri")
-}
-
 func TestCreateUser(t *testing.T) {
-	t.Setenv("MONGODB_URI", MONGODB_URI)
+	mt := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
 
-	response := services.CreateUser(models.User{
-		Name:  "Jean",
-		Email: "jean@epitech.eu",
+	mt.Run("test create", func(mt *mtest.T) {
+		collection := mt.Coll
+		mt.AddMockResponses(
+			mtest.CreateSuccessResponse(),
+		)
+
+		insertResult, err := services.CreateUser(collection, models.User{
+			Name:  "Jean",
+			Email: "jean@epitech.eu",
+		})
+
+		assert.Nil(t, err)
+		assert.Equal(t, len(insertResult.InsertedID.(primitive.ObjectID).Hex()), 24)
 	})
-
-	assert.Equal(t, response, "User created")
 }
