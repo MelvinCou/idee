@@ -1,26 +1,34 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+// import { Ping } from "./api/Ping";
+// import { ref } from "vue";
 
-const githubOAuth2 = async () => {
-  window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
-};
+// const api = new Ping({
+//   baseUrl: import.meta.env.VITE_API_URL,
+// });
+// const ping = ref();
+
+// const getPing = async () => {
+//   ping.value = (await api.pingList()).data;
+// };
+
+// getPing();
+
+// const githubOAuth2 = async () => {
+//   window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
+// };
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <button class="bg-blue-800 px-2 py-2 text-white" @click="githubOAuth2">
+      <!-- <button class="bg-blue-800 px-2 py-2 text-white" @click="githubOAuth2">
         GITHUB CONNECTION
-      </button>
-      <h1 class="bg-red-700 text-3xl font-bold text-amber-950 underline">Hello world!</h1>
-
+      </button> -->
+      <!-- <h1 class="blue">The ping request: {{ ping }}</h1> -->
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/main">Main</RouterLink>
       </nav>
     </div>
   </header>

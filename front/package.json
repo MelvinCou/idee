@@ -17,6 +17,7 @@
     "swagger": "swagger-typescript-api --modular -p ../server/docs/swagger.json -o ./src/api"
   },
   "dependencies": {
+    "eslint-import-resolver-typescript": "^3.6.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
