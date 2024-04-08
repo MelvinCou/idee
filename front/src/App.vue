@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import { ref } from "vue";
+import HelloWorld from "./components/HelloWorld.vue";
 
 const githubOAuth2 = async () => {
   window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
