@@ -121,7 +121,7 @@ func TestCreateUserHandlerWithNotUserCreated(t *testing.T) {
 	}
 
 	var createUserCalled bool
-	
+
 	// Mock CreateUserUserService to capture if it's called
 	controllers.CreateUserService = func(collection *mongo.Collection, user models.User) (*mongo.InsertOneResult, error) {
 		createUserCalled = true

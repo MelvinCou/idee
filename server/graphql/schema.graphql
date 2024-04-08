@@ -1425,7 +1425,7 @@ début et de fin (ex: du 14/07/2016 à 00h au 14/08/2016 à 12h), soit une
 récurrence d&#039;intervalle (ex: tous les lundis et mercredi de 10h à 12h).
 Attention, Period n&#039;est pas similaire à schema:Event, car au sens
 schema.org, un Event est une manifestation qui peut proposer des schema:Offers.
-Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique. 
+Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique.
 """
 type Period {
   _uri: String
@@ -1473,7 +1473,7 @@ début et de fin (ex: du 14/07/2016 à 00h au 14/08/2016 à 12h), soit une
 récurrence d&#039;intervalle (ex: tous les lundis et mercredi de 10h à 12h).
 Attention, Period n&#039;est pas similaire à schema:Event, car au sens
 schema.org, un Event est une manifestation qui peut proposer des schema:Offers.
-Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique. 
+Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique.
 """
 input Period_Filter {
   _or: [Period_Filter]
@@ -1528,7 +1528,7 @@ début et de fin (ex: du 14/07/2016 à 00h au 14/08/2016 à 12h), soit une
 récurrence d&#039;intervalle (ex: tous les lundis et mercredi de 10h à 12h).
 Attention, Period n&#039;est pas similaire à schema:Event, car au sens
 schema.org, un Event est une manifestation qui peut proposer des schema:Offers.
-Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique. 
+Ici, Period n&#039;est qu&#039;un intervalle de temps sans autre portée sémantique.
 """
 input Period_Sort {
   """
@@ -3756,4 +3756,3 @@ input TourType_Sort {
   """Etiquette courte décrivant la ressource."""
   rdfs_label: Sort
 }
-
