@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import { Ping } from "./api/Ping";
 import { ref } from "vue";
 
 const api = new Ping({

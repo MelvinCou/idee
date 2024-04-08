@@ -16,47 +16,6 @@
         "version": "1.0"
     },
     "paths": {
-        "/ping": {
-            "get": {
-                "description": "Ping the server",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ping"
-                ],
-                "summary": "Ping",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/main.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/total": {
             "get": {
                 "description": "Get total number of objets in database",
@@ -110,15 +69,6 @@
             "properties": {
                 "poi": {
                     "$ref": "#/definitions/graphql.GetTotalPoiPointOfInterest_ResultSet"
-                }
-            }
-        },
-        "main.Response": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string",
-                    "example": "pong"
                 }
             }
         }
