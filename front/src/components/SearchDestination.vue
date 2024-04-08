@@ -29,15 +29,13 @@ import axios from "axios";
 import { ref } from "vue";
 
 export default {
-  setup() {
+  setup(_,context) {
     const searchQuery = ref("");
     const cities = ref([]);
     let timeoutId = null;
-    const router = useRouter();
     const fetchCities = async (query) => {
-      const myAccessToken =
-        "pk.eyJ1IjoicmVzc2Vra2FraSIsImEiOiJjbHVpNWk1NmkwMHp0MnFteTh3enMxcXdyIn0.liTHNmNTnTDJ48xFuJPbig";
-      const bbox = "-4.833986,42.440817,8.248534,51.011153"; // Définissez les coordonnées de la bbox pour la France;
+      const myAccessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+      const bbox = "-4.833986,42.440817,8.248534,51.011153"; // bbox for France;
       const unique_session_token = "";
       const url = `https://api.mapbox.com/search/searchbox/v1/suggest?access_token=${myAccessToken}&session_token=${unique_session_token}&bbox=${bbox}&types=city&q=${query}`;
 
@@ -67,26 +65,19 @@ export default {
     const selectCity = (city) => {
       searchQuery.value = `${city.name} - ${city.place_formatted}`;
       cities.value = [];
-      router.push({ name: 'CityDetails', params: { name: city.name } });
+      context.emit('city-selected', city); // Emitting the selected city to parent view
     };
+
     const clearSearch = () => {
       searchQuery.value = "";
       cities.value = [];
     };
 
     return { searchQuery, cities, handleInput, selectCity, clearSearch };
-  },
+  }
 };
-const selectCity = (city) => {
-  searchQuery.value = `${city.name} - ${city.place_formatted}`;
-  cities.value = [];
-  // Utilisez le routeur pour naviguer
-  this.$router.push({ name: 'CityDetails', params: { name: city.name } });
-};
-
 
 </script>
-
 <style>
 .search-container {
   position: relative;
@@ -108,7 +99,7 @@ const selectCity = (city) => {
   border: 1px solid #cccccc;
   border-radius: 4px;
   padding: 10px;
-  padding-right: 40px; /* Ajoutez un padding à droite pour éviter que le texte ne soit caché par le bouton */
+  padding-right: 40px;
   color: #333;
   background-color: #fff;
 }

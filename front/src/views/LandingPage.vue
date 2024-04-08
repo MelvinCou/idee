@@ -6,7 +6,7 @@
         Discover the art of travel — an adventure designed by your desires. Navigate,
         personalize, and cherish your travel experiences, all within one intuitive app.
       </p>
-      <SearchDestination/>
+      <SearchDestination @city-selected="onCitySelected"/>
       <div class="date-picker-container">
         <VueDatePicker
           v-model="date"
@@ -39,6 +39,7 @@ import SearchDestination from "@/components/SearchDestination.vue";
 const date = ref([]);
 const backgroundImage = ref(background);
 const searchQuery = ref('');
+const selectedDestination = ref('');
 
 // Reactive reference for destinations
 var destinations = ref([]);
@@ -53,12 +54,16 @@ onMounted(() => {
   date.value = [startDate, endDate];
 });
 
+const onCitySelected = (city: any) => {
+  selectedDestination.value = `${city.name} - ${city.place_formatted}`;
+};
+
 // Display the selected destination and dates
 const showDateAndDestination = () => {
   const formattedDate = date.value
     .map(d => d.toISOString().substring(0, 10))
     .join(' to ');
-  const message = `Selected destination: ${selectedDestination}\nSelected date: ${formattedDate}`;
+  const message = `Selected destination: ${selectedDestination.value}\nSelected date: ${formattedDate}`;
   console.log(message);
 };
 </script>
