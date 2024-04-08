@@ -2,11 +2,14 @@ package controllers
 
 import (
 	"context"
+	"encoding/json"
 	"net/http"
-
 	"server/configs"
 
+	"server/models"
+
 	"github.com/gin-gonic/gin"
+	"golang.org/x/oauth2"
 )
 
 // GithubLogin handles the GitHub login redirection.
@@ -16,7 +19,7 @@ func GithubLogin(c *gin.Context) {
 
 	// Generate github /authorize url
 	url := oauth2Config.AuthCodeURL("randomstate")
-	
+
 	// Redirect to the GitHub authentication URL
 	c.Redirect(http.StatusSeeOther, url)
 }
@@ -25,7 +28,7 @@ func GithubLogin(c *gin.Context) {
 func GithubCallback(c *gin.Context) {
 	// Retrieve the state parameter from the query
 	state := c.Query("state")
-	
+
 	// Check if the state matches the expected value
 	if state != "randomstate" {
 		c.String(http.StatusBadRequest, "States don't Match!!")
@@ -58,9 +61,57 @@ func GithubCallback(c *gin.Context) {
 	// Send the cookie in the response
 	http.SetCookie(c.Writer, &cookie)
 
+	// Fetch and create user
+	err = getUserAndCreateIfNotExist(token)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to fetch and create user")
+		return
+	}
+
 	// Redirect the user to the frontend
 	c.Redirect(http.StatusFound, "http://localhost:5173")
 }
+
+func getUserAndCreateIfNotExist(token *oauth2.Token) error {
+	// Fetch GitHub user details using the token
+	githubUser, err := fetchGithubUser(token)
+	if err != nil {
+		return err
+	}
+
+	// Check if the user already exists and create if not
+	CreateUserHandler(*githubUser)
+
+	return nil
+}
+
+func fetchGithubUser(token *oauth2.Token) (*models.User, error) {
+	// Create a new HTTP request to fetch user details from GitHub API
+	req, err := http.NewRequest("GET", "https://api.github.com/user", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	// Set the Authorization header with the token's access token
+	req.Header.Set("Authorization", "Bearer "+token.AccessToken)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var user models.User
+
+	// Decode the response body into the user struct
+	if err := json.NewDecoder(resp.Body).Decode(&user); err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
 
 // The following function is commented out. Uncomment and add appropriate implementation if needed.
 
@@ -86,5 +137,5 @@ func GithubPOC(ctx *gin.Context) {
 	if err != nil {
 		// Manage error if access_token cookie is not present
 		ctx.String(http.StatusUnauthorized, "Unauthorized")
-		ret
+		return nil
 */
