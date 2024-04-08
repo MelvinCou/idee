@@ -29,9 +29,8 @@ func TestCreateUserService(t *testing.T) {
 			mtest.CreateSuccessResponse(),
 		)
 
-		insertResult, err := services.CreateUser(collection, user)
+		insertResult := services.CreateUser(collection, user)
 
-		assert.Nil(t, err)
 		assert.Equal(t, len(insertResult.InsertedID.(primitive.ObjectID).Hex()), 24)
 	})
 }
@@ -89,10 +88,10 @@ func TestCreateUserHandlerWithUserCreated(t *testing.T) {
 
 	var capturedUser models.User
 	// Mock CreateUserUserService to capture the user passed to it
-	controllers.CreateUserService = func(collection *mongo.Collection, user models.User) (*mongo.InsertOneResult, error) {
+	controllers.CreateUserService = func(collection *mongo.Collection, user models.User) *mongo.InsertOneResult {
 		capturedUser = user
 		objectID := primitive.NewObjectID()
-		return &mongo.InsertOneResult{InsertedID: objectID}, nil
+		return &mongo.InsertOneResult{InsertedID: objectID}
 	}
 
 	// Call the tested function
@@ -103,7 +102,6 @@ func TestCreateUserHandlerWithUserCreated(t *testing.T) {
 		t.Errorf("Expected user NodeID to be %s, got %s", user.NodeID, capturedUser.NodeID)
 	}
 }
-
 
 func TestCreateUserHandlerWithNotUserCreated(t *testing.T) {
 	create := controllers.CreateUserService
@@ -123,10 +121,10 @@ func TestCreateUserHandlerWithNotUserCreated(t *testing.T) {
 	var createUserCalled bool
 
 	// Mock CreateUserUserService to capture if it's called
-	controllers.CreateUserService = func(collection *mongo.Collection, user models.User) (*mongo.InsertOneResult, error) {
+	controllers.CreateUserService = func(collection *mongo.Collection, user models.User) *mongo.InsertOneResult {
 		createUserCalled = true
 		objectID := primitive.NewObjectID()
-		return &mongo.InsertOneResult{InsertedID: objectID}, nil
+		return &mongo.InsertOneResult{InsertedID: objectID}
 	}
 
 	// Call the tested function
