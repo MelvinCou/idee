@@ -21,12 +21,6 @@ const router = createRouter({
       path: "/map2",
       name: "map2",
       component: MapView,
-    },
-    {
-      path: '/city-details/:name', // Utilisez un paramètre dynamique pour la ville
-      name: 'CityDetails',
-      component: SearchDestination,
-      props: true // Permet de passer les paramètres de route en tant que props au composant
     }
   ]
 });
