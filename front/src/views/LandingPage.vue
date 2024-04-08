@@ -6,22 +6,7 @@
         Discover the art of travel — an adventure designed by your desires. Navigate,
         personalize, and cherish your travel experiences, all within one intuitive app.
       </p>
-
-      <template>
-        <v-autocomplete
-          v-model="selectedDestination"
-          :items="destinations"
-          label="Search destinations"
-          solo
-          hide-details
-          class="search-destination"
-          append-icon="mdi-magnify"
-          @input="fetchDestinations(selectedDestination)"
-          variant="solo-filled"
-        >
-        </v-autocomplete>
-      </template>
-
+      <SearchDestination/>
       <div class="date-picker-container">
         <VueDatePicker
           v-model="date"
@@ -43,52 +28,41 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import type { DatePickerInstance } from "@vuepic/vue-datepicker";
+<script setup lang="ts">
+import { ref, onMounted, watch } from 'vue';
+import type { DatePickerInstance } from '@vuepic/vue-datepicker';
+import { useDestinationsStore } from '@/stores/destinationsStore';
+import background from '../assets/images/BG.jpeg';
+import SearchDestination from "@/components/SearchDestination.vue";
 
-
-import { useDestinationsStore } from "@/stores/destinationsStore";
-
-
+// Reactive references
 const date = ref([]);
-const selectedDestination = ref("");
-const { destinations, fetchDestinations } = useDestinationsStore();
+const backgroundImage = ref(background);
+const searchQuery = ref('');
 
+// Reactive reference for destinations
+var destinations = ref([]);
+
+// Initialization of the date picker
 const datepicker = ref<DatePickerInstance>(null);
 
+// Default date configuration on component mount
 onMounted(() => {
   const startDate = new Date();
   const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
   date.value = [startDate, endDate];
 });
 
+// Display the selected destination and dates
 const showDateAndDestination = () => {
   const formattedDate = date.value
-    .map((d) => d.toISOString().substring(0, 10))
-    .join(" à ");
-  const message = `La destination sélectionnée est : ${selectedDestination.value}\nLa date sélectionnée est : ${formattedDate}`;
+    .map(d => d.toISOString().substring(0, 10))
+    .join(' to ');
+  const message = `Selected destination: ${selectedDestination}\nSelected date: ${formattedDate}`;
   console.log(message);
 };
 </script>
 
-<script lang="ts">
-import background from "../assets/images/BG.jpeg";
-export default {
-  data: () => ({
-    backgroundImage: background,
-    selectedDestination: null, // Tracks the selected destination
-    destinations: [
-      // TO replace with actual data
-      "Paris",
-      "New York",
-      "Tokyo",
-      "London",
-      "Sydney",
-    ],
-  }),
-};
-</script>
 
 <style scoped>
 .LandingPage {
@@ -150,5 +124,44 @@ export default {
 .search-destination .v-select__selections {
   color: #000;
   /* Couleur du texte plus foncée pour une meilleure lisibilité */
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.search-input-container {
+  width: 100%;
+  max-width: 600px; /* Ajustez cette largeur selon vos besoins */
+}
+
+.search {
+  width: 80%;
+  padding: 10px 40px 10px 15px; /* Espace pour l'icône de recherche */
+  font-size: 16px;
+  border: 2px solid #ccc; /* Bordure subtile */
+  border-radius: 25px; /* Bords arrondis pour un look moderne */
+  outline: none; /* Supprime l'outline par défaut au focus */
+  box-sizing: border-box; /* Assure que le padding ne change pas la largeur */
+}
+
+.search:focus {
+  border-color: #007bff; /* Change la couleur de la bordure lors du focus */
+}
+
+.feather-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); /* Centre l'icône verticalement */
+  cursor: pointer;
+  color: #007bff; /* Couleur de l'icône */
+}
+
+/* Vous pouvez ajouter des styles supplémentaires pour les états hover ou active de l'icône, par exemple : */
+.feather-icon:hover {
+  color: #0056b3;
 }
 </style>
