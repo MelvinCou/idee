@@ -31,7 +31,14 @@
 		5173,
 		8080,
 		8081
-	]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Vue.volar"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
