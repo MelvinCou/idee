@@ -21,8 +21,3 @@ export interface GraphqlGetTotalPoiPointOfInterestResultSet {
 export interface GraphqlGetTotalResponse {
   poi?: GraphqlGetTotalPoiPointOfInterestResultSet;
 }
-
-export interface MainResponse {
-  /** @example "pong" */
-  message?: string;
-}
