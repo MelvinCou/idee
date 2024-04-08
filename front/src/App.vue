@@ -1,19 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
-import { Ping } from "./api/Ping";
-import { ref } from "vue";
-
-const api = new Ping({
-  baseUrl: import.meta.env.VITE_API_URL,
-});
-const ping = ref();
-
-const getPing = async () => {
-  ping.value = (await api.pingList()).data;
-};
-
-getPing();
 
 const githubOAuth2 = async () => {
   window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
@@ -29,8 +16,6 @@ const githubOAuth2 = async () => {
       <button class="bg-blue-800 px-2 py-2 text-white" @click="githubOAuth2">
         GITHUB CONNECTION
       </button>
-      <h1 class="blue">The ping request: {{ ping }}</h1>
-
       <h1 class="bg-red-700 text-3xl font-bold text-amber-950 underline">Hello world!</h1>
 
       <nav>
