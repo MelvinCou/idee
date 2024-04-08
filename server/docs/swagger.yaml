@@ -15,12 +15,6 @@ definitions:
       poi:
         $ref: '#/definitions/graphql.GetTotalPoiPointOfInterest_ResultSet'
     type: object
-  main.Response:
-    properties:
-      message:
-        example: pong
-        type: string
-    type: object
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
@@ -37,33 +31,6 @@ info:
   title: Idee API
   version: "1.0"
 paths:
-  /ping:
-    get:
-      consumes:
-      - application/json
-      description: Ping the server
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/main.Response'
-        "400":
-          description: Bad Request
-          schema:
-            type: string
-        "404":
-          description: Not Found
-          schema:
-            type: string
-        "500":
-          description: Internal Server Error
-          schema:
-            type: string
-      summary: Ping
-      tags:
-      - ping
   /total:
     get:
       consumes:
