@@ -18,16 +18,10 @@ const user = ref({
     <v-app-bar color="black">
       <v-app-bar-title>Fox explorer</v-app-bar-title>
       <v-spacer></v-spacer>
+      <RouterLink to="/">Accueil</RouterLink>
       <v-spacer></v-spacer>
-      <RouterLink to="/">Home</RouterLink>
-      <v-spacer></v-spacer>
-
-      <RouterLink to="/main">Main</RouterLink>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
+      <RouterLink to="/main">Carte</RouterLink>
+      <div class="custom-spacer"></div>
       <v-menu min-width="200px" rounded>
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props">
@@ -47,10 +41,10 @@ const user = ref({
                 {{ user.email }}
               </p>
               <v-divider class="my-3"></v-divider>
-              <v-btn variant="text" rounded> Edit Account </v-btn>
+              <v-btn variant="text" rounded>Modification du compte</v-btn>
               <v-divider class="my-3"></v-divider>
-              <v-btn variant="text" rounded> Disconnect </v-btn>
-              <v-btn @click="githubOAuth2">GITHUB CONNECTION</v-btn>
+              <v-btn variant="text" rounded> Déconnexion </v-btn>
+              <v-btn @click="githubOAuth2">Connexion avec github</v-btn>
             </div>
           </v-card-text>
         </v-card>
@@ -60,4 +54,8 @@ const user = ref({
   </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.custom-spacer {
+  flex-grow: 5;
+}
+</style>

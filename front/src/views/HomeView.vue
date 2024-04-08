@@ -2,7 +2,7 @@
 
 <template>
   <v-main>
-    <h1>You did it!</h1>
-    <p>home page</p>
+    <h1>RECHERCHE DE VILLE!</h1>
+    <p>Page principale</p>
   </v-main>
 </template>
