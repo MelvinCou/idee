@@ -1,101 +1,63 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-// import { Ping } from "./api/Ping";
-// import { ref } from "vue";
 
-// const api = new Ping({
-//   baseUrl: import.meta.env.VITE_API_URL,
-// });
-// const ping = ref();
+import { ref } from "vue";
 
-// const getPing = async () => {
-//   ping.value = (await api.pingList()).data;
-// };
-
-// getPing();
-
-// const githubOAuth2 = async () => {
-//   window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
-// };
+const githubOAuth2 = async () => {
+  window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
+};
+const user = ref({
+  initials: "JD",
+  fullName: "John Doe",
+  email: "john.doe@doe.com",
+});
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <!-- <button class="bg-blue-800 px-2 py-2 text-white" @click="githubOAuth2">
-        GITHUB CONNECTION
-      </button> -->
-      <!-- <h1 class="blue">The ping request: {{ ping }}</h1> -->
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/main">Main</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <v-app>
+    <v-app-bar color="black">
+      <v-app-bar-title>Fox explorer</v-app-bar-title>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <RouterLink to="/">Home</RouterLink>
+      <v-spacer></v-spacer>
 
-  <RouterView />
+      <RouterLink to="/main">Main</RouterLink>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-menu min-width="200px" rounded>
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props">
+            <v-avatar color="brown" size="large">
+              <span class="text-h5">{{ user.initials }}</span>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-text>
+            <div class="mx-auto text-center">
+              <v-avatar color="brown">
+                <span class="text-h5">{{ user.initials }}</span>
+              </v-avatar>
+              <h3>{{ user.fullName }}</h3>
+              <p class="text-caption mt-1">
+                {{ user.email }}
+              </p>
+              <v-divider class="my-3"></v-divider>
+              <v-btn variant="text" rounded> Edit Account </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn variant="text" rounded> Disconnect </v-btn>
+              <v-btn @click="githubOAuth2">GITHUB CONNECTION</v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
+    </v-app-bar>
+    <RouterView />
+  </v-app>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+<style scoped></style>
