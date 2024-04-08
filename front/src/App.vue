@@ -43,7 +43,7 @@ const user = ref({
               <v-divider class="my-3"></v-divider>
               <v-btn variant="text" rounded>Modification du compte</v-btn>
               <v-divider class="my-3"></v-divider>
-              <v-btn variant="text" rounded> Déconnexion </v-btn>
+              <v-btn variant="text" rounded>Déconnexion</v-btn>
               <v-btn @click="githubOAuth2">Connexion avec github</v-btn>
             </div>
           </v-card-text>
