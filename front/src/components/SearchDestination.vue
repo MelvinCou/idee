@@ -6,18 +6,11 @@
         @input="handleInput"
         type="text"
         placeholder="Recherchez une ville..."
-        class="search-input"
-
-      />
+        class="search-input" />
       <button v-if="searchQuery" @click="clearSearch" class="clear-button">X</button>
     </div>
     <ul v-if="cities.length > 0" class="results-list">
-      <li
-        v-for="city in cities"
-        :key="city.mapbox_id"
-        @click="selectCity(city)"
-        class="city-item"
-      >
+      <li v-for="city in cities" :key="city.mapbox_id" @click="selectCity(city)" class="city-item">
         {{ city.name }} - {{ city.place_formatted }}
       </li>
     </ul>
@@ -29,7 +22,7 @@ import axios from "axios";
 import { ref } from "vue";
 
 export default {
-  setup(_,context) {
+  setup(_, context) {
     const searchQuery = ref("");
     const cities = ref([]);
     let timeoutId = null;
@@ -54,7 +47,7 @@ export default {
     const handleInput = () => {
       clearTimeout(timeoutId);
       if (searchQuery.value === "") {
-        cities.value = []; 
+        cities.value = [];
       } else {
         timeoutId = setTimeout(() => {
           fetchCities(searchQuery.value);
@@ -65,7 +58,7 @@ export default {
     const selectCity = (city) => {
       searchQuery.value = `${city.name} - ${city.place_formatted}`;
       cities.value = [];
-      context.emit('city-selected', city); // Emitting the selected city to parent view
+      context.emit("city-selected", city); // Emitting the selected city to parent view
     };
 
     const clearSearch = () => {
@@ -74,18 +67,17 @@ export default {
     };
 
     return { searchQuery, cities, handleInput, selectCity, clearSearch };
-  }
+  },
 };
-
 </script>
 <style>
 .search-container {
   position: relative;
   width: 100%;
   max-width: 600px;
-  padding-right : 20px;
+  padding-right: 20px;
   margin: auto;
-  margin-top : 20px;
+  margin-top: 20px;
 }
 
 .input-container {

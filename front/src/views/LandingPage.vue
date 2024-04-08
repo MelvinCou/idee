@@ -3,10 +3,10 @@
     <div class="text-content">
       <h1>Embark on a Journey & plan your trip</h1>
       <p class="subheading">
-        Discover the art of travel — an adventure designed by your desires. Navigate,
-        personalize, and cherish your travel experiences, all within one intuitive app.
+        Discover the art of travel — an adventure designed by your desires. Navigate, personalize,
+        and cherish your travel experiences, all within one intuitive app.
       </p>
-      <SearchDestination @city-selected="onCitySelected"/>
+      <SearchDestination @city-selected="onCitySelected" />
       <div class="date-picker-container">
         <VueDatePicker
           v-model="date"
@@ -17,8 +17,7 @@
           auto-apply
           :min-date="new Date()"
           prevent-min-max-navigation
-          ref="datepicker"
-        />
+          ref="datepicker" />
       </div>
 
       <v-btn @click="showDateAndDestination" large color="red" dark class="mb-2">
@@ -29,17 +28,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
-import type { DatePickerInstance } from '@vuepic/vue-datepicker';
-import { useDestinationsStore } from '@/stores/destinationsStore';
-import background from '../assets/images/BG.jpeg';
+import { ref, onMounted, watch } from "vue";
+import type { DatePickerInstance } from "@vuepic/vue-datepicker";
+import { useDestinationsStore } from "@/stores/destinationsStore";
+import background from "../assets/images/BG.jpeg";
 import SearchDestination from "@/components/SearchDestination.vue";
 
 // Reactive references
 const date = ref([]);
 const backgroundImage = ref(background);
-const searchQuery = ref('');
-const selectedDestination = ref('');
+const searchQuery = ref("");
+const selectedDestination = ref("");
 
 // Reactive reference for destinations
 var destinations = ref([]);
@@ -60,9 +59,7 @@ const onCitySelected = (city: any) => {
 
 // Display the selected destination and dates
 const showDateAndDestination = () => {
-  const formattedDate = date.value
-    .map(d => d.toISOString().substring(0, 10))
-    .join(' to ');
+  const formattedDate = date.value.map((d) => d.toISOString().substring(0, 10)).join(" to ");
   const message = `Selected destination: ${selectedDestination.value}\nSelected date: ${formattedDate}`;
   console.log(message);
 };
