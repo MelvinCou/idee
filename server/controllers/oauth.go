@@ -130,12 +130,16 @@ func fetchGithubUser(token *oauth2.Token) (*models.User, error) {
 //	@Failure		500	{string}	string	"Internal Server Error"
 //	@Router			/ping [get]
 func GithubPOC(ctx *gin.Context) {
-	// Retrieve the access_token cookie from the request
-	cookie, err := ctx.Request.Cookie("access_token")
+    // Retrieve the access_token cookie from the request
+    _, err := ctx.Request.Cookie("access_token")
 
-	// Check if the cookie is present
-	if err != nil {
-		// Manage error if access_token cookie is not present
-		ctx.String(http.StatusUnauthorized, "Unauthorized")
-		return nil
+    // Check if the cookie is present
+    if err != nil {
+        // Manage error if access_token cookie is not present
+        ctx.String(http.StatusUnauthorized, "Unauthorized")
+        return
+    }
+
+    ctx.JSON(http.StatusOK, Response{Message: "Authorized!"})
+}
 */

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"log"
 	"server/configs"
 	"server/models"
 	"server/services"
@@ -19,11 +20,9 @@ func CreateUserHandler(user models.User) {
 
 	// If the user doesn't exist, create a new user
 	if result == nil {
-		CreateUserService(userCollection, user)
+		resp := CreateUserService(userCollection, user)
+		if resp == nil {
+			log.Fatalf("Error during user insertion")
+		}
 	}
-}
-
-// Response represents the JSON response for HTTP requests.
-type Response struct {
-	Message string `json:"message" example:"pong"`
 }
