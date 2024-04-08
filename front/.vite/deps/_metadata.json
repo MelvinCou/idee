@@ -1,0 +1,76 @@
+{
+  "hash": "b3a98cef",
+  "configHash": "f930548f",
+  "lockfileHash": "6cd8b62e",
+  "browserHash": "4d26b6b3",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "2bd51d41",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "575a1041",
+      "needsInterop": false
+    },
+    "vuetify": {
+      "src": "../../node_modules/vuetify/lib/framework.mjs",
+      "file": "vuetify.js",
+      "fileHash": "0f5e2910",
+      "needsInterop": false
+    },
+    "vuetify/components": {
+      "src": "../../node_modules/vuetify/lib/components/index.mjs",
+      "file": "vuetify_components.js",
+      "fileHash": "4f46d704",
+      "needsInterop": false
+    },
+    "vuetify/directives": {
+      "src": "../../node_modules/vuetify/lib/directives/index.mjs",
+      "file": "vuetify_directives.js",
+      "fileHash": "894794e1",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "f8b0becb",
+      "needsInterop": false
+    },
+    "@vuepic/vue-datepicker": {
+      "src": "../../node_modules/@vuepic/vue-datepicker/dist/vue-datepicker.js",
+      "file": "@vuepic_vue-datepicker.js",
+      "fileHash": "e173feca",
+      "needsInterop": false
+    },
+    "leaflet": {
+      "src": "../../node_modules/leaflet/dist/leaflet-src.js",
+      "file": "leaflet.js",
+      "fileHash": "aba58eea",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-3M77TZHF": {
+      "file": "chunk-3M77TZHF.js"
+    },
+    "chunk-NK5NFCYA": {
+      "file": "chunk-NK5NFCYA.js"
+    },
+    "chunk-EFQH3KYU": {
+      "file": "chunk-EFQH3KYU.js"
+    },
+    "chunk-AYVSL3LM": {
+      "file": "chunk-AYVSL3LM.js"
+    },
+    "chunk-GU3YDFVY": {
+      "file": "chunk-GU3YDFVY.js"
+    },
+    "chunk-TYRVL62N": {
+      "file": "chunk-TYRVL62N.js"
+    }
+  }
+}
