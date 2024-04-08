@@ -17,7 +17,9 @@
     "swagger": "swagger-typescript-api --modular -p ../server/docs/swagger.json -o ./src/api"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^8.4.0",
     "eslint-import-resolver-typescript": "^3.6.1",
+    "mapbox-gl": "^3.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
