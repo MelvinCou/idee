@@ -3,11 +3,13 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import VueDatePicker from "@vuepic/vue-datepicker";
+
 import "@vuepic/vue-datepicker/dist/main.css";
 
-import "mapbox-gl/dist/mapbox-gl.css";
+
 const app = createApp(App);
 
 app.config.globalProperties.$api_url = import.meta.env.VITE_API_URL;
