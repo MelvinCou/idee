@@ -11,15 +11,14 @@ import (
 )
 
 // CreateUser inserts a new user into the database collection.
-func CreateUser(collection *mongo.Collection, user models.User) (*mongo.InsertOneResult, error) {
+func CreateUser(collection *mongo.Collection, user models.User) (*mongo.InsertOneResult) {
 	insertResult, err := collection.InsertOne(context.TODO(), user)
 
 	if err != nil {
 		log.Fatalf("Error during user insertion: %v", err)
-		return nil, err
 	}
 
-	return insertResult, nil
+	return insertResult
 }
 
 // FindUser searches for a user in the database collection by nodeID.
