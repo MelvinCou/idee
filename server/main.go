@@ -67,7 +67,6 @@ func main() {
 	api := r.Group("/api")
 
 	{
-		api.GET("/ping", Ping)
 		api.GET("/total", controllers.Total)
 	}
 
@@ -79,24 +78,4 @@ func main() {
 	if err := r.Run(); err != nil { // listen and serve on 0.0.0.0:8080
 		log.Printf("%+v\n", err)
 	}
-}
-
-// Ping godoc
-//
-//	@Summary		Ping
-//	@Description	Ping the server
-//	@Tags			ping
-//	@Accept			json
-//	@Produce		json
-//	@Success		200	{object}	Response
-//	@Failure		400	{string}	string	"Bad Request"
-//	@Failure		404	{string}	string	"Not Found"
-//	@Failure		500	{string}	string	"Internal Server Error"
-//	@Router			/ping [get]
-func Ping(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, Response{Message: "pong"})
-}
-
-type Response struct {
-	Message string `json:"message" example:"pong"`
 }
