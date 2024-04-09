@@ -38,3 +38,29 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
         }
     }
 }
+
+query GetEnjoy($city: String!, $from: Int!) {
+  poi(
+      size: 20,
+      from: $from,
+      filters: [
+          {
+              isLocatedAt: {
+                  schema_address: { hasAddressCity: { rdfs_label: { _text: $city } } }
+              },
+              rdf_type: {_in: ["https://www.datatourisme.fr/ontology/core#CulturalSite", "https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace", "https://www.datatourisme.fr/ontology/core#SightseeingBoat", "https://www.datatourisme.fr/ontology/core#WalkingTour", "https://www.datatourisme.fr/ontology/core#ThemePark", "https://www.datatourisme.fr/ontology/core#ParkAndGarden"]}
+          }
+      ]
+  ) {
+      results {
+        rdfs_label {
+              value
+          }
+          rdfs_comment {
+              value
+          }
+      }
+      total
+  }
+}
+
