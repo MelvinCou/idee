@@ -128,18 +128,11 @@ const docTemplate = `{
         "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest": {
             "type": "object",
             "properties": {
-                "isLocatedAt": {
-                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                "hasContact": {
+                    "description": "L\u0026#039;agent à contacter pour affaires générales relatives à ce POI.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
-                    }
-                },
-                "rdf_type": {
-                    "description": "La classification de POI. Par exemple : festival, musée, chambre d’hôtes...",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
                     }
                 },
                 "rdfs_comment": {
@@ -158,73 +151,28 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
             "type": "object",
             "properties": {
-                "schema_address": {
-                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                "foaf_homepage": {
+                    "description": "L\u0026#039;adresse du site internet d\u0026#039;un Agent.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                        "type": "string"
                     }
                 },
-                "schema_geo": {
-                    "description": "Les coordonnées géographiques de la ressource",
+                "schema_email": {
+                    "description": "Un courriel, courrier électronique.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
-                    }
-                }
-            }
-        },
-        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
-            "type": "object",
-            "properties": {
-                "hasAddressCity": {
-                    "description": "La localité de cette addresse (code INSEE de la commune)",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity"
-                    }
-                }
-            }
-        },
-        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity": {
-            "type": "object",
-            "properties": {
-                "rdfs_label": {
-                    "description": "Etiquette courte décrivant la ressource.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString"
-                    }
-                }
-            }
-        },
-        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString": {
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "Literal value",
-                    "type": "string"
-                }
-            }
-        },
-        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
-            "type": "object",
-            "properties": {
-                "schema_latitude": {
-                    "description": "Valeur de la latitude de la ressource.",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
+                        "type": "string"
                     }
                 },
-                "schema_longitude": {
-                    "description": "Valeur de la longitude de la ressource.",
+                "schema_telephone": {
+                    "description": "Un numéro de téléphone.",
                     "type": "array",
                     "items": {
-                        "type": "number"
+                        "type": "string"
                     }
                 }
             }

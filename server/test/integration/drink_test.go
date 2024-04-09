@@ -38,6 +38,7 @@ func TestGetDrinkFromParis(t *testing.T) {
 
 	assert.GreaterOrEqual(t, resp.Poi.Total, 1)
 	for _, result := range resp.Poi.Results {
-		assert.GreaterOrEqual(t, len(result.Rdf_type), 1)
+		assert.GreaterOrEqual(t, len(result.Rdfs_label), 1)
+		assert.GreaterOrEqual(t, len(result.Rdfs_comment), 0)
 	}
 }
