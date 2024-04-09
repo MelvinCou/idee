@@ -31,6 +31,7 @@ func SetupRouter() *gin.Engine {
 
 	{
 		api.GET("/total", controllers.Total)
+		api.GET("/drink", controllers.Drink)
 	}
 
 	r.GET("/github_login", controllers.GithubLogin)
