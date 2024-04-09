@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      DATATOURISME_URI: ${{secrets.DATATOURISME_URI}}
     defaults:
       run:
         working-directory: server
