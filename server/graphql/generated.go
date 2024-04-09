@@ -108,6 +108,74 @@ type GetDrinksResponse struct {
 // GetPoi returns GetDrinksResponse.Poi, and is useful for accessing the field via an interface.
 func (v *GetDrinksResponse) GetPoi() GetDrinksPoiPointOfInterest_ResultSet { return v.Poi }
 
+// GetEnjoyPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
+type GetEnjoyPoiPointOfInterest_ResultSet struct {
+	Results []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest `json:"results"`
+	Total   int                                                          `json:"total"`
+}
+
+// GetResults returns GetEnjoyPoiPointOfInterest_ResultSet.Results, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSet) GetResults() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest {
+	return v.Results
+}
+
+// GetTotal returns GetEnjoyPoiPointOfInterest_ResultSet.Total, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSet) GetTotal() int { return v.Total }
+
+// GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest includes the requested fields of the GraphQL type PointOfInterest.
+// The GraphQL type's documentation follows.
+//
+// Tout objet touristique qui mérite d&#039;être décrit et valorisé. Un POI (Point
+// of Interest) est un élément touristique qui est géré par un Agent et qui peut
+// être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
+// Pratique, un Objet patrimonial
+type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest struct {
+	// Etiquette courte décrivant la ressource.
+	Rdfs_label []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString `json:"rdfs_label"`
+	// Description de la ressource.
+	Rdfs_comment []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString `json:"rdfs_comment"`
+}
+
+// GetRdfs_label returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_label, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_label() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString {
+	return v.Rdfs_label
+}
+
+// GetRdfs_comment returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_comment, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_comment() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString {
+	return v.Rdfs_comment
+}
+
+// GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString includes the requested fields of the GraphQL type LangString.
+type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString) GetValue() string {
+	return v.Value
+}
+
+// GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString includes the requested fields of the GraphQL type LangString.
+type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString) GetValue() string {
+	return v.Value
+}
+
+// GetEnjoyResponse is returned by GetEnjoy on success.
+type GetEnjoyResponse struct {
+	Poi GetEnjoyPoiPointOfInterest_ResultSet `json:"poi"`
+}
+
+// GetPoi returns GetEnjoyResponse.Poi, and is useful for accessing the field via an interface.
+func (v *GetEnjoyResponse) GetPoi() GetEnjoyPoiPointOfInterest_ResultSet { return v.Poi }
+
 // GetTotalPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
 type GetTotalPoiPointOfInterest_ResultSet struct {
 	Total int `json:"total"`
@@ -139,6 +207,18 @@ func (v *__GetDrinksInput) GetFrom() int { return v.From }
 
 // GetSize returns __GetDrinksInput.Size, and is useful for accessing the field via an interface.
 func (v *__GetDrinksInput) GetSize() int { return v.Size }
+
+// __GetEnjoyInput is used internally by genqlient
+type __GetEnjoyInput struct {
+	City string `json:"city"`
+	From int    `json:"from"`
+}
+
+// GetCity returns __GetEnjoyInput.City, and is useful for accessing the field via an interface.
+func (v *__GetEnjoyInput) GetCity() string { return v.City }
+
+// GetFrom returns __GetEnjoyInput.From, and is useful for accessing the field via an interface.
+func (v *__GetEnjoyInput) GetFrom() int { return v.From }
 
 // The query or mutation executed by GetDrinks.
 const GetDrinks_Operation = `
@@ -181,6 +261,51 @@ func GetDrinks(
 	var err_ error
 
 	var data_ GetDrinksResponse
+	resp_ := &graphql.Response{Data: &data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return &data_, err_
+}
+
+// The query or mutation executed by GetEnjoy.
+const GetEnjoy_Operation = `
+query GetEnjoy ($city: String!, $from: Int!) {
+	poi(size: 20, from: $from, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#CulturalSite","https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace","https://www.datatourisme.fr/ontology/core#SightseeingBoat","https://www.datatourisme.fr/ontology/core#WalkingTour","https://www.datatourisme.fr/ontology/core#ThemePark","https://www.datatourisme.fr/ontology/core#ParkAndGarden"]}}]) {
+		results {
+			rdfs_label {
+				value
+			}
+			rdfs_comment {
+				value
+			}
+		}
+		total
+	}
+}
+`
+
+func GetEnjoy(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	city string,
+	from int,
+) (*GetEnjoyResponse, error) {
+	req_ := &graphql.Request{
+		OpName: "GetEnjoy",
+		Query:  GetEnjoy_Operation,
+		Variables: &__GetEnjoyInput{
+			City: city,
+			From: from,
+		},
+	}
+	var err_ error
+
+	var data_ GetEnjoyResponse
 	resp_ := &graphql.Response{Data: &data_}
 
 	err_ = client_.MakeRequest(
