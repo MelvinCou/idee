@@ -11,15 +11,13 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
         filters: [
             {
                 isLocatedAt: {
-                    schema_address: {
-                        hasAddressCity: { rdfs_label: { _text: $city } }
-                    }
+                    schema_address: { hasAddressCity: { rdfs_label: { _text: $city } } }
                 }
                 rdf_type: {
                     _in: [
-                        "https://www.datatourisme.fr/ontology/core#BarOrPub",
+                        "https://www.datatourisme.fr/ontology/core#BarOrPub"
                         "https://www.datatourisme.fr/ontology/core#BistroOrWineBar"
-                        ]
+                    ]
                 }
             }
         ]

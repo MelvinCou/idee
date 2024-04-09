@@ -16,6 +16,52 @@
         "version": "1.0"
     },
     "paths": {
+        "/drink": {
+            "get": {
+                "description": "Get available drinks (bars, bistros) in a city",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "Total",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "Paris",
+                        "name": "city",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "example": 1,
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.GetDrinksResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/total": {
             "get": {
                 "description": "Get total number of objets in database",
@@ -53,6 +99,150 @@
                 "error": {
                     "type": "string",
                     "example": "string"
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSet": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+            "type": "object",
+            "properties": {
+                "isLocatedAt": {
+                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
+                    }
+                },
+                "rdf_type": {
+                    "description": "La classification de POI. Par exemple : festival, musée, chambre d’hôtes...",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "rdfs_comment": {
+                    "description": "Description de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                    }
+                },
+                "rdfs_label": {
+                    "description": "Etiquette courte décrivant la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+            "type": "object",
+            "properties": {
+                "schema_address": {
+                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                    }
+                },
+                "schema_geo": {
+                    "description": "Les coordonnées géographiques de la ressource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
+            "type": "object",
+            "properties": {
+                "hasAddressCity": {
+                    "description": "La localité de cette addresse (code INSEE de la commune)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity": {
+            "type": "object",
+            "properties": {
+                "rdfs_label": {
+                    "description": "Etiquette courte décrivant la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
+            "type": "object",
+            "properties": {
+                "schema_latitude": {
+                    "description": "Valeur de la latitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "schema_longitude": {
+                    "description": "Valeur de la longitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetDrinksResponse": {
+            "type": "object",
+            "properties": {
+                "poi": {
+                    "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSet"
                 }
             }
         },

@@ -5,6 +5,105 @@ definitions:
         example: string
         type: string
     type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSet:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest'
+        type: array
+      total:
+        type: integer
+    type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest:
+    properties:
+      isLocatedAt:
+        description: La localisation du POI, et donc le lieu où il peut être potentiellement
+          consommé. Lieu de départ d&#039;un itinéraire.
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace'
+        type: array
+      rdf_type:
+        description: 'La classification de POI. Par exemple : festival, musée, chambre
+          d’hôtes...'
+        items:
+          type: string
+        type: array
+      rdfs_comment:
+        description: Description de la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString'
+        type: array
+      rdfs_label:
+        description: Etiquette courte décrivant la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString'
+        type: array
+    type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace:
+    properties:
+      schema_address:
+        description: L&#039;adresse postale du lieu concerné
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress'
+        type: array
+      schema_geo:
+        description: Les coordonnées géographiques de la ressource
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape'
+        type: array
+    type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress:
+    properties:
+      hasAddressCity:
+        description: La localité de cette addresse (code INSEE de la commune)
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity'
+        type: array
+    type: object
+  ? graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity
+  : properties:
+      rdfs_label:
+        description: Etiquette courte décrivant la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString'
+        type: array
+    type: object
+  ? graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString
+  : properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  ? graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape
+  : properties:
+      schema_latitude:
+        description: Valeur de la latitude de la ressource.
+        items:
+          type: number
+        type: array
+      schema_longitude:
+        description: Valeur de la longitude de la ressource.
+        items:
+          type: number
+        type: array
+    type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetDrinksResponse:
+    properties:
+      poi:
+        $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSet'
+    type: object
   graphql.GetTotalPoiPointOfInterest_ResultSet:
     properties:
       total:
@@ -31,6 +130,37 @@ info:
   title: Idee API
   version: "1.0"
 paths:
+  /drink:
+    get:
+      consumes:
+      - application/json
+      description: Get available drinks (bars, bistros) in a city
+      parameters:
+      - example: Paris
+        in: query
+        name: city
+        required: true
+        type: string
+      - example: 1
+        in: query
+        minimum: 1
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/graphql.GetDrinksResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/graphql.Error'
+      summary: Total
+      tags:
+      - graphql
   /total:
     get:
       consumes:
