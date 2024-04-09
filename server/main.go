@@ -2,20 +2,14 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 
-	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"server/configs"
-	"server/controllers"
 	docs "server/docs"
 	g "server/graphql"
-
-	"github.com/Khan/genqlient/graphql"
-	swaggerFiles "github.com/swaggo/files"
+	"server/router"
 )
 
 //	@title						Idee API
@@ -39,41 +33,15 @@ func main() {
 	if datatourisme == "" {
 		log.Fatal("Please set DATATOURISME_URI")
 	}
-	datatourismeClient := http.Client{}
-	g.Client = graphql.NewClient(datatourisme, &datatourismeClient)
 
-	r := gin.Default()
+	_ = g.GetClient()
 
-	// Middleware CORS
-	r.Use(func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(http.StatusOK)
-			return
-		}
-
-		c.Next()
-	})
+	r := router.SetupRouter()
 
 	configs.GithubConfig()
 
 	docs.SwaggerInfo.BasePath = "/api"
 	docs.SwaggerInfo.Host = os.Getenv("SWAGGER_HOST")
-
-	api := r.Group("/api")
-
-	{
-		api.GET("/total", controllers.Total)
-	}
-
-	r.GET("/github_login", controllers.GithubLogin)
-	r.GET("/github_callback", controllers.GithubCallback)
-
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	if err := r.Run(); err != nil { // listen and serve on 0.0.0.0:8080
 		log.Printf("%+v\n", err)
