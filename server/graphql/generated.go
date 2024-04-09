@@ -30,24 +30,12 @@ func (v *GetDrinksPoiPointOfInterest_ResultSet) GetResults() []GetDrinksPoiPoint
 // être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
 // Pratique, un Objet patrimonial
 type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest struct {
-	// Description de la ressource.
-	Rdfs_comment []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString `json:"rdfs_comment"`
-	// La classification de POI. Par exemple : festival, musée, chambre d’hôtes...
-	Rdf_type []string `json:"rdf_type"`
 	// Etiquette courte décrivant la ressource.
 	Rdfs_label []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString `json:"rdfs_label"`
-	// La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
-	IsLocatedAt []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace `json:"isLocatedAt"`
-}
-
-// GetRdfs_comment returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_comment, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_comment() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString {
-	return v.Rdfs_comment
-}
-
-// GetRdf_type returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdf_type, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdf_type() []string {
-	return v.Rdf_type
+	// Description de la ressource.
+	Rdfs_comment []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString `json:"rdfs_comment"`
+	// L&#039;agent à contacter pour affaires générales relatives à ce POI.
+	HasContact []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent `json:"hasContact"`
 }
 
 // GetRdfs_label returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_label, and is useful for accessing the field via an interface.
@@ -55,81 +43,39 @@ func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_la
 	return v.Rdfs_label
 }
 
-// GetIsLocatedAt returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.IsLocatedAt, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetIsLocatedAt() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace {
-	return v.IsLocatedAt
+// GetRdfs_comment returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_comment, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_comment() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString {
+	return v.Rdfs_comment
 }
 
-// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace includes the requested fields of the GraphQL type Place.
-type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
-	// Les coordonnées géographiques de la ressource
-	Schema_geo []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
-	// L&#039;adresse postale du lieu concerné
-	Schema_address []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
+// GetHasContact returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.HasContact, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetHasContact() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent {
+	return v.HasContact
 }
 
-// GetSchema_geo returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
-	return v.Schema_geo
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent includes the requested fields of the GraphQL type Agent.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent struct {
+	// L&#039;adresse du site internet d&#039;un Agent.
+	Foaf_homepage []string `json:"foaf_homepage"`
+	// Un numéro de téléphone.
+	Schema_telephone []string `json:"schema_telephone"`
+	// Un courriel, courrier électronique.
+	Schema_email []string `json:"schema_email"`
 }
 
-// GetSchema_address returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
-	return v.Schema_address
+// GetFoaf_homepage returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Foaf_homepage, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetFoaf_homepage() []string {
+	return v.Foaf_homepage
 }
 
-// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
-// The GraphQL type's documentation follows.
-//
-// Adresse postale
-type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
-	// La localité de cette addresse (code INSEE de la commune)
-	HasAddressCity []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity `json:"hasAddressCity"`
+// GetSchema_telephone returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Schema_telephone, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetSchema_telephone() []string {
+	return v.Schema_telephone
 }
 
-// GetHasAddressCity returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.HasAddressCity, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetHasAddressCity() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity {
-	return v.HasAddressCity
-}
-
-// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity includes the requested fields of the GraphQL type City.
-type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity struct {
-	// Etiquette courte décrivant la ressource.
-	Rdfs_label []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString `json:"rdfs_label"`
-}
-
-// GetRdfs_label returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity.Rdfs_label, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity) GetRdfs_label() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString {
-	return v.Rdfs_label
-}
-
-// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString includes the requested fields of the GraphQL type LangString.
-type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString struct {
-	// Literal value
-	Value string `json:"value"`
-}
-
-// GetValue returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString.Value, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString) GetValue() string {
-	return v.Value
-}
-
-// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
-type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape struct {
-	// Valeur de la latitude de la ressource.
-	Schema_latitude []float64 `json:"schema_latitude"`
-	// Valeur de la longitude de la ressource.
-	Schema_longitude []float64 `json:"schema_longitude"`
-}
-
-// GetSchema_latitude returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape.Schema_latitude, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape) GetSchema_latitude() []float64 {
-	return v.Schema_latitude
-}
-
-// GetSchema_longitude returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape.Schema_longitude, and is useful for accessing the field via an interface.
-func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape) GetSchema_longitude() []float64 {
-	return v.Schema_longitude
+// GetSchema_email returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Schema_email, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetSchema_email() []string {
+	return v.Schema_email
 }
 
 // GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString includes the requested fields of the GraphQL type LangString.
@@ -200,25 +146,16 @@ query GetDrinks ($city: String, $from: Int, $size: Int) {
 	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#BarOrPub","https://www.datatourisme.fr/ontology/core#BistroOrWineBar"]}}]) {
 		total
 		results {
-			rdfs_comment {
-				value
-			}
-			rdf_type
 			rdfs_label {
 				value
 			}
-			isLocatedAt {
-				schema_geo {
-					schema_latitude
-					schema_longitude
-				}
-				schema_address {
-					hasAddressCity {
-						rdfs_label {
-							value
-						}
-					}
-				}
+			rdfs_comment {
+				value
+			}
+			hasContact {
+				foaf_homepage
+				schema_telephone
+				schema_email
 			}
 		}
 	}

@@ -24,25 +24,16 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
     ) {
         total
         results {
-            rdfs_comment {
-                value
-            }
-            rdf_type
             rdfs_label {
                 value
             }
-            isLocatedAt {
-                schema_geo {
-                    schema_latitude
-                    schema_longitude
-                }
-                schema_address {
-                    hasAddressCity {
-                        rdfs_label {
-                            value
-                        }
-                    }
-                }
+            rdfs_comment {
+                value
+            }
+            hasContact {
+                foaf_homepage
+                schema_telephone
+                schema_email
             }
         }
     }
