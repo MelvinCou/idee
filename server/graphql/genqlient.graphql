@@ -3,3 +3,49 @@ query GetTotal {
     total
   }
 }
+
+query GetDrinks($city: String, $from: Int, $size: Int) {
+    poi(
+        from: $from
+        size: $size
+        filters: [
+            {
+                isLocatedAt: {
+                    schema_address: {
+                        hasAddressCity: { rdfs_label: { _text: $city } }
+                    }
+                }
+                rdf_type: {
+                    _in: [
+                        "https://www.datatourisme.fr/ontology/core#BarOrPub",
+                        "https://www.datatourisme.fr/ontology/core#BistroOrWineBar"
+                        ]
+                }
+            }
+        ]
+    ) {
+        total
+        results {
+            rdfs_comment {
+                value
+            }
+            rdf_type
+            rdfs_label {
+                value
+            }
+            isLocatedAt {
+                schema_geo {
+                    schema_latitude
+                    schema_longitude
+                }
+                schema_address {
+                    hasAddressCity {
+                        rdfs_label {
+                            value
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
