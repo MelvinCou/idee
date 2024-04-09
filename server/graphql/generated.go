@@ -8,6 +8,160 @@ import (
 	"github.com/Khan/genqlient/graphql"
 )
 
+// GetDrinksPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
+type GetDrinksPoiPointOfInterest_ResultSet struct {
+	Total   int                                                           `json:"total"`
+	Results []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest `json:"results"`
+}
+
+// GetTotal returns GetDrinksPoiPointOfInterest_ResultSet.Total, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSet) GetTotal() int { return v.Total }
+
+// GetResults returns GetDrinksPoiPointOfInterest_ResultSet.Results, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSet) GetResults() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest {
+	return v.Results
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest includes the requested fields of the GraphQL type PointOfInterest.
+// The GraphQL type's documentation follows.
+//
+// Tout objet touristique qui mérite d&#039;être décrit et valorisé. Un POI (Point
+// of Interest) est un élément touristique qui est géré par un Agent et qui peut
+// être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
+// Pratique, un Objet patrimonial
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest struct {
+	// Description de la ressource.
+	Rdfs_comment []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString `json:"rdfs_comment"`
+	// La classification de POI. Par exemple : festival, musée, chambre d’hôtes...
+	Rdf_type []string `json:"rdf_type"`
+	// Etiquette courte décrivant la ressource.
+	Rdfs_label []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString `json:"rdfs_label"`
+	// La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d&#039;un itinéraire.
+	IsLocatedAt []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace `json:"isLocatedAt"`
+}
+
+// GetRdfs_comment returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_comment, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_comment() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString {
+	return v.Rdfs_comment
+}
+
+// GetRdf_type returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdf_type, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdf_type() []string {
+	return v.Rdf_type
+}
+
+// GetRdfs_label returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_label, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_label() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString {
+	return v.Rdfs_label
+}
+
+// GetIsLocatedAt returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest.IsLocatedAt, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterest) GetIsLocatedAt() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace {
+	return v.IsLocatedAt
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace includes the requested fields of the GraphQL type Place.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
+	// Les coordonnées géographiques de la ressource
+	Schema_geo []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
+	// L&#039;adresse postale du lieu concerné
+	Schema_address []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
+}
+
+// GetSchema_geo returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
+	return v.Schema_geo
+}
+
+// GetSchema_address returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
+	return v.Schema_address
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
+// The GraphQL type's documentation follows.
+//
+// Adresse postale
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
+	// La localité de cette addresse (code INSEE de la commune)
+	HasAddressCity []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity `json:"hasAddressCity"`
+}
+
+// GetHasAddressCity returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.HasAddressCity, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetHasAddressCity() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity {
+	return v.HasAddressCity
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity includes the requested fields of the GraphQL type City.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity struct {
+	// Etiquette courte décrivant la ressource.
+	Rdfs_label []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString `json:"rdfs_label"`
+}
+
+// GetRdfs_label returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity.Rdfs_label, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCity) GetRdfs_label() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString {
+	return v.Rdfs_label
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString includes the requested fields of the GraphQL type LangString.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddressHasAddressCityRdfs_labelLangString) GetValue() string {
+	return v.Value
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape struct {
+	// Valeur de la latitude de la ressource.
+	Schema_latitude []float64 `json:"schema_latitude"`
+	// Valeur de la longitude de la ressource.
+	Schema_longitude []float64 `json:"schema_longitude"`
+}
+
+// GetSchema_latitude returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape.Schema_latitude, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape) GetSchema_latitude() []float64 {
+	return v.Schema_latitude
+}
+
+// GetSchema_longitude returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape.Schema_longitude, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape) GetSchema_longitude() []float64 {
+	return v.Schema_longitude
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString includes the requested fields of the GraphQL type LangString.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString) GetValue() string {
+	return v.Value
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString includes the requested fields of the GraphQL type LangString.
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString) GetValue() string {
+	return v.Value
+}
+
+// GetDrinksResponse is returned by GetDrinks on success.
+type GetDrinksResponse struct {
+	Poi GetDrinksPoiPointOfInterest_ResultSet `json:"poi"`
+}
+
+// GetPoi returns GetDrinksResponse.Poi, and is useful for accessing the field via an interface.
+func (v *GetDrinksResponse) GetPoi() GetDrinksPoiPointOfInterest_ResultSet { return v.Poi }
+
 // GetTotalPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
 type GetTotalPoiPointOfInterest_ResultSet struct {
 	Total int `json:"total"`
@@ -23,6 +177,83 @@ type GetTotalResponse struct {
 
 // GetPoi returns GetTotalResponse.Poi, and is useful for accessing the field via an interface.
 func (v *GetTotalResponse) GetPoi() GetTotalPoiPointOfInterest_ResultSet { return v.Poi }
+
+// __GetDrinksInput is used internally by genqlient
+type __GetDrinksInput struct {
+	City string `json:"city"`
+	From int    `json:"from"`
+	Size int    `json:"size"`
+}
+
+// GetCity returns __GetDrinksInput.City, and is useful for accessing the field via an interface.
+func (v *__GetDrinksInput) GetCity() string { return v.City }
+
+// GetFrom returns __GetDrinksInput.From, and is useful for accessing the field via an interface.
+func (v *__GetDrinksInput) GetFrom() int { return v.From }
+
+// GetSize returns __GetDrinksInput.Size, and is useful for accessing the field via an interface.
+func (v *__GetDrinksInput) GetSize() int { return v.Size }
+
+// The query or mutation executed by GetDrinks.
+const GetDrinks_Operation = `
+query GetDrinks ($city: String, $from: Int, $size: Int) {
+	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#BarOrPub","https://www.datatourisme.fr/ontology/core#BistroOrWineBar"]}}]) {
+		total
+		results {
+			rdfs_comment {
+				value
+			}
+			rdf_type
+			rdfs_label {
+				value
+			}
+			isLocatedAt {
+				schema_geo {
+					schema_latitude
+					schema_longitude
+				}
+				schema_address {
+					hasAddressCity {
+						rdfs_label {
+							value
+						}
+					}
+				}
+			}
+		}
+	}
+}
+`
+
+func GetDrinks(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	city string,
+	from int,
+	size int,
+) (*GetDrinksResponse, error) {
+	req_ := &graphql.Request{
+		OpName: "GetDrinks",
+		Query:  GetDrinks_Operation,
+		Variables: &__GetDrinksInput{
+			City: city,
+			From: from,
+			Size: size,
+		},
+	}
+	var err_ error
+
+	var data_ GetDrinksResponse
+	resp_ := &graphql.Response{Data: &data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return &data_, err_
+}
 
 // The query or mutation executed by GetTotal.
 const GetTotal_Operation = `
