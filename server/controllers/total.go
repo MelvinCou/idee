@@ -18,7 +18,7 @@ import (
 //	@Failure		500	{object}	graphql.Error
 //	@Router			/total [get]
 func Total(ctx *gin.Context) {
-	r, err := graphql.GetTotal(ctx, graphql.Client)
+	r, err := graphql.GetTotal(ctx, graphql.GetClient())
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
 	} else {
