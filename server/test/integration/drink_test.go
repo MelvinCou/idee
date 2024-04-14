@@ -3,33 +3,46 @@ package integration
 import (
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"server/graphql"
 	"server/router"
 	"testing"
 
+	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/stretchr/testify/assert"
 )
 
 const (
 	endpointDrink = "/api/drink"
+	endpointEnjoy = "/api/enjoy"
 )
 
+var r *gin.Engine
+
+func TestMain(m *testing.M) {
+	// Setup
+	r = router.SetupRouter()
+
+	// Run tests
+	code := m.Run()
+
+	os.Exit(code)
+}
+
 func TestGetDrinkBadRequest(t *testing.T) {
-	router := router.SetupRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", endpointDrink, http.NoBody)
-	router.ServeHTTP(w, req)
+	r.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 }
 
 func TestGetDrinkFromParis(t *testing.T) {
 	var resp graphql.GetDrinksResponse
-	router := router.SetupRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", endpointDrink+"?City=Paris&Page=1", http.NoBody)
-	router.ServeHTTP(w, req)
+	r.ServeHTTP(w, req)
 
 	assert.Equal(t, w.Code, http.StatusOK)
 	if err := binding.JSON.BindBody(w.Body.Bytes(), &resp); err != nil {

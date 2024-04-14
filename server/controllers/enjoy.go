@@ -32,7 +32,13 @@ func Enjoy(ctx *gin.Context) {
 		return
 	}
 
-	r, err := graphql.GetEnjoy(ctx, graphql.GetClient(), p.City, utils.GetFromForGraphQL(p.Page), 20)
+	from, err := utils.GetFromForGraphQL(p.Page)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	r, err := graphql.GetEnjoy(ctx, graphql.GetClient(), p.City, from, 20)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
 	} else {
