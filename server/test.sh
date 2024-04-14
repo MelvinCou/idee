@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Exécution des tests unitaires
+# Exit the script if an error occurs
+set -e
+
+# Execute unit tests
 echo "Execution of unit tests"
 go test -v ./test/unit
 
-# Exécution des tests d'intégration
+# Execute integration tests
 echo "Execution of integration tests"
 go test -v ./test/integration
 
