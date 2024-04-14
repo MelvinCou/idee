@@ -16,6 +16,7 @@ import (
 const (
 	endpointDrink = "/api/drink"
 	endpointEnjoy = "/api/enjoy"
+	endpointSleep = "/api/sleep"
 )
 
 var r *gin.Engine
