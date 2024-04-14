@@ -68,6 +68,45 @@ definitions:
       poi:
         $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSet'
     type: object
+  graphql.GetEnjoyPoiPointOfInterest_ResultSet:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest'
+        type: array
+      total:
+        type: integer
+    type: object
+  graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest:
+    properties:
+      rdfs_comment:
+        description: Description de la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString'
+        type: array
+      rdfs_label:
+        description: Etiquette courte décrivant la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString'
+        type: array
+    type: object
+  graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetEnjoyResponse:
+    properties:
+      poi:
+        $ref: '#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSet'
+    type: object
   graphql.GetTotalPoiPointOfInterest_ResultSet:
     properties:
       total:
@@ -123,6 +162,35 @@ paths:
           schema:
             $ref: '#/definitions/graphql.Error'
       summary: Total
+      tags:
+      - graphql
+  /enjoy:
+    get:
+      consumes:
+      - application/json
+      description: Get events|activities from our DATATourisme API
+      parameters:
+      - in: query
+        name: city
+        required: true
+        type: string
+      - in: query
+        minimum: 0
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/graphql.GetEnjoyResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/graphql.Error'
+      summary: Enjoy
       tags:
       - graphql
   /total:

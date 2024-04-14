@@ -71,6 +71,50 @@ const docTemplate = `{
                 }
             }
         },
+        "/enjoy": {
+            "get": {
+                "description": "Get events|activities from our DATATourisme API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "Enjoy",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "city",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.GetEnjoyResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/total": {
             "get": {
                 "description": "Get total number of objets in database",
@@ -200,6 +244,65 @@ const docTemplate = `{
             "properties": {
                 "poi": {
                     "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSet"
+                }
+            }
+        },
+        "graphql.GetEnjoyPoiPointOfInterest_ResultSet": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+            "type": "object",
+            "properties": {
+                "rdfs_comment": {
+                    "description": "Description de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                    }
+                },
+                "rdfs_label": {
+                    "description": "Etiquette courte décrivant la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetEnjoyResponse": {
+            "type": "object",
+            "properties": {
+                "poi": {
+                    "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSet"
                 }
             }
         },
