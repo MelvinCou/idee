@@ -35,6 +35,7 @@ func SetupRouter() *gin.Engine {
 		api.GET("/enjoy", controllers.Enjoy)
 		api.GET("/sleep", controllers.Sleep)
 		api.GET("/total", controllers.Total)
+		// api.GET("/travel", controllers.Travel)
 	}
 
 	r.GET("/github_login", controllers.GithubLogin)
