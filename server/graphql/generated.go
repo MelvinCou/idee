@@ -4,6 +4,7 @@ package graphql
 
 import (
 	"context"
+	"time"
 
 	"github.com/Khan/genqlient/graphql"
 )
@@ -110,17 +111,17 @@ func (v *GetDrinksResponse) GetPoi() GetDrinksPoiPointOfInterest_ResultSet { ret
 
 // GetEnjoyPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
 type GetEnjoyPoiPointOfInterest_ResultSet struct {
-	Results []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest `json:"results"`
 	Total   int                                                          `json:"total"`
+	Results []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest `json:"results"`
 }
+
+// GetTotal returns GetEnjoyPoiPointOfInterest_ResultSet.Total, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSet) GetTotal() int { return v.Total }
 
 // GetResults returns GetEnjoyPoiPointOfInterest_ResultSet.Results, and is useful for accessing the field via an interface.
 func (v *GetEnjoyPoiPointOfInterest_ResultSet) GetResults() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest {
 	return v.Results
 }
-
-// GetTotal returns GetEnjoyPoiPointOfInterest_ResultSet.Total, and is useful for accessing the field via an interface.
-func (v *GetEnjoyPoiPointOfInterest_ResultSet) GetTotal() int { return v.Total }
 
 // GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest includes the requested fields of the GraphQL type PointOfInterest.
 // The GraphQL type's documentation follows.
@@ -134,6 +135,16 @@ type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest struct {
 	Rdfs_label []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString `json:"rdfs_label"`
 	// Description de la ressource.
 	Rdfs_comment []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString `json:"rdfs_comment"`
+	// L&#039;agent à contacter pour affaires générales relatives à ce POI.
+	HasContact []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent `json:"hasContact"`
+	// Description textuelle courte ou longue du POI pouvant être associée à une
+	// audience. Par exemple, un POI peut avoir une description dédiée aux écoles et
+	// une autre dédiée au grand public. Si une description n&#039;a aucune audience
+	// renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
+	HasDescription []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription `json:"hasDescription"`
+	// Vrai si le produit propose un accès aux personnes à mobilité réduite
+	ReducedMobilityAccess  []bool      `json:"reducedMobilityAccess"`
+	LastUpdateDatatourisme []time.Time `json:"lastUpdateDatatourisme"`
 }
 
 // GetRdfs_label returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_label, and is useful for accessing the field via an interface.
@@ -144,6 +155,80 @@ func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_lab
 // GetRdfs_comment returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_comment, and is useful for accessing the field via an interface.
 func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_comment() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString {
 	return v.Rdfs_comment
+}
+
+// GetHasContact returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.HasContact, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetHasContact() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent {
+	return v.HasContact
+}
+
+// GetHasDescription returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.HasDescription, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetHasDescription() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription {
+	return v.HasDescription
+}
+
+// GetReducedMobilityAccess returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.ReducedMobilityAccess, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetReducedMobilityAccess() []bool {
+	return v.ReducedMobilityAccess
+}
+
+// GetLastUpdateDatatourisme returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.LastUpdateDatatourisme, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetLastUpdateDatatourisme() []time.Time {
+	return v.LastUpdateDatatourisme
+}
+
+// GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent includes the requested fields of the GraphQL type Agent.
+type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent struct {
+	// L&#039;adresse du site internet d&#039;un Agent.
+	Foaf_homepage []string `json:"foaf_homepage"`
+	// Un numéro de téléphone.
+	Schema_telephone []string `json:"schema_telephone"`
+	// Un courriel, courrier électronique.
+	Schema_email []string `json:"schema_email"`
+}
+
+// GetFoaf_homepage returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Foaf_homepage, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetFoaf_homepage() []string {
+	return v.Foaf_homepage
+}
+
+// GetSchema_telephone returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Schema_telephone, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetSchema_telephone() []string {
+	return v.Schema_telephone
+}
+
+// GetSchema_email returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Schema_email, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetSchema_email() []string {
+	return v.Schema_email
+}
+
+// GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription includes the requested fields of the GraphQL type Description.
+// The GraphQL type's documentation follows.
+//
+// Une description permet d&#039;associer la description textuelle d&#039;un POI
+// avec l&#039;Audience à qui cette description est dédiée. Par exemple, un POI
+// peut avoir une description dédiée aux écoles et une autre dédiée au grand
+// public. Si une description n&#039;a aucune audience renseignée, on suppose
+// qu&#039;elle est dédiée à tous les publics.
+type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription struct {
+	// Description longue de la ressource.
+	Dc_description []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString `json:"dc_description"`
+}
+
+// GetDc_description returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription.Dc_description, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription) GetDc_description() []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString {
+	return v.Dc_description
+}
+
+// GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString includes the requested fields of the GraphQL type LangString.
+type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString) GetValue() string {
+	return v.Value
 }
 
 // GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString includes the requested fields of the GraphQL type LangString.
@@ -212,6 +297,7 @@ func (v *__GetDrinksInput) GetSize() int { return v.Size }
 type __GetEnjoyInput struct {
 	City string `json:"city"`
 	From int    `json:"from"`
+	Size int    `json:"size"`
 }
 
 // GetCity returns __GetEnjoyInput.City, and is useful for accessing the field via an interface.
@@ -219,6 +305,9 @@ func (v *__GetEnjoyInput) GetCity() string { return v.City }
 
 // GetFrom returns __GetEnjoyInput.From, and is useful for accessing the field via an interface.
 func (v *__GetEnjoyInput) GetFrom() int { return v.From }
+
+// GetSize returns __GetEnjoyInput.Size, and is useful for accessing the field via an interface.
+func (v *__GetEnjoyInput) GetSize() int { return v.Size }
 
 // The query or mutation executed by GetDrinks.
 const GetDrinks_Operation = `
@@ -274,8 +363,9 @@ func GetDrinks(
 
 // The query or mutation executed by GetEnjoy.
 const GetEnjoy_Operation = `
-query GetEnjoy ($city: String!, $from: Int!) {
-	poi(size: 20, from: $from, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#CulturalSite","https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace","https://www.datatourisme.fr/ontology/core#SightseeingBoat","https://www.datatourisme.fr/ontology/core#WalkingTour","https://www.datatourisme.fr/ontology/core#ThemePark","https://www.datatourisme.fr/ontology/core#ParkAndGarden"]}}]) {
+query GetEnjoy ($city: String, $from: Int, $size: Int) {
+	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#CulturalSite","https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace","https://www.datatourisme.fr/ontology/core#SightseeingBoat","https://www.datatourisme.fr/ontology/core#WalkingTour","https://www.datatourisme.fr/ontology/core#ThemePark","https://www.datatourisme.fr/ontology/core#ParkAndGarden","https://www.datatourisme.fr/ontology/core#SportsTheme"]}}]) {
+		total
 		results {
 			rdfs_label {
 				value
@@ -283,8 +373,19 @@ query GetEnjoy ($city: String!, $from: Int!) {
 			rdfs_comment {
 				value
 			}
+			hasContact {
+				foaf_homepage
+				schema_telephone
+				schema_email
+			}
+			hasDescription {
+				dc_description {
+					value
+				}
+			}
+			reducedMobilityAccess
+			lastUpdateDatatourisme
 		}
-		total
 	}
 }
 `
@@ -294,6 +395,7 @@ func GetEnjoy(
 	client_ graphql.Client,
 	city string,
 	from int,
+	size int,
 ) (*GetEnjoyResponse, error) {
 	req_ := &graphql.Request{
 		OpName: "GetEnjoy",
@@ -301,6 +403,7 @@ func GetEnjoy(
 		Variables: &__GetEnjoyInput{
 			City: city,
 			From: from,
+			Size: size,
 		},
 	}
 	var err_ error
