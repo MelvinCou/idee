@@ -9,24 +9,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type EnjoyParams struct {
+type SleepParams struct {
 	City string `json:"city" binding:"required"`
 	Page int    `json:"page" binding:"required,gte=0"`
 }
 
-// Enjoy godoc
+// Sleep godoc
 //
-//	@Summary		Enjoy
-//	@Description	Get events|activities from our DATATourisme API
+//	@Summary		Sleep
+//	@Description	Get sleep places from our DATATourisme API
 //	@Tags			graphql
 //	@Accept			json
 //	@Produce		json
-//	@Param			EnjoyParams	query		EnjoyParams	true	"City and page parameters"
-//	@Success		200			{object}	graphql.GetEnjoyResponse
+//	@Param			SleepParams	query		SleepParams	true	"City and page parameters"
+//	@Success		200			{object}	graphql.GetSleepResponse
 //	@Failure		500			{object}	graphql.Error
 //	@Router			/enjoy [get]
-func Enjoy(ctx *gin.Context) {
-	var p EnjoyParams
+func Sleep(ctx *gin.Context) {
+	var p SleepParams
 	if err := ctx.ShouldBindQuery(&p); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
