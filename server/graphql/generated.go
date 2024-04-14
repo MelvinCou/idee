@@ -479,7 +479,7 @@ func (v *__GetSleepInput) GetSize() int { return v.Size }
 // The query or mutation executed by GetDrinks.
 const GetDrinks_Operation = `
 query GetDrinks ($city: String, $from: Int, $size: Int) {
-	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#BarOrPub","https://www.datatourisme.fr/ontology/core#BistroOrWineBar"]}}]) {
+	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#BarOrPub","https://www.datatourisme.fr/ontology/core#BistroOrWineBar","https://www.datatourisme.fr/ontology/core#Abbey"]}}]) {
 		total
 		results {
 			rdfs_label {

@@ -62,6 +62,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/graphql.GetDrinksResponse"
                         }
                     },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
@@ -73,7 +79,7 @@ const docTemplate = `{
         },
         "/enjoy": {
             "get": {
-                "description": "Get events|activities from our DATATourisme API",
+                "description": "Get sleep places from our DATATourisme API",
                 "consumes": [
                     "application/json"
                 ],
@@ -83,7 +89,7 @@ const docTemplate = `{
                 "tags": [
                     "graphql"
                 ],
-                "summary": "Enjoy",
+                "summary": "Sleep",
                 "parameters": [
                     {
                         "type": "string",
@@ -104,6 +110,12 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/graphql.GetSleepResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
                         }
                     },
                     "500": {

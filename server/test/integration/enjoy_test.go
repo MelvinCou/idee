@@ -10,6 +10,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const (
+	endpointEnjoy = "/api/enjoy"
+)
+
 func TestGetEnjoyBadRequest(t *testing.T) {
 	// Create an HTTP request recorder
 	w := httptest.NewRecorder()

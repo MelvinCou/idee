@@ -22,7 +22,8 @@ type DrinkParams struct {
 //	@Produce		json
 //	@Param			params	query		controllers.DrinkParams	true	"City and page parameters"
 //	@Success		200		{object}	graphql.GetDrinksResponse
-//	@Failure		500		{object}	graphql.Error
+//	@Failure		400		{object}	graphql.Error	"Bad Request"
+//	@Failure		500		{object}	graphql.Error	"Internal Server Error"
 //	@Router			/drink [get]
 func Drink(ctx *gin.Context) {
 	var p DrinkParams

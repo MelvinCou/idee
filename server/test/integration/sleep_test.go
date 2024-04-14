@@ -10,6 +10,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const (
+	endpointSleep = "/api/sleep"
+)
+
 func TestGetSleepBadRequest(t *testing.T) {
 	// Create an HTTP request recorder
 	w := httptest.NewRecorder()
