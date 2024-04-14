@@ -12,24 +12,32 @@ import (
 )
 
 const (
-	endpointDrink = "/api/drink"
+	endpointEnjoy = "/api/enjoy"
 )
 
-func TestGetDrinkBadRequest(t *testing.T) {
-	router := router.SetupRouter()
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", endpointDrink, http.NoBody)
-	router.ServeHTTP(w, req)
+func TestGetEnjoyBadRequest(t *testing.T) {
+	// Initialize the router
+	r := router.SetupRouter()
 
+	// Create an HTTP request recorder
+	w := httptest.NewRecorder()
+
+	// Create an HTTP GET request
+	req, _ := http.NewRequest("GET", endpointEnjoy, http.NoBody)
+
+	// Execute the HTTP request
+	r.ServeHTTP(w, req)
+
+	// Check the HTTP status code is BadRequest
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 }
 
-func TestGetDrinkFromParis(t *testing.T) {
-	var resp graphql.GetDrinksResponse
-	router := router.SetupRouter()
+func TestGetEnjoyFromParis(t *testing.T) {
+	var resp graphql.GetEnjoyResponse
+	r := router.SetupRouter()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", endpointDrink+"?City=Paris&Page=1", http.NoBody)
-	router.ServeHTTP(w, req)
+	req, _ := http.NewRequest("GET", endpointEnjoy+"?City=Paris&Page=1", http.NoBody)
+	r.ServeHTTP(w, req)
 
 	assert.Equal(t, w.Code, http.StatusOK)
 	if err := binding.JSON.BindBody(w.Body.Bytes(), &resp); err != nil {

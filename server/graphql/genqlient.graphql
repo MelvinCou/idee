@@ -39,28 +39,49 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
     }
 }
 
-query GetEnjoy($city: String!, $from: Int!) {
+query GetEnjoy($city: String, $from: Int, $size: Int) {
   poi(
-      size: 20,
-      from: $from,
+      from: $from
+      size: $size
       filters: [
           {
               isLocatedAt: {
                   schema_address: { hasAddressCity: { rdfs_label: { _text: $city } } }
               },
-              rdf_type: {_in: ["https://www.datatourisme.fr/ontology/core#CulturalSite", "https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace", "https://www.datatourisme.fr/ontology/core#SightseeingBoat", "https://www.datatourisme.fr/ontology/core#WalkingTour", "https://www.datatourisme.fr/ontology/core#ThemePark", "https://www.datatourisme.fr/ontology/core#ParkAndGarden"]}
-          }
-      ]
-  ) {
-      results {
-        rdfs_label {
-              value
-          }
-          rdfs_comment {
-              value
-          }
-      }
-      total
-  }
+               rdf_type: {
+                    _in: [
+                        "https://www.datatourisme.fr/ontology/core#CulturalSite"
+                        "https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace"
+                        "https://www.datatourisme.fr/ontology/core#SightseeingBoat"
+                        "https://www.datatourisme.fr/ontology/core#WalkingTour"
+                        "https://www.datatourisme.fr/ontology/core#ThemePark"
+                        "https://www.datatourisme.fr/ontology/core#ParkAndGarden"
+                        "https://www.datatourisme.fr/ontology/core#SportsTheme"
+                    ]
+                }
+            }
+        ]
+    ) {
+        total
+        results {
+            rdfs_label {
+                value
+            }
+            rdfs_comment {
+                value
+            }
+            hasContact {
+                foaf_homepage
+                schema_telephone
+                schema_email
+            }
+            hasDescription {
+                dc_description {
+                    value
+                }
+            }
+            reducedMobilityAccess
+            lastUpdateDatatourisme
+        }
+    }
 }
-

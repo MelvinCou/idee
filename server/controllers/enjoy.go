@@ -3,14 +3,13 @@ package controllers
 import (
 	"net/http"
 
-	// "server/graphql"
-	// "strconv"
+	"server/graphql"
+	"server/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
-// Enjoy contains binded and validated data.
-type EnjoyQueryParams struct {
+type EnjoyParams struct {
 	City string `json:"city" binding:"required"`
 	Page int    `json:"page" binding:"required,gte=0"`
 }
@@ -22,35 +21,21 @@ type EnjoyQueryParams struct {
 //	@Tags			graphql
 //	@Accept			json
 //	@Produce		json
+//	@Param			enjoyQueryParams	query		EnjoyParams	true	"enjoyQueryParams"
 //	@Success		200					{object}	graphql.GetEnjoyResponse
 //	@Failure		500					{object}	graphql.Error
-//	@Param			enjoyQueryParams	query		EnjoyQueryParams	true	"enjoyQueryParams"
 //	@Router			/enjoy [get]
 func Enjoy(ctx *gin.Context) {
-	var e EnjoyQueryParams
-	if err := ctx.ShouldBindQuery(&e); err == nil {
-		ctx.JSON(http.StatusOK, gin.H{"message": "Booking dates are valid!"})
-	} else {
+	var p EnjoyParams
+	if err := ctx.ShouldBindQuery(&p); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
-	// index := 0
-	// cityName := ctx.Query("city")
-	// page := ctx.Query("page")
-
-	// if cityName == "" {
-	// 	ctx.JSON(400, gin.H{"error": "city parameter is missing"})
-	// }
-	// if page == "" {
-	// 	ctx.JSON(400, gin.H{"error": "page parameter is missing"})
-	// } else {
-	// 	index, _ = strconv.Atoi(page)
-	// }
-
-	// r, err := graphql.GetEnjoy(ctx, graphql.Client, cityName, index)
-	// if err != nil {
-	// 	ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
-	// } else {
-	// 	ctx.JSON(http.StatusOK, r)
-	// }
+	r, err := graphql.GetEnjoy(ctx, graphql.GetClient(), p.City, utils.GetFromForGraphQL(p.Page), 20)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
+	} else {
+		ctx.JSON(http.StatusOK, r)
+	}
 }
