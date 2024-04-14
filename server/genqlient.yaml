@@ -6,4 +6,4 @@ operations:
 generated: graphql/generated.go
 bindings:
   DateTime:
-    type: "time.Time"
+    type: string

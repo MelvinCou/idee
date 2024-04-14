@@ -4,7 +4,6 @@ package graphql
 
 import (
 	"context"
-	"time"
 
 	"github.com/Khan/genqlient/graphql"
 )
@@ -143,8 +142,8 @@ type GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest struct {
 	// renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
 	HasDescription []GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription `json:"hasDescription"`
 	// Vrai si le produit propose un accès aux personnes à mobilité réduite
-	ReducedMobilityAccess  []bool      `json:"reducedMobilityAccess"`
-	LastUpdateDatatourisme []time.Time `json:"lastUpdateDatatourisme"`
+	ReducedMobilityAccess  []bool   `json:"reducedMobilityAccess"`
+	LastUpdateDatatourisme []string `json:"lastUpdateDatatourisme"`
 }
 
 // GetRdfs_label returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_label, and is useful for accessing the field via an interface.
@@ -173,7 +172,7 @@ func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetReducedM
 }
 
 // GetLastUpdateDatatourisme returns GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest.LastUpdateDatatourisme, and is useful for accessing the field via an interface.
-func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetLastUpdateDatatourisme() []time.Time {
+func (v *GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest) GetLastUpdateDatatourisme() []string {
 	return v.LastUpdateDatatourisme
 }
 

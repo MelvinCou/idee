@@ -4,21 +4,13 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"server/graphql"
-	"server/router"
 	"testing"
 
 	"github.com/gin-gonic/gin/binding"
 	"github.com/stretchr/testify/assert"
 )
 
-const (
-	endpointEnjoy = "/api/enjoy"
-)
-
 func TestGetEnjoyBadRequest(t *testing.T) {
-	// Initialize the router
-	r := router.SetupRouter()
-
 	// Create an HTTP request recorder
 	w := httptest.NewRecorder()
 
@@ -34,7 +26,6 @@ func TestGetEnjoyBadRequest(t *testing.T) {
 
 func TestGetEnjoyFromParis(t *testing.T) {
 	var resp graphql.GetEnjoyResponse
-	r := router.SetupRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", endpointEnjoy+"?City=Paris&Page=1", http.NoBody)
 	r.ServeHTTP(w, req)
