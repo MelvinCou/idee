@@ -310,6 +310,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/graphql.GetDrinksResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/graphql.Error'
         "500":
           description: Internal Server Error
           schema:
@@ -321,7 +325,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get events|activities from our DATATourisme API
+      description: Get sleep places from our DATATourisme API
       parameters:
       - in: query
         name: city
@@ -339,11 +343,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/graphql.GetSleepResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/graphql.Error'
         "500":
           description: Internal Server Error
           schema:
             $ref: '#/definitions/graphql.Error'
-      summary: Enjoy
+      summary: Sleep
       tags:
       - graphql
   /total:

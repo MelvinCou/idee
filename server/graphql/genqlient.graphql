@@ -17,6 +17,7 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
                     _in: [
                         "https://www.datatourisme.fr/ontology/core#BarOrPub"
                         "https://www.datatourisme.fr/ontology/core#BistroOrWineBar"
+                        "https://www.datatourisme.fr/ontology/core#Abbey"
                     ]
                 }
             }
