@@ -93,13 +93,15 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "example": "Paris",
                         "name": "city",
                         "in": "query",
                         "required": true
                     },
                     {
-                        "minimum": 0,
+                        "minimum": 1,
                         "type": "integer",
+                        "example": 1,
                         "name": "page",
                         "in": "query",
                         "required": true
