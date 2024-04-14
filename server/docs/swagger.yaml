@@ -327,12 +327,14 @@ paths:
       - application/json
       description: Get sleep places from our DATATourisme API
       parameters:
-      - in: query
+      - example: Paris
+        in: query
         name: city
         required: true
         type: string
-      - in: query
-        minimum: 0
+      - example: 1
+        in: query
+        minimum: 1
         name: page
         required: true
         type: integer
