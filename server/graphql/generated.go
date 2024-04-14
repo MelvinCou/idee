@@ -260,6 +260,158 @@ type GetEnjoyResponse struct {
 // GetPoi returns GetEnjoyResponse.Poi, and is useful for accessing the field via an interface.
 func (v *GetEnjoyResponse) GetPoi() GetEnjoyPoiPointOfInterest_ResultSet { return v.Poi }
 
+// GetSleepPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
+type GetSleepPoiPointOfInterest_ResultSet struct {
+	Total   int                                                          `json:"total"`
+	Results []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest `json:"results"`
+}
+
+// GetTotal returns GetSleepPoiPointOfInterest_ResultSet.Total, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSet) GetTotal() int { return v.Total }
+
+// GetResults returns GetSleepPoiPointOfInterest_ResultSet.Results, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSet) GetResults() []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest {
+	return v.Results
+}
+
+// GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest includes the requested fields of the GraphQL type PointOfInterest.
+// The GraphQL type's documentation follows.
+//
+// Tout objet touristique qui mérite d&#039;être décrit et valorisé. Un POI (Point
+// of Interest) est un élément touristique qui est géré par un Agent et qui peut
+// être consommé via des Produits et Services. ex : Un Restaurant, un Hôtel, une
+// Pratique, un Objet patrimonial
+type GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest struct {
+	// Etiquette courte décrivant la ressource.
+	Rdfs_label []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString `json:"rdfs_label"`
+	// Description de la ressource.
+	Rdfs_comment []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString `json:"rdfs_comment"`
+	// L&#039;agent à contacter pour affaires générales relatives à ce POI.
+	HasContact []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent `json:"hasContact"`
+	// Description textuelle courte ou longue du POI pouvant être associée à une
+	// audience. Par exemple, un POI peut avoir une description dédiée aux écoles et
+	// une autre dédiée au grand public. Si une description n&#039;a aucune audience
+	// renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
+	HasDescription []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription `json:"hasDescription"`
+	// Vrai si le produit propose un accès aux personnes à mobilité réduite
+	ReducedMobilityAccess  []bool   `json:"reducedMobilityAccess"`
+	LastUpdateDatatourisme []string `json:"lastUpdateDatatourisme"`
+}
+
+// GetRdfs_label returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_label, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_label() []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString {
+	return v.Rdfs_label
+}
+
+// GetRdfs_comment returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest.Rdfs_comment, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest) GetRdfs_comment() []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString {
+	return v.Rdfs_comment
+}
+
+// GetHasContact returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest.HasContact, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest) GetHasContact() []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent {
+	return v.HasContact
+}
+
+// GetHasDescription returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest.HasDescription, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest) GetHasDescription() []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription {
+	return v.HasDescription
+}
+
+// GetReducedMobilityAccess returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest.ReducedMobilityAccess, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest) GetReducedMobilityAccess() []bool {
+	return v.ReducedMobilityAccess
+}
+
+// GetLastUpdateDatatourisme returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest.LastUpdateDatatourisme, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest) GetLastUpdateDatatourisme() []string {
+	return v.LastUpdateDatatourisme
+}
+
+// GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent includes the requested fields of the GraphQL type Agent.
+type GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent struct {
+	// L&#039;adresse du site internet d&#039;un Agent.
+	Foaf_homepage []string `json:"foaf_homepage"`
+	// Un numéro de téléphone.
+	Schema_telephone []string `json:"schema_telephone"`
+	// Un courriel, courrier électronique.
+	Schema_email []string `json:"schema_email"`
+}
+
+// GetFoaf_homepage returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Foaf_homepage, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetFoaf_homepage() []string {
+	return v.Foaf_homepage
+}
+
+// GetSchema_telephone returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Schema_telephone, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetSchema_telephone() []string {
+	return v.Schema_telephone
+}
+
+// GetSchema_email returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent.Schema_email, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent) GetSchema_email() []string {
+	return v.Schema_email
+}
+
+// GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription includes the requested fields of the GraphQL type Description.
+// The GraphQL type's documentation follows.
+//
+// Une description permet d&#039;associer la description textuelle d&#039;un POI
+// avec l&#039;Audience à qui cette description est dédiée. Par exemple, un POI
+// peut avoir une description dédiée aux écoles et une autre dédiée au grand
+// public. Si une description n&#039;a aucune audience renseignée, on suppose
+// qu&#039;elle est dédiée à tous les publics.
+type GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription struct {
+	// Description longue de la ressource.
+	Dc_description []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString `json:"dc_description"`
+}
+
+// GetDc_description returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription.Dc_description, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription) GetDc_description() []GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString {
+	return v.Dc_description
+}
+
+// GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString includes the requested fields of the GraphQL type LangString.
+type GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString) GetValue() string {
+	return v.Value
+}
+
+// GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString includes the requested fields of the GraphQL type LangString.
+type GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString) GetValue() string {
+	return v.Value
+}
+
+// GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString includes the requested fields of the GraphQL type LangString.
+type GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString struct {
+	// Literal value
+	Value string `json:"value"`
+}
+
+// GetValue returns GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString.Value, and is useful for accessing the field via an interface.
+func (v *GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString) GetValue() string {
+	return v.Value
+}
+
+// GetSleepResponse is returned by GetSleep on success.
+type GetSleepResponse struct {
+	Poi GetSleepPoiPointOfInterest_ResultSet `json:"poi"`
+}
+
+// GetPoi returns GetSleepResponse.Poi, and is useful for accessing the field via an interface.
+func (v *GetSleepResponse) GetPoi() GetSleepPoiPointOfInterest_ResultSet { return v.Poi }
+
 // GetTotalPoiPointOfInterest_ResultSet includes the requested fields of the GraphQL type PointOfInterest_ResultSet.
 type GetTotalPoiPointOfInterest_ResultSet struct {
 	Total int `json:"total"`
@@ -307,6 +459,22 @@ func (v *__GetEnjoyInput) GetFrom() int { return v.From }
 
 // GetSize returns __GetEnjoyInput.Size, and is useful for accessing the field via an interface.
 func (v *__GetEnjoyInput) GetSize() int { return v.Size }
+
+// __GetSleepInput is used internally by genqlient
+type __GetSleepInput struct {
+	City string `json:"city"`
+	From int    `json:"from"`
+	Size int    `json:"size"`
+}
+
+// GetCity returns __GetSleepInput.City, and is useful for accessing the field via an interface.
+func (v *__GetSleepInput) GetCity() string { return v.City }
+
+// GetFrom returns __GetSleepInput.From, and is useful for accessing the field via an interface.
+func (v *__GetSleepInput) GetFrom() int { return v.From }
+
+// GetSize returns __GetSleepInput.Size, and is useful for accessing the field via an interface.
+func (v *__GetSleepInput) GetSize() int { return v.Size }
 
 // The query or mutation executed by GetDrinks.
 const GetDrinks_Operation = `
@@ -363,7 +531,7 @@ func GetDrinks(
 // The query or mutation executed by GetEnjoy.
 const GetEnjoy_Operation = `
 query GetEnjoy ($city: String, $from: Int, $size: Int) {
-	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#CulturalSite","https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace","https://www.datatourisme.fr/ontology/core#SightseeingBoat","https://www.datatourisme.fr/ontology/core#WalkingTour","https://www.datatourisme.fr/ontology/core#ThemePark","https://www.datatourisme.fr/ontology/core#ParkAndGarden","https://www.datatourisme.fr/ontology/core#SportsTheme"]}}]) {
+	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#CulturalSite","https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace","https://www.datatourisme.fr/ontology/core#SightseeingBoat","https://www.datatourisme.fr/ontology/core#WalkingTour","https://www.datatourisme.fr/ontology/core#ThemePark","https://www.datatourisme.fr/ontology/core#ParkAndGarden","https://www.datatourisme.fr/ontology/core#SportsTheme","https://www.datatourisme.fr/ontology/core#ZooAnimalPark"]}}]) {
 		total
 		results {
 			rdfs_label {
@@ -408,6 +576,65 @@ func GetEnjoy(
 	var err_ error
 
 	var data_ GetEnjoyResponse
+	resp_ := &graphql.Response{Data: &data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return &data_, err_
+}
+
+// The query or mutation executed by GetSleep.
+const GetSleep_Operation = `
+query GetSleep ($city: String, $from: Int, $size: Int) {
+	poi(from: $from, size: $size, filters: [{isLocatedAt:{schema_address:{hasAddressCity:{rdfs_label:{_text:$city}}}},rdf_type:{_in:["https://www.datatourisme.fr/ontology/core#Apartement","https://www.datatourisme.fr/ontology/core#CamperVanArea","https://www.datatourisme.fr/ontology/core#YouthHostelAndInternationalCenter","https://www.datatourisme.fr/ontology/core#GroupLodging","https://www.datatourisme.fr/ontology/core#Hotel","https://www.datatourisme.fr/ontology/core#AccommodationProduct"]}}]) {
+		total
+		results {
+			rdfs_label {
+				value
+			}
+			rdfs_comment {
+				value
+			}
+			hasContact {
+				foaf_homepage
+				schema_telephone
+				schema_email
+			}
+			hasDescription {
+				dc_description {
+					value
+				}
+			}
+			reducedMobilityAccess
+			lastUpdateDatatourisme
+		}
+	}
+}
+`
+
+func GetSleep(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	city string,
+	from int,
+	size int,
+) (*GetSleepResponse, error) {
+	req_ := &graphql.Request{
+		OpName: "GetSleep",
+		Query:  GetSleep_Operation,
+		Variables: &__GetSleepInput{
+			City: city,
+			From: from,
+			Size: size,
+		},
+	}
+	var err_ error
+
+	var data_ GetSleepResponse
 	resp_ := &graphql.Response{Data: &data_}
 
 	err_ = client_.MakeRequest(

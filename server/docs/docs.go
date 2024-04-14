@@ -103,7 +103,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/graphql.GetEnjoyResponse"
+                            "$ref": "#/definitions/graphql.GetSleepResponse"
                         }
                     },
                     "500": {
@@ -377,6 +377,139 @@ const docTemplate = `{
             "properties": {
                 "poi": {
                     "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSet"
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSet": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+            "type": "object",
+            "properties": {
+                "hasContact": {
+                    "description": "L\u0026#039;agent à contacter pour affaires générales relatives à ce POI.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
+                    }
+                },
+                "hasDescription": {
+                    "description": "Description textuelle courte ou longue du POI pouvant être associée à une\naudience. Par exemple, un POI peut avoir une description dédiée aux écoles et\nune autre dédiée au grand public. Si une description n\u0026#039;a aucune audience\nrenseignée, on suppose qu\u0026#039;elle est dédiée à tous les publics.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                    }
+                },
+                "lastUpdateDatatourisme": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "rdfs_comment": {
+                    "description": "Description de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                    }
+                },
+                "rdfs_label": {
+                    "description": "Etiquette courte décrivant la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                    }
+                },
+                "reducedMobilityAccess": {
+                    "description": "Vrai si le produit propose un accès aux personnes à mobilité réduite",
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
+            "type": "object",
+            "properties": {
+                "foaf_homepage": {
+                    "description": "L\u0026#039;adresse du site internet d\u0026#039;un Agent.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_email": {
+                    "description": "Un courriel, courrier électronique.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_telephone": {
+                    "description": "Un numéro de téléphone.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
+            "type": "object",
+            "properties": {
+                "dc_description": {
+                    "description": "Description longue de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetSleepResponse": {
+            "type": "object",
+            "properties": {
+                "poi": {
+                    "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSet"
                 }
             }
         },

@@ -164,6 +164,102 @@ definitions:
       poi:
         $ref: '#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSet'
     type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSet:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest'
+        type: array
+      total:
+        type: integer
+    type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest:
+    properties:
+      hasContact:
+        description: L&#039;agent à contacter pour affaires générales relatives à
+          ce POI.
+        items:
+          $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent'
+        type: array
+      hasDescription:
+        description: |-
+          Description textuelle courte ou longue du POI pouvant être associée à une
+          audience. Par exemple, un POI peut avoir une description dédiée aux écoles et
+          une autre dédiée au grand public. Si une description n&#039;a aucune audience
+          renseignée, on suppose qu&#039;elle est dédiée à tous les publics.
+        items:
+          $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription'
+        type: array
+      lastUpdateDatatourisme:
+        items:
+          type: string
+        type: array
+      rdfs_comment:
+        description: Description de la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString'
+        type: array
+      rdfs_label:
+        description: Etiquette courte décrivant la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString'
+        type: array
+      reducedMobilityAccess:
+        description: Vrai si le produit propose un accès aux personnes à mobilité
+          réduite
+        items:
+          type: boolean
+        type: array
+    type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent:
+    properties:
+      foaf_homepage:
+        description: L&#039;adresse du site internet d&#039;un Agent.
+        items:
+          type: string
+        type: array
+      schema_email:
+        description: Un courriel, courrier électronique.
+        items:
+          type: string
+        type: array
+      schema_telephone:
+        description: Un numéro de téléphone.
+        items:
+          type: string
+        type: array
+    type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription:
+    properties:
+      dc_description:
+        description: Description longue de la ressource.
+        items:
+          $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString'
+        type: array
+    type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString:
+    properties:
+      value:
+        description: Literal value
+        type: string
+    type: object
+  graphql.GetSleepResponse:
+    properties:
+      poi:
+        $ref: '#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSet'
+    type: object
   graphql.GetTotalPoiPointOfInterest_ResultSet:
     properties:
       total:
@@ -242,7 +338,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/graphql.GetEnjoyResponse'
+            $ref: '#/definitions/graphql.GetSleepResponse'
         "500":
           description: Internal Server Error
           schema:

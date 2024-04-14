@@ -57,6 +57,53 @@ query GetEnjoy($city: String, $from: Int, $size: Int) {
                         "https://www.datatourisme.fr/ontology/core#ThemePark"
                         "https://www.datatourisme.fr/ontology/core#ParkAndGarden"
                         "https://www.datatourisme.fr/ontology/core#SportsTheme"
+                        "https://www.datatourisme.fr/ontology/core#ZooAnimalPark"
+                    ]
+                }
+            }
+        ]
+    ) {
+        total
+        results {
+            rdfs_label {
+                value
+            }
+            rdfs_comment {
+                value
+            }
+            hasContact {
+                foaf_homepage
+                schema_telephone
+                schema_email
+            }
+            hasDescription {
+                dc_description {
+                    value
+                }
+            }
+            reducedMobilityAccess
+            lastUpdateDatatourisme
+        }
+    }
+}
+
+query GetSleep($city: String, $from: Int, $size: Int) {
+  poi(
+      from: $from
+      size: $size
+      filters: [
+          {
+              isLocatedAt: {
+                  schema_address: { hasAddressCity: { rdfs_label: { _text: $city } } }
+              },
+               rdf_type: {
+                    _in: [
+                        "https://www.datatourisme.fr/ontology/core#Apartement"
+                        "https://www.datatourisme.fr/ontology/core#CamperVanArea"
+                        "https://www.datatourisme.fr/ontology/core#YouthHostelAndInternationalCenter"
+                        "https://www.datatourisme.fr/ontology/core#GroupLodging"
+                        "https://www.datatourisme.fr/ontology/core#Hotel"
+                        "https://www.datatourisme.fr/ontology/core#AccommodationProduct"
                     ]
                 }
             }
