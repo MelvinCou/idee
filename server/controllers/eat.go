@@ -8,25 +8,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type DrinkParams struct {
+type EatParams struct {
 	City string `query:"city" binding:"required" example:"Paris"`
 	Page int    `query:"page" binding:"required,gte=1" example:"1"`
 }
 
-// Drink godoc
+// Eat godoc
 //
-//	@Summary		Drink
-//	@Description	Get available drinks (bars, bistros) in a city
+//	@Summary		Eat
+//	@Description	Get available eat (restaurants, bistros) in a city
 //	@Tags			graphql
 //	@Accept			json
 //	@Produce		json
-//	@Param			params	query		controllers.DrinkParams	true	"City and page parameters"
-//	@Success		200		{object}	graphql.GetDrinksResponse
+//	@Param			params	query		controllers.EatParams	true	"City and page parameters"
+//	@Success		200		{object}	graphql.GetEatsResponse
 //	@Failure		400		{object}	graphql.Error	"Bad Request"
 //	@Failure		500		{object}	graphql.Error	"Internal Server Error"
 //	@Router			/drink [get]
-func Drink(ctx *gin.Context) {
-	var p DrinkParams
+func Eat(ctx *gin.Context) {
+	var p EatParams
 	if err := ctx.ShouldBindQuery(&p); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -38,7 +38,7 @@ func Drink(ctx *gin.Context) {
 		return
 	}
 
-	r, err := graphql.GetDrinks(ctx, graphql.GetClient(), p.City, from, 20)
+	r, err := graphql.GetEat(ctx, graphql.GetClient(), p.City, from, 20)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
 	} else {
