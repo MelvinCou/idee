@@ -24,7 +24,7 @@ type EatParams struct {
 //	@Success		200		{object}	graphql.GetEatsResponse
 //	@Failure		400		{object}	graphql.Error	"Bad Request"
 //	@Failure		500		{object}	graphql.Error	"Internal Server Error"
-//	@Router			/drink [get]
+//	@Router			/eat [get]
 func Eat(ctx *gin.Context) {
 	var p EatParams
 	if err := ctx.ShouldBindQuery(&p); err != nil {

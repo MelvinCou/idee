@@ -650,7 +650,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get available travel (bus station, train station, ...) in a city
+      description: Get available drinks (bars, bistros) in a city
       parameters:
       - example: Paris
         in: query
@@ -669,7 +669,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/graphql.GetTravelsResponse'
+            $ref: '#/definitions/graphql.GetDrinksResponse'
         "400":
           description: Bad Request
           schema:
@@ -678,10 +678,80 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/graphql.Error'
-      summary: Travel
+      summary: Drink
+      tags:
+      - graphql
+  /eat:
+    get:
+      consumes:
+      - application/json
+      description: Get available eat (restaurants, bistros) in a city
+      parameters:
+      - example: Paris
+        in: query
+        name: city
+        required: true
+        type: string
+      - example: 1
+        in: query
+        minimum: 1
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/graphql.GetEatsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/graphql.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/graphql.Error'
+      summary: Eat
       tags:
       - graphql
   /enjoy:
+    get:
+      consumes:
+      - application/json
+      description: Get events|activities from our DATATourisme API
+      parameters:
+      - example: Paris
+        in: query
+        name: city
+        required: true
+        type: string
+      - example: 1
+        in: query
+        minimum: 1
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/graphql.GetEnjoysResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/graphql.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/graphql.Error'
+      summary: Enjoy
+      tags:
+      - graphql
+  /sleep:
     get:
       consumes:
       - application/json
@@ -733,6 +803,41 @@ paths:
           schema:
             $ref: '#/definitions/graphql.Error'
       summary: Total
+      tags:
+      - graphql
+  /travel:
+    get:
+      consumes:
+      - application/json
+      description: Get available travel (bus station, train station, ...) in a city
+      parameters:
+      - example: Paris
+        in: query
+        name: city
+        required: true
+        type: string
+      - example: 1
+        in: query
+        minimum: 1
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/graphql.GetTravelsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/graphql.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/graphql.Error'
+      summary: Travel
       tags:
       - graphql
 securityDefinitions:

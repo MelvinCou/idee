@@ -25,7 +25,7 @@ type SleepParams struct {
 //	@Success		200			{object}	graphql.GetSleepsResponse
 //	@Failure		400			{object}	graphql.Error	"Bad Request"
 //	@Failure		500			{object}	graphql.Error	"Internal Server Error"
-//	@Router			/enjoy [get]
+//	@Router			/sleep [get]
 func Sleep(ctx *gin.Context) {
 	var p SleepParams
 	if err := ctx.ShouldBindQuery(&p); err != nil {

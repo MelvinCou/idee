@@ -27,7 +27,7 @@ const docTemplate = `{
     "paths": {
         "/drink": {
             "get": {
-                "description": "Get available travel (bus station, train station, ...) in a city",
+                "description": "Get available drinks (bars, bistros) in a city",
                 "consumes": [
                     "application/json"
                 ],
@@ -37,7 +37,7 @@ const docTemplate = `{
                 "tags": [
                     "graphql"
                 ],
-                "summary": "Travel",
+                "summary": "Drink",
                 "parameters": [
                     {
                         "type": "string",
@@ -59,7 +59,59 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/graphql.GetTravelsResponse"
+                            "$ref": "#/definitions/graphql.GetDrinksResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/eat": {
+            "get": {
+                "description": "Get available eat (restaurants, bistros) in a city",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "Eat",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "Paris",
+                        "name": "city",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "example": 1,
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.GetEatsResponse"
                         }
                     },
                     "400": {
@@ -78,6 +130,58 @@ const docTemplate = `{
             }
         },
         "/enjoy": {
+            "get": {
+                "description": "Get events|activities from our DATATourisme API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "Enjoy",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "Paris",
+                        "name": "city",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "example": 1,
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.GetEnjoysResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sleep": {
             "get": {
                 "description": "Get sleep places from our DATATourisme API",
                 "consumes": [
@@ -147,6 +251,58 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/graphql.GetTotalResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/travel": {
+            "get": {
+                "description": "Get available travel (bus station, train station, ...) in a city",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "Travel",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "Paris",
+                        "name": "city",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "example": 1,
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.GetTravelsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/graphql.Error"
                         }
                     },
                     "500": {
