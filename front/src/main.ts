@@ -6,9 +6,7 @@ import router from "./router";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import VueDatePicker from "@vuepic/vue-datepicker";
-
 import "@vuepic/vue-datepicker/dist/main.css";
-
 
 const app = createApp(App);
 
