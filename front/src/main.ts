@@ -7,8 +7,7 @@ import router from "./router";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
-import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
-
+import "mapbox-gl/dist/mapbox-gl.css";
 const app = createApp(App);
 
 app.config.globalProperties.$api_url = import.meta.env.VITE_API_URL;

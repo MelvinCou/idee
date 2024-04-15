@@ -19,8 +19,9 @@
   "dependencies": {
     "@vuepic/vue-datepicker": "^8.4.0",
     "eslint-import-resolver-typescript": "^3.6.1",
-    "mapbox-gl": "^3.2.0",
+    "mapbox-gl": "^3.3.0",
     "pinia": "^2.1.7",
+    "v-mapbox": "^5.0.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
     "vuetify": "^3.5.13"
@@ -46,6 +47,7 @@
     "jsdom": "^24.0.0",
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.0.3",
+    "sass": "^1.75.0",
     "start-server-and-test": "^2.0.3",
     "swagger-typescript-api": "^13.0.3",
     "typescript": "~5.3.0",
