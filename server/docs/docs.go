@@ -27,7 +27,7 @@ const docTemplate = `{
     "paths": {
         "/drink": {
             "get": {
-                "description": "Get available drinks (bars, bistros) in a city",
+                "description": "Get available travel (bus station, train station, ...) in a city",
                 "consumes": [
                     "application/json"
                 ],
@@ -37,7 +37,7 @@ const docTemplate = `{
                 "tags": [
                     "graphql"
                 ],
-                "summary": "Total",
+                "summary": "Travel",
                 "parameters": [
                     {
                         "type": "string",
@@ -59,7 +59,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/graphql.GetDrinksResponse"
+                            "$ref": "#/definitions/graphql.GetTravelsResponse"
                         }
                     },
                     "400": {
@@ -111,7 +111,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/graphql.GetSleepResponse"
+                            "$ref": "#/definitions/graphql.GetSleepsResponse"
                         }
                     },
                     "400": {
@@ -193,6 +193,26 @@ const docTemplate = `{
                         "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
                     }
                 },
+                "hasDescription": {
+                    "description": "Description textuelle courte ou longue du POI pouvant être associée à une\naudience. Par exemple, un POI peut avoir une description dédiée aux écoles et\nune autre dédiée au grand public. Si une description n\u0026#039;a aucune audience\nrenseignée, on suppose qu\u0026#039;elle est dédiée à tous les publics.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                    }
+                },
+                "isLocatedAt": {
+                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
+                    }
+                },
+                "lastUpdateDatatourisme": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "rdfs_comment": {
                     "description": "Description de la ressource.",
                     "type": "array",
@@ -205,6 +225,13 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                    }
+                },
+                "reducedMobilityAccess": {
+                    "description": "Vrai si le produit propose un accès aux personnes à mobilité réduite",
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
                     }
                 }
             }
@@ -235,6 +262,58 @@ const docTemplate = `{
                 }
             }
         },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
+            "type": "object",
+            "properties": {
+                "dc_description": {
+                    "description": "Description longue de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+            "type": "object",
+            "properties": {
+                "schema_geo": {
+                    "description": "Les coordonnées géographiques de la ressource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
+            "type": "object",
+            "properties": {
+                "schema_latitude": {
+                    "description": "Valeur de la latitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "schema_longitude": {
+                    "description": "Valeur de la longitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
         "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
             "type": "object",
             "properties": {
@@ -261,13 +340,13 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSet": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSet": {
             "type": "object",
             "properties": {
                 "results": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterest"
                     }
                 },
                 "total": {
@@ -275,21 +354,28 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterest": {
             "type": "object",
             "properties": {
                 "hasContact": {
                     "description": "L\u0026#039;agent à contacter pour affaires générales relatives à ce POI.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
                     }
                 },
                 "hasDescription": {
                     "description": "Description textuelle courte ou longue du POI pouvant être associée à une\naudience. Par exemple, un POI peut avoir une description dédiée aux écoles et\nune autre dédiée au grand public. Si une description n\u0026#039;a aucune audience\nrenseignée, on suppose qu\u0026#039;elle est dédiée à tous les publics.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                    }
+                },
+                "isLocatedAt": {
+                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
                     }
                 },
                 "lastUpdateDatatourisme": {
@@ -302,14 +388,14 @@ const docTemplate = `{
                     "description": "Description de la ressource.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
                     }
                 },
                 "rdfs_label": {
                     "description": "Etiquette courte décrivant la ressource.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
                     }
                 },
                 "reducedMobilityAccess": {
@@ -321,7 +407,7 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
             "type": "object",
             "properties": {
                 "foaf_homepage": {
@@ -347,19 +433,19 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
             "type": "object",
             "properties": {
                 "dc_description": {
                     "description": "Description longue de la ressource.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
                     }
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
             "type": "object",
             "properties": {
                 "value": {
@@ -368,7 +454,38 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+            "type": "object",
+            "properties": {
+                "schema_geo": {
+                    "description": "Les coordonnées géographiques de la ressource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
+            "type": "object",
+            "properties": {
+                "schema_latitude": {
+                    "description": "Valeur de la latitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "schema_longitude": {
+                    "description": "Valeur de la longitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
             "type": "object",
             "properties": {
                 "value": {
@@ -377,7 +494,7 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
             "type": "object",
             "properties": {
                 "value": {
@@ -386,21 +503,21 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetEnjoyResponse": {
+        "graphql.GetEatsResponse": {
             "type": "object",
             "properties": {
                 "poi": {
-                    "$ref": "#/definitions/graphql.GetEnjoyPoiPointOfInterest_ResultSet"
+                    "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSet"
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSet": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSet": {
             "type": "object",
             "properties": {
                 "results": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterest"
                     }
                 },
                 "total": {
@@ -408,21 +525,28 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterest": {
             "type": "object",
             "properties": {
                 "hasContact": {
                     "description": "L\u0026#039;agent à contacter pour affaires générales relatives à ce POI.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
                     }
                 },
                 "hasDescription": {
                     "description": "Description textuelle courte ou longue du POI pouvant être associée à une\naudience. Par exemple, un POI peut avoir une description dédiée aux écoles et\nune autre dédiée au grand public. Si une description n\u0026#039;a aucune audience\nrenseignée, on suppose qu\u0026#039;elle est dédiée à tous les publics.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                    }
+                },
+                "isLocatedAt": {
+                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
                     }
                 },
                 "lastUpdateDatatourisme": {
@@ -435,14 +559,14 @@ const docTemplate = `{
                     "description": "Description de la ressource.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
                     }
                 },
                 "rdfs_label": {
                     "description": "Etiquette courte décrivant la ressource.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
                     }
                 },
                 "reducedMobilityAccess": {
@@ -454,7 +578,7 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
             "type": "object",
             "properties": {
                 "foaf_homepage": {
@@ -480,19 +604,19 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
             "type": "object",
             "properties": {
                 "dc_description": {
                     "description": "Description longue de la ressource.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
                     }
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
             "type": "object",
             "properties": {
                 "value": {
@@ -501,7 +625,38 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+            "type": "object",
+            "properties": {
+                "schema_geo": {
+                    "description": "Les coordonnées géographiques de la ressource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
+            "type": "object",
+            "properties": {
+                "schema_latitude": {
+                    "description": "Valeur de la latitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "schema_longitude": {
+                    "description": "Valeur de la longitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
             "type": "object",
             "properties": {
                 "value": {
@@ -510,7 +665,7 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetSleepPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
             "type": "object",
             "properties": {
                 "value": {
@@ -519,11 +674,182 @@ const docTemplate = `{
                 }
             }
         },
-        "graphql.GetSleepResponse": {
+        "graphql.GetEnjoysResponse": {
             "type": "object",
             "properties": {
                 "poi": {
-                    "$ref": "#/definitions/graphql.GetSleepPoiPointOfInterest_ResultSet"
+                    "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSet"
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSet": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+            "type": "object",
+            "properties": {
+                "hasContact": {
+                    "description": "L\u0026#039;agent à contacter pour affaires générales relatives à ce POI.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
+                    }
+                },
+                "hasDescription": {
+                    "description": "Description textuelle courte ou longue du POI pouvant être associée à une\naudience. Par exemple, un POI peut avoir une description dédiée aux écoles et\nune autre dédiée au grand public. Si une description n\u0026#039;a aucune audience\nrenseignée, on suppose qu\u0026#039;elle est dédiée à tous les publics.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                    }
+                },
+                "isLocatedAt": {
+                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
+                    }
+                },
+                "lastUpdateDatatourisme": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "rdfs_comment": {
+                    "description": "Description de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                    }
+                },
+                "rdfs_label": {
+                    "description": "Etiquette courte décrivant la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                    }
+                },
+                "reducedMobilityAccess": {
+                    "description": "Vrai si le produit propose un accès aux personnes à mobilité réduite",
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
+            "type": "object",
+            "properties": {
+                "foaf_homepage": {
+                    "description": "L\u0026#039;adresse du site internet d\u0026#039;un Agent.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_email": {
+                    "description": "Un courriel, courrier électronique.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_telephone": {
+                    "description": "Un numéro de téléphone.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
+            "type": "object",
+            "properties": {
+                "dc_description": {
+                    "description": "Description longue de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+            "type": "object",
+            "properties": {
+                "schema_geo": {
+                    "description": "Les coordonnées géographiques de la ressource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
+            "type": "object",
+            "properties": {
+                "schema_latitude": {
+                    "description": "Valeur de la latitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "schema_longitude": {
+                    "description": "Valeur de la longitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetSleepsResponse": {
+            "type": "object",
+            "properties": {
+                "poi": {
+                    "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSet"
                 }
             }
         },
@@ -540,6 +866,177 @@ const docTemplate = `{
             "properties": {
                 "poi": {
                     "$ref": "#/definitions/graphql.GetTotalPoiPointOfInterest_ResultSet"
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSet": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterest"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterest": {
+            "type": "object",
+            "properties": {
+                "hasContact": {
+                    "description": "L\u0026#039;agent à contacter pour affaires générales relatives à ce POI.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent"
+                    }
+                },
+                "hasDescription": {
+                    "description": "Description textuelle courte ou longue du POI pouvant être associée à une\naudience. Par exemple, un POI peut avoir une description dédiée aux écoles et\nune autre dédiée au grand public. Si une description n\u0026#039;a aucune audience\nrenseignée, on suppose qu\u0026#039;elle est dédiée à tous les publics.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription"
+                    }
+                },
+                "isLocatedAt": {
+                    "description": "La localisation du POI, et donc le lieu où il peut être potentiellement consommé. Lieu de départ d\u0026#039;un itinéraire.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace"
+                    }
+                },
+                "lastUpdateDatatourisme": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "rdfs_comment": {
+                    "description": "Description de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString"
+                    }
+                },
+                "rdfs_label": {
+                    "description": "Etiquette courte décrivant la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString"
+                    }
+                },
+                "reducedMobilityAccess": {
+                    "description": "Vrai si le produit propose un accès aux personnes à mobilité réduite",
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasContactAgent": {
+            "type": "object",
+            "properties": {
+                "foaf_homepage": {
+                    "description": "L\u0026#039;adresse du site internet d\u0026#039;un Agent.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_email": {
+                    "description": "Un courriel, courrier électronique.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_telephone": {
+                    "description": "Un numéro de téléphone.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription": {
+            "type": "object",
+            "properties": {
+                "dc_description": {
+                    "description": "Description longue de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString"
+                    }
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescriptionDc_descriptionLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
+            "type": "object",
+            "properties": {
+                "schema_geo": {
+                    "description": "Les coordonnées géographiques de la ressource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape": {
+            "type": "object",
+            "properties": {
+                "schema_latitude": {
+                    "description": "Valeur de la latitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "schema_longitude": {
+                    "description": "Valeur de la longitude de la ressource.",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_commentLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestRdfs_labelLangString": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Literal value",
+                    "type": "string"
+                }
+            }
+        },
+        "graphql.GetTravelsResponse": {
+            "type": "object",
+            "properties": {
+                "poi": {
+                    "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSet"
                 }
             }
         }

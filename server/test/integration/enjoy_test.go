@@ -29,9 +29,9 @@ func TestGetEnjoyBadRequest(t *testing.T) {
 }
 
 func TestGetEnjoyFromParis(t *testing.T) {
-	var resp graphql.GetEnjoyResponse
+	var resp graphql.GetEnjoysResponse
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", endpointEnjoy+"?City=Paris&Page=1", http.NoBody)
+	req, _ := http.NewRequest("GET", endpointEnjoy+"?city=Paris&page=1", http.NoBody)
 	r.ServeHTTP(w, req)
 
 	assert.Equal(t, w.Code, http.StatusOK)

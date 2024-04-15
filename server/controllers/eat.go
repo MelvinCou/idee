@@ -9,8 +9,8 @@ import (
 )
 
 type EatParams struct {
-	City string `query:"city" binding:"required" example:"Paris"`
-	Page int    `query:"page" binding:"required,gte=1" example:"1"`
+	City string `form:"city" binding:"required" example:"Paris"`
+	Page int    `form:"page" binding:"required,gte=1" example:"1"`
 }
 
 // Eat godoc
@@ -38,7 +38,7 @@ func Eat(ctx *gin.Context) {
 		return
 	}
 
-	r, err := graphql.GetEat(ctx, graphql.GetClient(), p.City, from, 20)
+	r, err := graphql.GetEats(ctx, graphql.GetClient(), p.City, from, utils.ElementByPage)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
 	} else {

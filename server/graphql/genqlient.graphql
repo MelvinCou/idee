@@ -37,11 +37,24 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
                 schema_telephone
                 schema_email
             }
+            hasDescription {
+                dc_description {
+                    value
+                }
+            }
+            reducedMobilityAccess
+            lastUpdateDatatourisme
+            isLocatedAt {
+                schema_geo {
+                    schema_longitude
+                    schema_latitude
+                }
+            }
         }
     }
 }
 
-query GetEnjoy($city: String, $from: Int, $size: Int) {
+query GetEnjoys($city: String, $from: Int, $size: Int) {
   poi(
       from: $from
       size: $size
@@ -86,11 +99,17 @@ query GetEnjoy($city: String, $from: Int, $size: Int) {
             }
             reducedMobilityAccess
             lastUpdateDatatourisme
+            isLocatedAt {
+                schema_geo {
+                    schema_longitude
+                    schema_latitude
+                }
+            }
         }
     }
 }
 
-query GetSleep($city: String, $from: Int, $size: Int) {
+query GetSleeps($city: String, $from: Int, $size: Int) {
   poi(
       from: $from
       size: $size
@@ -132,11 +151,17 @@ query GetSleep($city: String, $from: Int, $size: Int) {
             }
             reducedMobilityAccess
             lastUpdateDatatourisme
+            isLocatedAt {
+                schema_geo {
+                    schema_longitude
+                    schema_latitude
+                }
+            }
         }
     }
 }
 
-query GetEat($city: String, $from: Int, $size: Int) {
+query GetEats($city: String, $from: Int, $size: Int) {
   poi(
       from: $from
       size: $size
@@ -178,11 +203,17 @@ query GetEat($city: String, $from: Int, $size: Int) {
             }
             reducedMobilityAccess
             lastUpdateDatatourisme
+            isLocatedAt {
+                schema_geo {
+                    schema_longitude
+                    schema_latitude
+                }
+            }
         }
     }
 }
 
-query GetTravel($city: String, $from: Int, $size: Int) {
+query GetTravels($city: String, $from: Int, $size: Int) {
   poi(
       from: $from
       size: $size
@@ -224,6 +255,12 @@ query GetTravel($city: String, $from: Int, $size: Int) {
             }
             reducedMobilityAccess
             lastUpdateDatatourisme
+            isLocatedAt {
+                schema_geo {
+                    schema_longitude
+                    schema_latitude
+                }
+            }
         }
     }
 }

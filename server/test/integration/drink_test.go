@@ -40,7 +40,7 @@ func TestGetDrinkBadRequest(t *testing.T) {
 func TestGetDrinkFromParis(t *testing.T) {
 	var resp graphql.GetDrinksResponse
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", endpointDrink+"?City=Paris&Page=1", http.NoBody)
+	req, _ := http.NewRequest("GET", endpointDrink+"?city=Paris&page=1", http.NoBody)
 	r.ServeHTTP(w, req)
 
 	assert.Equal(t, w.Code, http.StatusOK)

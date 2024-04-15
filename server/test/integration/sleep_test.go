@@ -29,9 +29,9 @@ func TestGetSleepBadRequest(t *testing.T) {
 }
 
 func TestGetSleepFromParis(t *testing.T) {
-	var resp graphql.GetEnjoyResponse
+	var resp graphql.GetSleepsResponse
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", endpointSleep+"?City=Paris&Page=1", http.NoBody)
+	req, _ := http.NewRequest("GET", endpointSleep+"?city=Paris&page=1", http.NoBody)
 	r.ServeHTTP(w, req)
 
 	assert.Equal(t, w.Code, http.StatusOK)

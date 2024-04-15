@@ -10,8 +10,8 @@ import (
 )
 
 type EnjoyParams struct {
-	City string `query:"city" binding:"required" example:"Paris"`
-	Page int    `query:"page" binding:"required,gte=1" example:"1"`
+	City string `form:"city" binding:"required" example:"Paris"`
+	Page int    `form:"page" binding:"required,gte=1" example:"1"`
 }
 
 // Enjoy godoc
@@ -22,7 +22,7 @@ type EnjoyParams struct {
 //	@Accept			json
 //	@Produce		json
 //	@Param			EnjoyParams	query		EnjoyParams	true	"City and page parameters"
-//	@Success		200			{object}	graphql.GetEnjoyResponse
+//	@Success		200			{object}	graphql.GetEnjoysResponse
 //	@Failure		400			{object}	graphql.Error	"Bad Request"
 //	@Failure		500			{object}	graphql.Error	"Internal Server Error"
 //	@Router			/enjoy [get]
@@ -39,7 +39,7 @@ func Enjoy(ctx *gin.Context) {
 		return
 	}
 
-	r, err := graphql.GetEnjoy(ctx, graphql.GetClient(), p.City, from, 20)
+	r, err := graphql.GetEnjoys(ctx, graphql.GetClient(), p.City, from, utils.ElementByPage)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, ctx.Error(err))
 	} else {
