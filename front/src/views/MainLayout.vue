@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import CardDetails from "./CardDetails.vue";
+import MapComponent from "./../components/MapComponent.vue";
 export interface CardData {
   title: string;
   img: string;
@@ -173,7 +174,7 @@ const cardDataDump: CardData[] = [
     <v-layout full-height>
       <v-row>
         <v-col>
-          <v-sheet :height="200" :width="200" color="red-lighten-3"></v-sheet>
+          <MapComponent></MapComponent>
         </v-col>
       </v-row>
     </v-layout>
