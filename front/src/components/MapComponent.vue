@@ -33,7 +33,7 @@ onMounted(() => {
     ...mapProps, // Spread map properties
   });
   map.addControl(nav, "top-right");
-  const marker = new mapboxgl.Marker().setLngLat([103.811279, 1.345399]).addTo(map);
+  new mapboxgl.Marker().setLngLat([103.811279, 1.345399]).addTo(map);
   const geolocate = new mapboxgl.GeolocateControl({
     positionOptions: {
       enableHighAccuracy: true,
