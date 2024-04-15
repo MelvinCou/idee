@@ -24,7 +24,7 @@ type TravelParams struct {
 //	@Success		200		{object}	graphql.GetTravelsResponse
 //	@Failure		400		{object}	graphql.Error	"Bad Request"
 //	@Failure		500		{object}	graphql.Error	"Internal Server Error"
-//	@Router			/drink [get]
+//	@Router			/travel [get]
 func Travel(ctx *gin.Context) {
 	var p TravelParams
 	if err := ctx.ShouldBindQuery(&p); err != nil {
