@@ -10,14 +10,14 @@ let showDetails = ref(false);
 const cardDataDump = ref<CardData[]>();
 const detailsData = ref<CardData>({
   title: "initialise",
-  img: "",
-  publicDescription: "",
-  wikipediaDescription: "",
-  address: "",
-  location: "",
-  webSite: "",
-  dataProduceur: "",
+  comment: "",
+  description: "",
+  link: "",
+  contact: "",
+  location: { latitude: 0, longitude: 0 },
+  reducedMobilityAccess: undefined,
   dateUpdate: "",
+  img: "",
 });
 const api = new Drink({
   baseUrl: import.meta.env.VITE_API_URL,
