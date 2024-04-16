@@ -41,7 +41,7 @@ export default {
         }));
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.error("Erreor in retrieving city names :", error);
+        console.error("Error in retrieving city names :", error);
       }
     };
 

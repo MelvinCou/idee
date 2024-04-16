@@ -3,45 +3,75 @@
 </template>
 
 <script setup lang="ts">
-import mapboxgl from "mapbox-gl"; // Import Mapbox library
-import { onMounted } from "vue";
+import mapboxgl from "mapbox-gl";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
-const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN; // Access token from environment variable
+// Assume the access token is set correctly in your environment variables
+const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
+// Interface for defining the structure of map properties
 interface MapProps {
-  center: [number, number]; // Interface for map center coordinates
-  maxBounds: [[number, number], [number, number]]; // Interface for map boundaries
+  center: [number, number]; // Longitude, Latitude
+  maxBounds: [[number, number], [number, number]]; // Southwest [lon, lat] and Northeast [lon, lat]
 }
 
+const map = ref<mapboxgl.Map | null>(null);
+const route = useRoute();
+
+// Default map properties
 const mapProps: MapProps = {
-  // Define map properties
-  center: [103.811279, 1.345399],
+  center: [2.3522, 48.8566], // Default center, e.g., Paris
   maxBounds: [
-    [103.6, 1.1704753],
-    [104.1, 1.4754753],
+    [-180, -85], // Southwest bounds
+    [180, 85], // Northeast bounds
   ],
 };
 
-onMounted(() => {
-  let map: mapboxgl.Map | null = null; // Reactive ref for the map instance
-  mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
-  const nav = new mapboxgl.NavigationControl();
-
-  map = new mapboxgl.Map({
+onMounted(async () => {
+  // Initialize the map
+  map.value = new mapboxgl.Map({
     container: "mapContainer",
     style: "mapbox://styles/mapbox/streets-v11",
-    ...mapProps, // Spread map properties
-  });
-  map.addControl(nav, "top-right");
-  new mapboxgl.Marker().setLngLat([103.811279, 1.345399]).addTo(map);
-  const geolocate = new mapboxgl.GeolocateControl({
-    positionOptions: {
-      enableHighAccuracy: true,
-    },
-    trackUserLocation: true,
+    ...mapProps,
   });
 
-  map.addControl(geolocate, "top-right");
+  // Add essential map controls
+  map.value.addControl(new mapboxgl.NavigationControl(), "top-right");
+  map.value.addControl(
+    new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    }),
+    "top-right",
+  );
+
+  // Fetch city details based on the city ID from the route query
+  const cityId = route.params.cityId;
+  if (cityId) {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/search/searchbox/v1/retrieve/${cityId}?access_token=${MAPBOX_ACCESS_TOKEN}&session_token=null`,
+      );
+      const data = await response.json();
+      if (data.features && data.features.length > 0) {
+        const coordinates = data.features[0].geometry.coordinates as [number, number];
+        map.value.flyTo({
+          center: coordinates,
+          essential: true,
+          zoom: 10,
+        });
+        new mapboxgl.Marker().setLngLat(coordinates).addTo(map.value);
+      } else {
+        console.error("No features found in the data");
+      }
+    } catch (error) {
+      console.error("Error fetching city details:", error);
+    }
+  }
 });
 </script>
 
