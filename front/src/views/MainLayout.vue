@@ -6,6 +6,7 @@ import CardDetails, { Data } from "../components/CardDetails.vue";
 import { Drink } from "../api/Drink";
 import type { GraphqlGetDrinksResponse } from "@/api/data-contracts";
 
+import Tabs from "@/components/Tabs.vue"
 let showDetails = ref(false);
 const cardDataDump = ref<CardData[]>();
 const detailsData = ref<CardData>({
@@ -57,6 +58,7 @@ getDrink();
         :data="detailsData">
       </CardDetails>
     </v-expand-x-transition>
+    <Tabs />
 
     <v-data-iterator :items="cardDataDump">
       <template v-slot:default="{ items }">
