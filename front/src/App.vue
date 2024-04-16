@@ -63,7 +63,7 @@ userStore.getUser();
               <img v-bind:src="userStore.user.avatar" v-bind:height="50" v-bind:width="50" />
             </v-avatar>
           </v-btn>
-          <v-btn @click="githubOAuth2" v-else>Connexion avec github</v-btn>
+          <v-btn @click="githubOAuth2" prepend-icon="mdi-github" v-else>Connexion</v-btn>
         </template>
         <v-card>
           <v-card-text>
