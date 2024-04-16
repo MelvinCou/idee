@@ -1,24 +1,68 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { ref } from "vue";
-const tabsNames: { name: string; action: () => void; icon: string }[] = [
-  { name: "enjoys", action: () => console.log("monCUL"), icon: "mdi-party-popper" },
-  { name: "bars", action: () => console.log("monCUL1"), icon: "mdi-glass-mug" },
-  { name: "forks", action: () => console.log("monCUL"), icon: "mdi-silverware-fork-knife" },
-  { name: "travels", action: () => console.log("monCUL"), icon: "mdi-plane-train" },
-  { name: "beds", action: () => console.log("monCUL"), icon: "mdi-bed" },
+import { ref, defineEmits } from "vue";
+import { useDrinksStore } from "@/stores/drinks";
+import { useEnjoysStore } from "@/stores/enjoys";
+import { useEatsStore } from "@/stores/eats";
+import { useTravelsStore } from "@/stores/travels";
+import { useSleepsStore } from "@/stores/sleeps";
+
+interface Tabs {
+  name: string;
+  action: () => void;
+  icon: string;
+}
+
+const emit = defineEmits(["actualTab"]);
+
+const enjoyStore = useEnjoysStore();
+const drinkStore = useDrinksStore();
+const eatStore = useEatsStore();
+const travelStore = useTravelsStore();
+const sleepStore = useSleepsStore();
+
+const tabsNames: Tabs[] = [
+  {
+    name: "enjoy",
+    action: () => handleTabClick(0, enjoyStore.getEnjoys),
+    icon: "mdi-party-popper",
+  },
+  { name: "drink", action: () => handleTabClick(1, drinkStore.getDrinks), icon: "mdi-glass-mug" },
+  {
+    name: "eat",
+    action: () => handleTabClick(2, eatStore.getEats),
+    icon: "mdi-silverware-fork-knife",
+  },
+  {
+    name: "travel",
+    action: () => handleTabClick(3, travelStore.getTravels),
+    icon: "mdi-plane-train",
+  },
+  { name: "sleep", action: () => handleTabClick(4, sleepStore.getSleeps), icon: "mdi-bed" },
 ];
 const selectedTab = ref(tabsNames[0]);
 
+const handleTabClick = async (numTabs: number, actionStore: () => Promise<void>) => {
+  if (numTabs >= 0 && numTabs <= 4) {
+    const data = await actionStore();
+    emit("actualTab", tabsNames[numTabs].name);
+  }
+};
 </script>
 
 <template>
   <v-card>
     <v-tabs v-model="selectedTab" align-tabs="center" color="deep-purple-accent-4">
-      <v-tab v-for="tab in tabsNames" :value="tab" @click="tab.action"><v-icon :icon="tab.icon" size="x-large" /></v-tab>
+      <v-tab v-for="tab in tabsNames" :value="tab" @click="tab.action"
+        ><v-icon :icon="tab.icon" size="x-large"
+      /></v-tab>
     </v-tabs>
     <v-window v-model="selectedTab">
-      <v-window-item v-for="element in tabsNames" :key="element.name" :value="element" @click="element.action">
+      <v-window-item
+        v-for="element in tabsNames"
+        :key="element.name"
+        :value="element"
+        @click="element.action">
         <v-container fluid>
           {{ element.name }}
         </v-container>
