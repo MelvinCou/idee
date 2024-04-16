@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { Enjoy } from "@/api/Enjoy";
 import type { GraphqlGetEnjoysResponse } from "@/api/data-contracts";
+import { getPaginationFromTotal } from "@/utils";
 
 export const useEnjoysStore = defineStore("enjoys", () => {
   const enjoys = ref<GraphqlGetEnjoysResponse>();
@@ -24,7 +25,7 @@ export const useEnjoysStore = defineStore("enjoys", () => {
     }
 
     if (paginationTotal.value === undefined && enjoys.value.poi?.total) {
-      paginationTotal.value = enjoys.value.poi?.total % 20;
+      paginationTotal.value = getPaginationFromTotal(enjoys.value.poi?.total);
     }
   };
 

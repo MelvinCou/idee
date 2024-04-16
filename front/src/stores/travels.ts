@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { Travel } from "@/api/Travel";
 import type { GraphqlGetTravelsResponse } from "@/api/data-contracts";
+import { getPaginationFromTotal } from "@/utils";
 
 export const useTravelsStore = defineStore("travels", () => {
   const travels = ref<GraphqlGetTravelsResponse>();
@@ -24,7 +25,7 @@ export const useTravelsStore = defineStore("travels", () => {
     }
 
     if (paginationTotal.value === undefined && travels.value.poi?.total) {
-      paginationTotal.value = travels.value.poi?.total % 20;
+      paginationTotal.value = getPaginationFromTotal(travels.value.poi?.total);
     }
   };
 

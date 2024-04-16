@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { ref, defineEmits, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useDrinksStore } from "@/stores/drinks";
 import { useEnjoysStore } from "@/stores/enjoys";
 import { useEatsStore } from "@/stores/eats";
@@ -61,9 +61,6 @@ const handleTabClick = async (numTabs: number, actionStore: () => Promise<void>)
         :key="element.name"
         :value="element"
         @click="element.action">
-        <v-container fluid>
-          {{ element.name }}
-        </v-container>
       </v-window-item>
     </v-window>
   </v-card>
