@@ -26,7 +26,7 @@ const userStore = defineStore("user", () => {
     }
   };
   const startCron = () => {
-    intervalId.value = setInterval(
+    intervalId.value = window.setInterval(
       () => {
         getUser();
       },
