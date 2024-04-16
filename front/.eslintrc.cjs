@@ -29,12 +29,17 @@ module.exports = {
   },
   plugins: ["vue", "@typescript-eslint", "prettier", "import", "jsx-a11y", "sort-keys-fix"],
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       node: {
-        moduleDirectory: ["node_modules", "."],
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
       },
       typescript: {
-        alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        project: './tsconfig.json',
+      },
+      alias: {
+        map: [['~', path.resolve(__dirname, './src')]],
+        extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
       },
     },
   },
@@ -45,16 +50,10 @@ module.exports = {
     "no-debugger": "warn",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-
-    // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
     "default-case": "off",
-    // "tsc" already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/291)
     "no-dupe-class-members": "off",
-    // "tsc" already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/477)
     "no-undef": "off",
-    // "tsc" already handles this
     "import/named": "off",
-    // Add TypeScript specific rules (and turn off ESLint equivalents)
     "@typescript-eslint/consistent-type-assertions": "warn",
     "no-array-constructor": "off",
     "@typescript-eslint/no-array-constructor": "warn",
