@@ -12,6 +12,12 @@ import (
 	"golang.org/x/oauth2"
 )
 
+type User struct {
+	Login     string `json:"login"`
+	AvatarUrl string `json:"avatar_url"`
+	Name      string `json:"name"`
+}
+
 // GithubLogin handles the GitHub login redirection.
 func GithubLogin(c *gin.Context) {
 	// Instancie github configuration
@@ -112,7 +118,6 @@ func fetchGithubUser(token *oauth2.Token) (*models.User, error) {
 	return &user, nil
 }
 
-
 // The following function is commented out. Uncomment and add appropriate implementation if needed.
 
 /*
@@ -143,3 +148,38 @@ func GithubPOC(ctx *gin.Context) {
     ctx.JSON(http.StatusOK, Response{Message: "Authorized!"})
 }
 */
+
+func IsConnected(ctx *gin.Context) {
+	// Retrieve the access_token cookie from the request
+	cookie, err := ctx.Request.Cookie("access_token")
+
+	// Check if the cookie is present
+	if err != nil {
+		// Manage error if access_token cookie is not present
+		ctx.String(http.StatusUnauthorized, "Unauthorized")
+		return
+	}
+
+	req, err := http.NewRequest("GET", "https://api.github.com/user", nil)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+	}
+	// Set the Authorization header with the token's access token
+	req.Header.Set("Authorization", "Bearer "+cookie.Value)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+	}
+	defer resp.Body.Close()
+
+	var user User
+
+	// Decode the response body into the user struct
+	if err := json.NewDecoder(resp.Body).Decode(&user); err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+	}
+
+	ctx.JSON(resp.StatusCode, user)
+}
