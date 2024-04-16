@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { Sleep } from "@/api/Sleep";
 import type { GraphqlGetSleepsResponse } from "@/api/data-contracts";
+import { getPaginationFromTotal } from "@/utils";
 
 export const useSleepsStore = defineStore("sleeps", () => {
   const sleeps = ref<GraphqlGetSleepsResponse>();
@@ -24,7 +25,7 @@ export const useSleepsStore = defineStore("sleeps", () => {
     }
 
     if (paginationTotal.value === undefined && sleeps.value.poi?.total) {
-      paginationTotal.value = sleeps.value.poi?.total % 20;
+      paginationTotal.value = getPaginationFromTotal(sleeps.value.poi?.total);
     }
   };
 

@@ -10,6 +10,7 @@ import { useTravelsStore } from "@/stores/travels";
 import { useSleepsStore } from "@/stores/sleeps";
 import Tabs from "@/components/Tabs.vue";
 import type { MainLayoutActiveTabs } from "@/interfaces/main";
+import { itemPerPage } from "@/utils";
 
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
@@ -22,52 +23,61 @@ const activeTabs = ref<MainLayoutActiveTabs>();
 const cardDataDump = ref<CardData[]>();
 const actualPage = ref<number>();
 
-watch(actualPage, async (newPage) => {
-  switch (activeTabs.value?.actualTab) {
+const switchData = async (tabName: string, newPage?: number) => {
+  switch (tabName) {
     case "enjoy":
-      await enjoyStore.getEnjoys(newPage);
+      if (newPage) await enjoyStore.getEnjoys(newPage);
       activeTabs.value = {
-        ...activeTabs.value!,
+        actualTab: tabName,
         data: enjoyStore.enjoys!,
         paginationMax: enjoyStore.paginationTotal!,
       };
+      actualPage.value = enjoyStore.page;
       break;
     case "drink":
-      await drinkStore.getDrinks(newPage);
+      if (newPage) await drinkStore.getDrinks(newPage);
       activeTabs.value = {
-        ...activeTabs.value!,
+        actualTab: tabName,
         data: drinkStore.drinks!,
         paginationMax: drinkStore.paginationTotal!,
       };
+      actualPage.value = drinkStore.page;
       break;
     case "eat":
-      await eatStore.getEats(newPage);
+      if (newPage) await eatStore.getEats(newPage);
       activeTabs.value = {
-        ...activeTabs.value!,
+        actualTab: tabName,
         data: eatStore.eats!,
         paginationMax: eatStore.paginationTotal!,
       };
+      actualPage.value = eatStore.page;
       break;
     case "travel":
-      await travelStore.getTravels(newPage);
+      if (newPage) await travelStore.getTravels(newPage);
       activeTabs.value = {
-        ...activeTabs.value!,
+        actualTab: tabName,
         data: travelStore.travels!,
         paginationMax: travelStore.paginationTotal!,
       };
+      actualPage.value = travelStore.page;
       break;
     case "sleep":
-      await sleepStore.getSleeps(newPage);
+      if (newPage) await sleepStore.getSleeps(newPage);
       activeTabs.value = {
-        ...activeTabs.value!,
+        actualTab: tabName,
         data: sleepStore.sleeps!,
         paginationMax: sleepStore.paginationTotal!,
       };
+      actualPage.value = sleepStore.page;
       break;
   }
   cardDataDump.value = activeTabs.value?.data.poi?.results?.map<CardData>((r) => {
     return new Data(r);
   });
+};
+
+watch(actualPage, async (newPage) => {
+  switchData(activeTabs.value?.actualTab!, newPage);
 });
 
 const detailsData = ref<CardData>({
@@ -92,55 +102,6 @@ function displayDetail(data: CardData) {
 function rollBack(isRollBack: boolean) {
   showDetails.value = isRollBack;
 }
-
-const handleTabChange = (tabName: string) => {
-  switch (tabName) {
-    case "enjoy":
-      activeTabs.value = {
-        data: enjoyStore.enjoys!,
-        actualTab: tabName,
-        paginationMax: enjoyStore.paginationTotal!,
-      };
-      actualPage.value = enjoyStore.page!
-      break;
-    case "drink":
-      activeTabs.value = {
-        data: drinkStore.drinks!,
-        actualTab: tabName,
-        paginationMax: drinkStore.paginationTotal!,
-      };
-      actualPage.value = drinkStore.page!
-      break;
-    case "eat":
-      activeTabs.value = {
-        data: eatStore.eats!,
-        actualTab: tabName,
-        paginationMax: eatStore.paginationTotal!,
-      };
-      actualPage.value = eatStore.page!
-      break;
-    case "travel":
-      activeTabs.value = {
-        data: travelStore.travels!,
-        actualTab: tabName,
-        paginationMax: travelStore.paginationTotal!,
-      };
-      actualPage.value = travelStore.page!
-      break;
-    case "sleep":
-      activeTabs.value = {
-        data: sleepStore.sleeps!,
-        actualTab: tabName,
-        paginationMax: sleepStore.paginationTotal!,
-      };
-      actualPage.value = sleepStore.page!
-      break;
-  }
-
-  cardDataDump.value = activeTabs.value?.data.poi?.results?.map<CardData>((r) => {
-    return new Data(r);
-  });
-};
 </script>
 
 <template>
@@ -155,9 +116,9 @@ const handleTabChange = (tabName: string) => {
       </CardDetails>
     </v-expand-x-transition>
 
-    <Tabs @actualTab="handleTabChange" />
+    <Tabs @actualTab="switchData" />
 
-    <v-data-iterator :items="cardDataDump" :items-per-page="20">
+    <v-data-iterator :items="cardDataDump" :items-per-page="itemPerPage">
       <template v-slot="{ items }">
         <template v-for="(item, i) in items" :key="i">
           <v-card>
@@ -189,8 +150,7 @@ const handleTabChange = (tabName: string) => {
     <v-pagination
       v-model="actualPage"
       v-if="activeTabs?.paginationMax"
-      :length="activeTabs.paginationMax"
-    />
+      :length="activeTabs.paginationMax" />
   </v-navigation-drawer>
   <v-main>
     <!-- Content -->
