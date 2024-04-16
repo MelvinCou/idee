@@ -50,6 +50,7 @@ export class Data implements CardData {
       r.hasDescription &&
       r.hasDescription[0] &&
       r.hasDescription[0].dc_description &&
+      r.hasDescription[0].dc_description[0] &&
       r.hasDescription[0].dc_description[0].value;
     this.link =
       r.hasContact &&
