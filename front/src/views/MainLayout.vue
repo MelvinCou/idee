@@ -3,14 +3,26 @@ import { ref } from "vue";
 import MapComponent from "./../components/MapComponent.vue";
 import type { CardData } from "@/components/CardDetails.vue";
 import CardDetails, { Data } from "../components/CardDetails.vue";
-import { Drink } from "../api/Drink";
-import type { GraphqlGetDrinksResponse } from "@/api/data-contracts";
-
+import { useDrinksStore } from "@/stores/drinks";
+import { useEnjoysStore } from "@/stores/enjoys";
+import { useEatsStore } from "@/stores/eats";
+import { useTravelsStore } from "@/stores/travels";
+import { useSleepsStore } from "@/stores/sleeps";
 import Tabs from "@/components/Tabs.vue"
+import { Test } from "@/interfaces/main";
+
+const enjoyStore = useEnjoysStore();
+const drinkStore = useDrinksStore();
+const eatStore = useEatsStore();
+const travelStore = useTravelsStore();
+const sleepStore = useSleepsStore();
+
 let showDetails = ref(false);
+let listCardData = ref<Test>();
 const cardDataDump = ref<CardData[]>();
+
 const detailsData = ref<CardData>({
-  title: "initialise",
+  title: "initialize",
   comment: "",
   description: "",
   link: "",
@@ -20,9 +32,6 @@ const detailsData = ref<CardData>({
   dateUpdate: "",
   img: "",
 });
-const api = new Drink({
-  baseUrl: import.meta.env.VITE_API_URL,
-});
 
 function displayDetail(data: CardData) {
   detailsData.value = data;
@@ -30,21 +39,33 @@ function displayDetail(data: CardData) {
     showDetails.value = !showDetails.value;
   }
 }
+
 function rollBack(isRollBack: boolean) {
   showDetails.value = isRollBack;
 }
 
-const drink = ref<GraphqlGetDrinksResponse>();
-const getDrink = async () => {
-  drink.value = (await api.drinkList({ city: "Paris", page: 1 })).data;
-  cardDataDump.value = drink.value?.poi?.results?.map<CardData>((r) => {
-    return new Data(r);
-  });
+const handleTabChange = (tabName: string) => {
+  switch (tabName) {
+    case "enjoy":
+      listCardData.value = enjoyStore.enjoys
+      break;
+    case "drink":
+      listCardData.value = drinkStore.drinks
+      break;
+    case "eat":
+      listCardData.value = eatStore.eats
+      break;
+    case "travel":
+      listCardData.value = travelStore.travels
+      break;
+    case "sleep":
+      listCardData.value = sleepStore.sleeps
+      break;
+  }
+  cardDataDump.value = listCardData.value?.poi?.results?.map<CardData>((r) => {
+    return new Data(r)
+  })
 };
-getDrink();
-
-//! Fix : last data is hiden
-//! TODO: define city deestination to draw a path
 </script>
 
 <template>
@@ -58,7 +79,7 @@ getDrink();
         :data="detailsData">
       </CardDetails>
     </v-expand-x-transition>
-    <Tabs />
+    <Tabs @actualTab="handleTabChange" />
 
     <v-data-iterator :items="cardDataDump">
       <template v-slot:default="{ items }">
@@ -66,13 +87,13 @@ getDrink();
           <v-card>
             <div v-if="item" @click="displayDetail(item.raw)">
               <v-card-title> {{ item.raw.title }} </v-card-title>
-              <v-img :width="100" :height="100" aspect-ratio="16/9" cover :src="item.raw.img">
+              <!-- <v-img :width="100" :height="100" aspect-ratio="16/9" cover :src="item.raw.img">
                 <template v-slot:placeholder>
                   <div class="d-flex align-center justify-center fill-height">
                     <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
                   </div>
                 </template>
-              </v-img>
+              </v-img> -->
             </div>
             <v-progress-circular
               v-else

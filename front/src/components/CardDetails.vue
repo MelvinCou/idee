@@ -104,18 +104,18 @@ const goback = (bool: boolean) => {
       <h1 v-if="data.title">
         <v-btn @click="goback(isClick)" class="ma-2" color="red">
           <v-icon icon="mdi-arrow-left" start></v-icon>
-          ← Back
+          Back
         </v-btn>
         {{ data.title }}
       </h1>
     </div>
-    <v-img v-if="data.img" aspect-ratio="1.555" cover :src="data.img">
+    <!-- <v-img v-if="data.img" aspect-ratio="1.555" cover :src="data.img">
       <template v-slot:placeholder>
         <div class="d-flex align-center justify-center fill-height">
           <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
         </div>
       </template>
-    </v-img>
+    </v-img> -->
 
     <v-chip-group>
       <v-chip>Chip 1</v-chip>
