@@ -1,21 +1,32 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { Enjoy } from "@/api/Enjoy";
-import { GraphqlGetEnjoysResponse } from "@/api/data-contracts";
+import type { GraphqlGetEnjoysResponse } from "@/api/data-contracts";
 
 export const useEnjoysStore = defineStore("enjoys", () => {
   const enjoys = ref<GraphqlGetEnjoysResponse>();
   const page = ref<number>(1);
+  const paginationTotal = ref<number>();
 
   const api = new Enjoy({
     baseUrl: import.meta.env.VITE_API_URL,
   });
 
-  const getEnjoys = async () => {
-    if (enjoys.value === undefined) {
+  const getEnjoys = async (newPage?: number) => {
+    let pageUpdated = false;
+    if (newPage && newPage !== page.value) {
+      page.value = newPage;
+      pageUpdated = true;
+    }
+
+    if (enjoys.value === undefined || pageUpdated) {
       enjoys.value = (await api.enjoyList({ city: "Paris", page: page.value })).data;
+    }
+
+    if (paginationTotal.value === undefined && enjoys.value.poi?.total) {
+      paginationTotal.value = enjoys.value.poi?.total % 20;
     }
   };
 
-  return { enjoys, getEnjoys };
+  return { enjoys, getEnjoys, paginationTotal, page };
 });
