@@ -1,21 +1,32 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { Travel } from "@/api/Travel";
-import { GraphqlGetTravelsResponse } from "@/api/data-contracts";
+import type { GraphqlGetTravelsResponse } from "@/api/data-contracts";
 
 export const useTravelsStore = defineStore("travels", () => {
   const travels = ref<GraphqlGetTravelsResponse>();
   const page = ref<number>(1);
+  const paginationTotal = ref<number>();
 
   const api = new Travel({
     baseUrl: import.meta.env.VITE_API_URL,
   });
 
-  const getTravels = async () => {
-    if (travels.value === undefined) {
+  const getTravels = async (newPage?: number) => {
+    let pageUpdated = false;
+    if (newPage && newPage !== page.value) {
+      page.value = newPage;
+      pageUpdated = true;
+    }
+
+    if (travels.value === undefined || pageUpdated) {
       travels.value = (await api.travelList({ city: "Paris", page: page.value })).data;
+    }
+
+    if (paginationTotal.value === undefined && travels.value.poi?.total) {
+      paginationTotal.value = travels.value.poi?.total % 20;
     }
   };
 
-  return { travels, getTravels };
+  return { travels, getTravels, paginationTotal, page };
 });
