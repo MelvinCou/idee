@@ -9,26 +9,32 @@ import type {
 
 export interface CardData {
   title?: string;
-  img?: string;
-  publicDescription?: string;
-  wikipediaDescription?: string;
-  address?: string;
-  location?: string;
-  webSite?: string;
-  dataProduceur?: string;
+  comment?: string;
+  description?: string;
+  link?: string;
+  contact?: string; // telephone or email
+  location: {
+    longitude?: Number;
+    latitude?: Number;
+  };
+  reducedMobilityAccess?: boolean;
   dateUpdate?: string;
+  // we may delete this
+  img?: string;
 }
 
 export class Data implements CardData {
-  title?: string | undefined;
-  img?: string | undefined;
-  publicDescription?: string | undefined;
-  wikipediaDescription?: string | undefined;
-  address?: string | undefined;
-  location?: string | undefined;
-  webSite?: string | undefined;
-  dataProduceur?: string | undefined;
-  dateUpdate?: string | undefined;
+  title?: string;
+  comment?: string;
+  description?: string;
+  link?: string;
+  contact?: string;
+  location: {
+    longitude?: Number;
+    latitude?: Number;
+  };
+  reducedMobilityAccess?: boolean;
+  dateUpdate?: string;
 
   constructor(
     r:
@@ -39,26 +45,42 @@ export class Data implements CardData {
       | GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterest,
   ) {
     this.title = r.rdfs_label && r.rdfs_label[0] && r.rdfs_label[0].value;
-    this.address =
+    this.comment = r.rdfs_comment && r.rdfs_comment[0] && r.rdfs_comment[0].value;
+    this.description =
+      r.hasDescription &&
+      r.hasDescription[0] &&
+      r.hasDescription[0].dc_description &&
+      r.hasDescription[0].dc_description[0].value;
+    this.link =
       r.hasContact &&
       r.hasContact[0] &&
       r.hasContact[0].foaf_homepage &&
       r.hasContact[0].foaf_homepage[0];
-    this.webSite =
-      r.hasContact &&
-      r.hasContact[0] &&
-      r.hasContact[0].foaf_homepage &&
-      r.hasContact[0].foaf_homepage[0];
-    this.publicDescription = r.rdfs_comment && r.rdfs_comment[0] && r.rdfs_comment[0].value;
-    this.location = "";
-    this.dataProduceur =
+    this.contact =
       r.hasContact &&
       r.hasContact[0] &&
       ((r.hasContact[0].schema_email && r.hasContact[0].schema_email[0]) ||
         (r.hasContact[0].schema_telephone && r.hasContact[0].schema_telephone[0]));
+
+    this.location = {
+      latitude:
+        r.isLocatedAt &&
+        r.isLocatedAt[0] &&
+        r.isLocatedAt[0].schema_geo &&
+        r.isLocatedAt[0].schema_geo[0] &&
+        r.isLocatedAt[0].schema_geo[0].schema_latitude &&
+        r.isLocatedAt[0].schema_geo[0].schema_latitude[0],
+      longitude:
+        r.isLocatedAt &&
+        r.isLocatedAt[0] &&
+        r.isLocatedAt[0].schema_geo &&
+        r.isLocatedAt[0].schema_geo[0] &&
+        r.isLocatedAt[0].schema_geo[0].schema_longitude &&
+        r.isLocatedAt[0].schema_geo[0].schema_longitude[0],
+    };
+
+    this.reducedMobilityAccess = r.reducedMobilityAccess && r.reducedMobilityAccess[0];
     this.dateUpdate = r.lastUpdateDatatourisme && r.lastUpdateDatatourisme[0];
-    this.img = "";
-    this.wikipediaDescription = "";
   }
 }
 </script>
@@ -105,29 +127,30 @@ const goback = (bool: boolean) => {
     <v-btn block size="large" color="red"><strong>-</strong> Retirer à l'intinéraire </v-btn>
     <v-divider></v-divider>
 
-    <div v-if="data.publicDescription">
+    <div v-if="data.description">
       <h1>Description officiel</h1>
-      <p>{{ data.publicDescription }}</p>
+      <p>{{ data.description }}</p>
       <v-divider></v-divider>
     </div>
-    <div v-if="data.address">
-      <h1>Adresse</h1>
-      <p>{{ data.address }}</p>
+    <div v-else-if="data.comment">
+      <h1>Description officiel</h1>
+      <p>{{ data.comment }}</p>
+      <v-divider></v-divider>
+    </div>
+
+    <div v-if="data.link">
+      <h1>Site web</h1>
+      <a v-bind:href="data.link" target="_blank" variant="plain">{{ data.link }}</a>
+      <v-divider></v-divider>
+    </div>
+    <div v-if="data.contact">
+      <h1>Contact</h1>
+      <p>{{ data.contact }}</p>
       <v-divider></v-divider>
     </div>
     <div v-if="data.location">
       <h1>Localisation</h1>
       <p>{{ data.location }}</p>
-      <v-divider></v-divider>
-    </div>
-    <div v-if="data.webSite">
-      <h1>Site web</h1>
-      <a v-bind:href="data.webSite" target="_blank" variant="plain">{{ data.webSite }}</a>
-      <v-divider></v-divider>
-    </div>
-    <div v-if="data.dataProduceur">
-      <h1>Producteur de la donnée</h1>
-      <p>{{ data.dataProduceur }}</p>
       <v-divider></v-divider>
     </div>
     <div v-if="data.dateUpdate">
