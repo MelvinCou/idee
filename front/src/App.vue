@@ -60,7 +60,7 @@ userStore.getUser();
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props" v-if="userStore.user.connected">
             <v-avatar color="brown" size="large">
-              <img v-bind:src="userStore.user.avatar" v-bind:height="50" v-bind:width="50" />
+              <v-img v-bind:src="userStore.user.avatar" />
             </v-avatar>
           </v-btn>
           <v-btn @click="githubOAuth2" prepend-icon="mdi-github" v-else>Connexion</v-btn>
@@ -69,11 +69,7 @@ userStore.getUser();
           <v-card-text>
             <div class="mx-auto text-center">
               <v-avatar color="brown" v-if="userStore.user.avatar">
-                <img
-                  v-bind:src="userStore.user.avatar"
-                  v-bind:height="40"
-                  v-bind:width="40"
-                  v-if="userStore.user.connected" />
+                <v-img v-bind:src="userStore.user.avatar" v-if="userStore.user.connected" />
                 <span class="text-h5" v-else></span>
               </v-avatar>
               <h3>{{ userStore.user.name }}</h3>
