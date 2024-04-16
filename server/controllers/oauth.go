@@ -18,6 +18,8 @@ type User struct {
 	Name      string `json:"name"`
 }
 
+const accessToken = "access_token"
+
 // GithubLogin handles the GitHub login redirection.
 func GithubLogin(c *gin.Context) {
 	// Instancie github configuration
@@ -56,7 +58,7 @@ func GithubCallback(c *gin.Context) {
 
 	// Create a new cookie with the access token
 	cookie := http.Cookie{
-		Name:     "access_token",
+		Name:     accessToken,
 		Value:    token.AccessToken,
 		Path:     "/",
 		HttpOnly: true,
@@ -151,12 +153,12 @@ func GithubPOC(ctx *gin.Context) {
 
 func IsConnected(ctx *gin.Context) {
 	// Retrieve the access_token cookie from the request
-	cookie, err := ctx.Request.Cookie("access_token")
+	cookie, err := ctx.Request.Cookie(accessToken)
 
 	// Check if the cookie is present
 	if err != nil {
 		// Manage error if access_token cookie is not present
-		ctx.String(http.StatusUnauthorized, "Unauthorized")
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": err.Error()})
 		return
 	}
 
@@ -182,4 +184,19 @@ func IsConnected(ctx *gin.Context) {
 	}
 
 	ctx.JSON(resp.StatusCode, user)
+}
+
+func Disconnect(ctx *gin.Context) {
+	c := &http.Cookie{
+		Name:     accessToken,
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+	}
+
+	http.SetCookie(ctx.Writer, c)
+
+	// Redirect the user to the frontend
+	ctx.Redirect(http.StatusFound, "http://localhost:5173")
 }
