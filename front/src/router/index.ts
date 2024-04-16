@@ -11,7 +11,7 @@ const router = createRouter({
       component: LandingPage,
     },
     {
-      path: "/main",
+      path: "/main/:cityId?",
       name: "MainPage",
       component: MainLayout,
     },

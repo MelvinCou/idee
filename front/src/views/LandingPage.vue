@@ -28,7 +28,9 @@
 import { ref, onMounted } from "vue";
 import type { DatePickerInstance } from "@vuepic/vue-datepicker";
 import SearchDestination from "../components/SearchDestination.vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const date = ref<Date[]>([]);
 const selectedDestination = ref("");
 
@@ -41,12 +43,17 @@ onMounted(() => {
 });
 
 const onCitySelected = (city: any) => {
-  selectedDestination.value = `${city.name} - ${city.place_formatted}`;
+  selectedDestination.value = city.mapbox_id;
 };
 
 const processInputs = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const formattedDate = date.value.map((d) => d.toISOString().substring(0, 10)).join(" to ");
+  router.push({
+    name: "MainPage",
+    params: { cityId: selectedDestination.value },
+  });
+
   //TODO: Add logic to process the user inputs
 };
 </script>
