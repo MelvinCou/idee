@@ -1,19 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, onMounted } from "vue";
 import { useDrinksStore } from "@/stores/drinks";
 import { useEnjoysStore } from "@/stores/enjoys";
 import { useEatsStore } from "@/stores/eats";
 import { useTravelsStore } from "@/stores/travels";
 import { useSleepsStore } from "@/stores/sleeps";
-
-interface Tabs {
-  name: string;
-  action: () => void;
-  icon: string;
-}
-
-const emit = defineEmits(["actualTab"]);
+import { TabsInterface } from "@/interfaces/main";
 
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
@@ -21,7 +14,8 @@ const eatStore = useEatsStore();
 const travelStore = useTravelsStore();
 const sleepStore = useSleepsStore();
 
-const tabsNames: Tabs[] = [
+const emit = defineEmits(["actualTab"]);
+const tabsNames: TabsInterface[] = [
   {
     name: "enjoy",
     action: () => handleTabClick(0, enjoyStore.getEnjoys),
@@ -41,6 +35,10 @@ const tabsNames: Tabs[] = [
   { name: "sleep", action: () => handleTabClick(4, sleepStore.getSleeps), icon: "mdi-bed" },
 ];
 const selectedTab = ref(tabsNames[0]);
+
+onMounted(() => {
+  selectedTab.value.action();
+});
 
 const handleTabClick = async (numTabs: number, actionStore: () => Promise<void>) => {
   if (numTabs >= 0 && numTabs <= 4) {
