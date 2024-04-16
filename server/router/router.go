@@ -39,6 +39,7 @@ func SetupRouter() *gin.Engine {
 	}
 
 	r.GET("/github_connected", controllers.IsConnected)
+	r.GET("/github_disconnect", controllers.Disconnect)
 	r.GET("/github_login", controllers.GithubLogin)
 	r.GET("/github_callback", controllers.GithubCallback)
 
