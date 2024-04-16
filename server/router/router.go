@@ -38,6 +38,7 @@ func SetupRouter() *gin.Engine {
 		api.GET("/travel", controllers.Travel)
 	}
 
+	r.GET("/github_connected", controllers.IsConnected)
 	r.GET("/github_login", controllers.GithubLogin)
 	r.GET("/github_callback", controllers.GithubCallback)
 
