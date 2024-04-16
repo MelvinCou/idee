@@ -1,16 +1,50 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-
+import { defineStore } from "pinia";
 import { ref } from "vue";
+
+const userStore = defineStore("user", () => {
+  const user = ref({
+    name: "",
+    avatar: "",
+    connected: false,
+  });
+  const intervalId = ref(0);
+
+  const getUser = async () => {
+    let data;
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/github_connected`, {
+        credentials: "include",
+      });
+      data = await response.json();
+      user.value.name = data.name?.length > 0 ? data.name : data.login;
+      user.value.avatar = data.avatar_url;
+      if (response.ok) user.value.connected = true;
+    } catch (error) {
+      //
+    }
+  };
+  const startCron = () => {
+    intervalId.value = setInterval(
+      () => {
+        getUser();
+      },
+      5 * 60 * 1000, // Get user data every 5 min
+    );
+  };
+  startCron();
+
+  return { user, getUser };
+})();
 
 const githubOAuth2 = async () => {
   window.location.href = `${import.meta.env.VITE_BASE_URL}/github_login`;
 };
-const user = ref({
-  initials: "JD",
-  fullName: "John Doe",
-  email: "john.doe@doe.com",
-});
+const disconnect = async () => {
+  window.location.href = `${import.meta.env.VITE_BASE_URL}/github_disconnect`;
+};
+userStore.getUser();
 </script>
 
 <template>
@@ -24,27 +58,29 @@ const user = ref({
       <div class="custom-spacer"></div>
       <v-menu min-width="200px" rounded>
         <template v-slot:activator="{ props }">
-          <v-btn icon v-bind="props">
+          <v-btn icon v-bind="props" v-if="userStore.user.connected">
             <v-avatar color="brown" size="large">
-              <span class="text-h5">{{ user.initials }}</span>
+              <img v-bind:src="userStore.user.avatar" v-bind:height="50" v-bind:width="50" />
             </v-avatar>
           </v-btn>
+          <v-btn @click="githubOAuth2" v-else>Connexion avec github</v-btn>
         </template>
         <v-card>
           <v-card-text>
             <div class="mx-auto text-center">
-              <v-avatar color="brown">
-                <span class="text-h5">{{ user.initials }}</span>
+              <v-avatar color="brown" v-if="userStore.user.avatar">
+                <img
+                  v-bind:src="userStore.user.avatar"
+                  v-bind:height="40"
+                  v-bind:width="40"
+                  v-if="userStore.user.connected" />
+                <span class="text-h5" v-else></span>
               </v-avatar>
-              <h3>{{ user.fullName }}</h3>
-              <p class="text-caption mt-1">
-                {{ user.email }}
-              </p>
+              <h3>{{ userStore.user.name }}</h3>
               <v-divider class="my-3"></v-divider>
-              <v-btn variant="text" rounded>Modification du compte</v-btn>
-              <v-divider class="my-3"></v-divider>
-              <v-btn variant="text" rounded>Déconnexion</v-btn>
-              <v-btn @click="githubOAuth2">Connexion avec github</v-btn>
+              <v-btn @click="disconnect" variant="text" rounded v-if="userStore.user.connected"
+                >Déconnexion</v-btn
+              >
             </div>
           </v-card-text>
         </v-card>
