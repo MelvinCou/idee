@@ -23,10 +23,10 @@ userStore.getUser();
       <RouterLink to="/main">Carte</RouterLink>
       <div class="custom-spacer"></div>
       <v-menu min-width="200px" rounded>
-        <template v-slot:activator="{ props }">
+        <template #activator="{ props }">
           <v-btn icon v-bind="props" v-if="userStore.user.connected">
             <v-avatar color="brown" size="large">
-              <v-img v-bind:src="userStore.user.avatar" />
+              <v-img :src="userStore.user.avatar" />
             </v-avatar>
           </v-btn>
           <v-btn @click="githubOAuth2" prepend-icon="mdi-github" v-else>Connexion</v-btn>
@@ -35,7 +35,7 @@ userStore.getUser();
           <v-card-text>
             <div class="mx-auto text-center">
               <v-avatar color="brown" v-if="userStore.user.avatar">
-                <v-img v-bind:src="userStore.user.avatar" v-if="userStore.user.connected" />
+                <v-img :src="userStore.user.avatar" v-if="userStore.user.connected" />
                 <span class="text-h5" v-else></span>
               </v-avatar>
               <h3>{{ userStore.user.name }}</h3>
