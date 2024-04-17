@@ -87,6 +87,10 @@ export class Data implements CardData {
 </script>
 
 <script setup lang="ts">
+import { useMapPointsStore } from "@/stores/mapPoints";
+
+const mapPointsStore = useMapPointsStore();
+
 const props = defineProps<{
   data: CardData;
   isClick: boolean;
@@ -124,8 +128,42 @@ const goback = (bool: boolean) => {
 
       <v-chip>Chip 3</v-chip>
     </v-chip-group>
-    <v-btn block size="large" color="green"><strong>+</strong> Ajouter à l'intinéraire </v-btn>
-    <v-btn block size="large" color="red"><strong>-</strong> Retirer à l'intinéraire </v-btn>
+    <v-btn
+      block
+      size="large"
+      color="green"
+      prepend-icon="mdi-plus"
+      v-if="mapPointsStore.mapPoints?.from?.title !== $props.data.title"
+      @click="mapPointsStore.setFrom($props.data)"
+      >Ajouter à l'intinéraire</v-btn
+    >
+    <v-btn
+      block
+      size="large"
+      color="red"
+      prepend-icon="mdi-minus"
+      v-else
+      @click="mapPointsStore.setFrom(undefined)"
+      >Retirer de l'intinéraire</v-btn
+    >
+    <v-btn
+      block
+      size="large"
+      color="green"
+      prepend-icon="mdi-plus"
+      v-if="mapPointsStore.mapPoints?.to?.title !== $props.data.title"
+      @click="mapPointsStore.setTo($props.data)"
+      >Ajouter à l'intinéraire</v-btn
+    >
+    <v-btn
+      block
+      size="large"
+      color="red"
+      prepend-icon="mdi-minus"
+      v-else
+      @click="mapPointsStore.setTo(undefined)"
+      >Retirer de l'intinéraire</v-btn
+    >
     <v-divider></v-divider>
 
     <div v-if="props.data.description">
