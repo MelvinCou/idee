@@ -1,10 +1,9 @@
-<template>
-  <div id="mapContainer" class="basemap"></div>
-</template>
-
 <script setup lang="ts">
 import mapboxgl from "mapbox-gl"; // Import Mapbox library
 import { onMounted } from "vue";
+import { useMapPointsStore } from "../stores/mapPoints";
+
+const mapPointsStore = useMapPointsStore();
 
 const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN; // Access token from environment variable
 
@@ -44,6 +43,10 @@ onMounted(() => {
   map.addControl(geolocate, "top-right");
 });
 </script>
+
+<template>
+  <div id="mapContainer" class="basemap"></div>
+</template>
 
 <style lang="scss" scoped>
 .basemap {
