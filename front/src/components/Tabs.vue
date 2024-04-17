@@ -6,7 +6,7 @@ import { useEnjoysStore } from "@/stores/enjoys";
 import { useEatsStore } from "@/stores/eats";
 import { useTravelsStore } from "@/stores/travels";
 import { useSleepsStore } from "@/stores/sleeps";
-import { TabsInterface } from "@/interfaces/main";
+import type { TabsInterface } from "@/interfaces/main";
 
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
@@ -15,7 +15,7 @@ const travelStore = useTravelsStore();
 const sleepStore = useSleepsStore();
 
 const emit = defineEmits(["actualTab"]);
-const tabsNames: TabsInterface[] = [
+const tabsData: TabsInterface[] = [
   {
     name: "enjoy",
     action: () => handleTabClick(0, enjoyStore.getEnjoys),
@@ -34,7 +34,7 @@ const tabsNames: TabsInterface[] = [
   },
   { name: "sleep", action: () => handleTabClick(4, sleepStore.getSleeps), icon: "mdi-bed" },
 ];
-const selectedTab = ref(tabsNames[0]);
+const selectedTab = ref(tabsData[0]);
 
 onMounted(() => {
   selectedTab.value.action();
@@ -42,8 +42,8 @@ onMounted(() => {
 
 const handleTabClick = async (numTabs: number, actionStore: () => Promise<void>) => {
   if (numTabs >= 0 && numTabs <= 4) {
-    const data = await actionStore();
-    emit("actualTab", tabsNames[numTabs].name);
+    await actionStore();
+    emit("actualTab", tabsData[numTabs].name);
   }
 };
 </script>
@@ -51,13 +51,13 @@ const handleTabClick = async (numTabs: number, actionStore: () => Promise<void>)
 <template>
   <v-card>
     <v-tabs v-model="selectedTab" align-tabs="center" color="deep-purple-accent-4">
-      <v-tab v-for="tab in tabsNames" :value="tab" @click="tab.action"
+      <v-tab :key="tab.name" v-for="tab in tabsData" :value="tab" @click="tab.action"
         ><v-icon :icon="tab.icon" size="x-large"
       /></v-tab>
     </v-tabs>
     <v-window v-model="selectedTab">
       <v-window-item
-        v-for="element in tabsNames"
+        v-for="element in tabsData"
         :key="element.name"
         :value="element"
         @click="element.action">

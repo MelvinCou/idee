@@ -1,5 +1,4 @@
 import { fileURLToPath } from "node:url";
-// eslint-disable-next-line import/no-unresolved
 import { mergeConfig, defineConfig, configDefaults } from "vitest/config";
 import viteConfig from "./vite.config";
 
