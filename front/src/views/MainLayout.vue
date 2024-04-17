@@ -11,6 +11,9 @@ import { useSleepsStore } from "@/stores/sleeps";
 import Tabs from "@/components/Tabs.vue";
 import type { MainLayoutActiveTabs } from "@/interfaces/main";
 import { itemPerPage } from "@/utils";
+import { useMapPointsStore } from "@/stores/mapPoints";
+
+const mapPointsStore = useMapPointsStore();
 
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
@@ -140,8 +143,38 @@ function rollBack(isRollBack: boolean) {
                 indeterminate
                 size="64"></v-progress-circular>
               <v-card-actions>
-                <v-btn color="green">+</v-btn>
-                <v-btn color="red">-</v-btn>
+                <v-btn
+                  variant="outlined"
+                  color="green"
+                  prepend-icon="mdi-plus"
+                  v-if="mapPointsStore.mapPoints?.from?.title !== item.raw.title"
+                  @click="mapPointsStore.setFrom(item.raw)"
+                  >Départ</v-btn
+                >
+                <v-btn
+                  variant="outlined"
+                  color="red"
+                  prepend-icon="mdi-minus"
+                  v-else
+                  @click="mapPointsStore.setFrom(undefined)"
+                  >Départ</v-btn
+                >
+                <v-btn
+                  variant="outlined"
+                  color="green"
+                  prepend-icon="mdi-plus"
+                  v-if="mapPointsStore.mapPoints?.to?.title !== item.raw.title"
+                  @click="mapPointsStore.setTo(item.raw)"
+                  >Destination</v-btn
+                >
+                <v-btn
+                  variant="outlined"
+                  color="red"
+                  prepend-icon="mdi-minus"
+                  v-else
+                  @click="mapPointsStore.setTo(undefined)"
+                  >Destination</v-btn
+                >
               </v-card-actions>
             </v-card>
 
