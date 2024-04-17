@@ -1,7 +1,3 @@
-<template>
-  <div id="mapContainer" class="basemap"></div>
-</template>
-
 <script setup lang="ts">
 import mapboxgl from "mapbox-gl";
 import { onMounted, ref } from "vue";
@@ -74,6 +70,10 @@ onMounted(async () => {
   }
 });
 </script>
+
+<template>
+  <div id="mapContainer" class="basemap"></div>
+</template>
 
 <style lang="scss" scoped>
 .basemap {
