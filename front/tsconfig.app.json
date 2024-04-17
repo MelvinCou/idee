@@ -7,7 +7,8 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "extensions": [".js", ".vue", ".ts"],
     },
     "target": "esnext",
     "module": "esnext",
@@ -22,20 +23,4 @@
     "allowJs": true,
     "verbatimModuleSyntax": false
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": ["node_modules", "."]
-      },
-      "typescript": {
-        "alwaysTryTypes": true
-      },
-      "alias": {
-        "map": [
-          ["@", "./src"]
-        ],
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
-      }
-    }
-  }
 }

@@ -7,14 +7,12 @@ module.exports = {
   },
   root: true,
   extends: [
-    "prettier",
-    "plugin:vue/vue3-essential",
+    "plugin:vue/essential",
     "eslint:recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
     "@vue/eslint-config-typescript",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "@vue/eslint-config-prettier/skip-formatting",
+    "@vue/eslint-config-prettier",
   ],
   overrides: [
     {
@@ -22,30 +20,25 @@ module.exports = {
       extends: ["plugin:cypress/recommended"],
     },
   ],
+  parser: "vue-eslint-parser",
   parserOptions: {
     ecmaVersion: "latest",
     parser: "@typescript-eslint/parser",
     sourceType: "module",
   },
-  plugins: ["vue", "@typescript-eslint", "prettier", "import", "jsx-a11y", "sort-keys-fix"],
+  plugins: ["@typescript-eslint", "prettier"],
   settings: {
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
-      },
-      typescript: {
-        project: './tsconfig.json',
-      },
+    "import/resolver": {
       alias: {
-        map: [['~', path.resolve(__dirname, './src')]],
-        extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
+        map: [["@", "./src/"]],
+        extensions: [".js", ".vue", ".ts"],
       },
     },
   },
   rules: {
-    "import/no-unresolved": "error", // turn on errors for missing imports
     "prettier/prettier": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
     "no-console": "warn",
     "no-debugger": "warn",
     "no-unused-vars": "off",

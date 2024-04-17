@@ -14,8 +14,8 @@ export interface CardData {
   link?: string;
   contact?: string; // telephone or email
   location: {
-    longitude?: Number;
-    latitude?: Number;
+    longitude?: number;
+    latitude?: number;
   };
   reducedMobilityAccess?: boolean;
   dateUpdate?: string;
@@ -30,8 +30,8 @@ export class Data implements CardData {
   link?: string;
   contact?: string;
   location: {
-    longitude?: Number;
-    latitude?: Number;
+    longitude?: number;
+    latitude?: number;
   };
   reducedMobilityAccess?: boolean;
   dateUpdate?: string;
@@ -90,7 +90,7 @@ export class Data implements CardData {
 const props = defineProps<{
   data: CardData;
   isClick: boolean;
-  pins: String;
+  pins: string;
 }>();
 const emit = defineEmits(["back", "roll_back"]);
 
@@ -101,15 +101,15 @@ const goback = (bool: boolean) => {
 <template>
   <div class="container">
     <div class="title">
-      <h1 v-if="data.title">
-        <v-btn @click="goback(isClick)" class="ma-2" color="red">
+      <h1 v-if="props.data.title">
+        <v-btn @click="goback(props.isClick)" class="ma-2" color="red">
           <v-icon icon="mdi-arrow-left" start></v-icon>
           Back
         </v-btn>
-        {{ data.title }}
+        {{ props.data.title }}
       </h1>
     </div>
-    <!-- <v-img v-if="data.img" aspect-ratio="1.555" cover :src="data.img">
+    <!-- <v-img v-if="props.data.img" aspect-ratio="1.555" cover :src="props.data.img">
       <template v-slot:placeholder>
         <div class="d-flex align-center justify-center fill-height">
           <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -128,35 +128,35 @@ const goback = (bool: boolean) => {
     <v-btn block size="large" color="red"><strong>-</strong> Retirer à l'intinéraire </v-btn>
     <v-divider></v-divider>
 
-    <div v-if="data.description">
+    <div v-if="props.data.description">
       <h1>Description officiel</h1>
-      <p>{{ data.description }}</p>
+      <p>{{ props.data.description }}</p>
       <v-divider></v-divider>
     </div>
-    <div v-else-if="data.comment">
+    <div v-else-if="props.data.comment">
       <h1>Description officiel</h1>
-      <p>{{ data.comment }}</p>
+      <p>{{ props.data.comment }}</p>
       <v-divider></v-divider>
     </div>
 
-    <div v-if="data.link">
+    <div v-if="props.data.link">
       <h1>Site web</h1>
-      <a v-bind:href="data.link" target="_blank" variant="plain">{{ data.link }}</a>
+      <a :href="props.data.link" target="_blank" variant="plain">{{ props.data.link }}</a>
       <v-divider></v-divider>
     </div>
-    <div v-if="data.contact">
+    <div v-if="props.data.contact">
       <h1>Contact</h1>
-      <p>{{ data.contact }}</p>
+      <p>{{ props.data.contact }}</p>
       <v-divider></v-divider>
     </div>
-    <div v-if="data.location">
+    <div v-if="props.data.location">
       <h1>Localisation</h1>
-      <p>{{ data.location }}</p>
+      <p>{{ props.data.location }}</p>
       <v-divider></v-divider>
     </div>
-    <div v-if="data.dateUpdate">
+    <div v-if="props.data.dateUpdate">
       <h1>Date de mise à jour</h1>
-      <p>{{ data.dateUpdate }}</p>
+      <p>{{ props.data.dateUpdate }}</p>
       <v-divider></v-divider>
     </div>
   </div>
