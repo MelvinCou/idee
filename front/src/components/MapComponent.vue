@@ -83,6 +83,10 @@ watch(router.currentRoute, () => {
 });
 </script>
 
+<template>
+  <div id="mapContainer" class="basemap"></div>
+</template>
+
 <style scoped>
 .basemap {
   width: 100%;
