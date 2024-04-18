@@ -3,6 +3,7 @@ import { ref, watch } from "vue";
 import MapComponent from "./../components/MapComponent.vue";
 import type { CardData } from "@/components/CardDetails.vue";
 import CardDetails, { Data } from "../components/CardDetails.vue";
+import PointButton from "@/components/PointButton.vue";
 import { useDrinksStore } from "@/stores/drinks";
 import { useEnjoysStore } from "@/stores/enjoys";
 import { useEatsStore } from "@/stores/eats";
@@ -11,9 +12,6 @@ import { useSleepsStore } from "@/stores/sleeps";
 import Tabs from "@/components/Tabs.vue";
 import type { MainLayoutActiveTabs } from "@/interfaces/main";
 import { itemPerPage } from "@/utils";
-import { useMapPointsStore } from "@/stores/mapPoints";
-
-const mapPointsStore = useMapPointsStore();
 
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
@@ -143,22 +141,7 @@ function rollBack(isRollBack: boolean) {
                 indeterminate
                 size="64"></v-progress-circular>
               <v-card-actions>
-                <v-btn
-                  variant="outlined"
-                  color="green"
-                  prepend-icon="mdi-plus"
-                  v-if="!mapPointsStore.includes(item.raw)"
-                  @click="mapPointsStore.add(item.raw)"
-                  >Ajouter</v-btn
-                >
-                <v-btn
-                  variant="outlined"
-                  color="red"
-                  prepend-icon="mdi-minus"
-                  v-else
-                  @click="mapPointsStore.remove(item.raw)"
-                  >Retirer</v-btn
-                >
+                <PointButton :data="item.raw" :big="false"></PointButton>
               </v-card-actions>
             </v-card>
 
