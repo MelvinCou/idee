@@ -8,26 +8,38 @@ export const useTravelsStore = defineStore("travels", () => {
   const travels = ref<GraphqlGetTravelsResponse>();
   const page = ref<number>(1);
   const paginationTotal = ref<number>();
+  const city = ref<string>("");
 
   const api = new Travel({
     baseUrl: import.meta.env.VITE_API_URL,
   });
 
-  const getTravels = async (newPage?: number) => {
-    let pageUpdated = false;
-    if (newPage && newPage !== page.value) {
-      page.value = newPage;
-      pageUpdated = true;
-    }
+  const getTravels = async (newCity?: string, newPage?: number) => {
+    if (city.value !== "" || newCity) {
+      let pageUpdated = false;
+      let cityUpdated = false;
 
-    if (travels.value === undefined || pageUpdated) {
-      travels.value = (await api.travelList({ city: "Paris", page: page.value })).data;
-    }
+      if (newPage && newPage !== page.value) {
+        page.value = newPage;
+        pageUpdated = true;
+      }
 
-    if (paginationTotal.value === undefined && travels.value.poi?.total) {
-      paginationTotal.value = getPaginationFromTotal(travels.value.poi?.total);
+      if (newCity && newCity !== city.value) {
+        city.value = newCity;
+        page.value = 1;
+        pageUpdated = true;
+        cityUpdated = true;
+      }
+
+      if (travels.value === undefined || pageUpdated) {
+        travels.value = (await api.travelList({ city: city.value, page: page.value })).data;
+      }
+
+      if ((paginationTotal.value === undefined || cityUpdated) && travels.value.poi?.total) {
+        paginationTotal.value = getPaginationFromTotal(travels.value.poi?.total);
+      }
     }
   };
 
-  return { travels, getTravels, paginationTotal, page };
+  return { travels, getTravels, paginationTotal, page, city };
 });

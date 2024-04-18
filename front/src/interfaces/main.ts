@@ -24,3 +24,9 @@ export interface MainLayoutActiveTabs {
   actualTab: string;
   paginationMax: number;
 }
+
+export interface MapBoxSuggestion {
+  mapbox_id: string;
+  name: string;
+  place_formatted: string;
+}

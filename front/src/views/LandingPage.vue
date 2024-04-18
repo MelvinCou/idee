@@ -6,7 +6,6 @@
         Découvrez l'art du voyage grâce à cette application conviviale qui vous permet de planifier
         vos itinéraires et de choisir des bars, restaurants et points d'intérêt.
       </p>
-      <SearchDestination @city-selected="onCitySelected" />
       <div class="date-picker-container">
         <VueDatePicker
           v-model="date"
@@ -27,7 +26,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import type { DatePickerInstance } from "@vuepic/vue-datepicker";
-import SearchDestination from "../components/SearchDestination.vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -41,10 +39,6 @@ onMounted(() => {
   const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
   date.value = [startDate, endDate];
 });
-
-const onCitySelected = (city: any) => {
-  selectedDestination.value = city.mapbox_id;
-};
 
 const processInputs = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
