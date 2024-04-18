@@ -133,8 +133,8 @@ const goback = (bool: boolean) => {
       size="large"
       color="green"
       prepend-icon="mdi-plus"
-      v-if="mapPointsStore.mapPoints?.from?.title !== $props.data.title"
-      @click="mapPointsStore.setFrom($props.data)"
+      v-if="!mapPointsStore.includes($props.data)"
+      @click="mapPointsStore.add($props.data)"
       >Ajouter à l'intinéraire</v-btn
     >
     <v-btn
@@ -143,25 +143,7 @@ const goback = (bool: boolean) => {
       color="red"
       prepend-icon="mdi-minus"
       v-else
-      @click="mapPointsStore.setFrom(undefined)"
-      >Retirer de l'intinéraire</v-btn
-    >
-    <v-btn
-      block
-      size="large"
-      color="green"
-      prepend-icon="mdi-plus"
-      v-if="mapPointsStore.mapPoints?.to?.title !== $props.data.title"
-      @click="mapPointsStore.setTo($props.data)"
-      >Ajouter à l'intinéraire</v-btn
-    >
-    <v-btn
-      block
-      size="large"
-      color="red"
-      prepend-icon="mdi-minus"
-      v-else
-      @click="mapPointsStore.setTo(undefined)"
+      @click="mapPointsStore.remove($props.data)"
       >Retirer de l'intinéraire</v-btn
     >
     <v-divider></v-divider>
