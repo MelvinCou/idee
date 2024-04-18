@@ -34,7 +34,7 @@ const handleInput = () => {
   if (searchQuery.value === "") {
     cities.value = [];
   } else {
-    timeoutId = setTimeout(() => {
+    timeoutId = window.setTimeout(() => {
       fetchCities();
     }, 200);
   }
