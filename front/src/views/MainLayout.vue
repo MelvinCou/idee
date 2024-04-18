@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import MapComponent from "./../components/MapComponent.vue";
+import MapComponent from "@/components/MapComponent.vue";
+import SearchInput from "@/components/SearchInput.vue";
 import type { CardData } from "@/components/CardDetails.vue";
 import CardDetails, { Data } from "../components/CardDetails.vue";
 import PointButton from "@/components/PointButton.vue";
@@ -23,11 +24,14 @@ const showDetails = ref(false);
 const activeTabs = ref<MainLayoutActiveTabs>();
 const cardDataDump = ref<CardData[]>();
 const actualPage = ref<number>();
+const cityToSearch = ref<string>("");
 
-const switchData = async (tabName: string, newPage?: number) => {
+const switchData = async (tabName: string, newCity?: string, newPage?: number) => {
   switch (tabName) {
     case "enjoy":
-      if (newPage) await enjoyStore.getEnjoys(newPage);
+      if (cityToSearch.value !== enjoyStore.city || newPage) {
+        await enjoyStore.getEnjoys(cityToSearch.value, newPage);
+      }
       activeTabs.value = {
         actualTab: tabName,
         data: enjoyStore.enjoys!,
@@ -36,7 +40,9 @@ const switchData = async (tabName: string, newPage?: number) => {
       actualPage.value = enjoyStore.page;
       break;
     case "drink":
-      if (newPage) await drinkStore.getDrinks(newPage);
+      if (cityToSearch.value !== drinkStore.city || newPage) {
+        await drinkStore.getDrinks(cityToSearch.value, newPage);
+      }
       activeTabs.value = {
         actualTab: tabName,
         data: drinkStore.drinks!,
@@ -45,7 +51,9 @@ const switchData = async (tabName: string, newPage?: number) => {
       actualPage.value = drinkStore.page;
       break;
     case "eat":
-      if (newPage) await eatStore.getEats(newPage);
+      if (cityToSearch.value !== eatStore.city || newPage) {
+        await eatStore.getEats(cityToSearch.value, newPage);
+      }
       activeTabs.value = {
         actualTab: tabName,
         data: eatStore.eats!,
@@ -54,7 +62,9 @@ const switchData = async (tabName: string, newPage?: number) => {
       actualPage.value = eatStore.page;
       break;
     case "travel":
-      if (newPage) await travelStore.getTravels(newPage);
+      if (cityToSearch.value !== travelStore.city || newPage) {
+        await travelStore.getTravels(cityToSearch.value, newPage);
+      }
       activeTabs.value = {
         actualTab: tabName,
         data: travelStore.travels!,
@@ -63,7 +73,9 @@ const switchData = async (tabName: string, newPage?: number) => {
       actualPage.value = travelStore.page;
       break;
     case "sleep":
-      if (newPage) await sleepStore.getSleeps(newPage);
+      if (cityToSearch.value !== sleepStore.city || newPage) {
+        await sleepStore.getSleeps(cityToSearch.value, newPage);
+      }
       activeTabs.value = {
         actualTab: tabName,
         data: sleepStore.sleeps!,
@@ -72,13 +84,19 @@ const switchData = async (tabName: string, newPage?: number) => {
       actualPage.value = sleepStore.page;
       break;
   }
-  cardDataDump.value = activeTabs.value?.data.poi?.results?.map<CardData>((r) => {
-    return new Data(r);
-  });
+  if (cityToSearch.value !== "") {
+    cardDataDump.value = activeTabs.value?.data.poi?.results?.map<CardData>((r) => {
+      return new Data(r);
+    });
+  }
 };
 
-watch(actualPage, async (newPage) => {
-  switchData(activeTabs.value?.actualTab!, newPage);
+watch(actualPage, (newPage) => {
+  switchData(activeTabs.value?.actualTab!, undefined, newPage);
+});
+
+watch(cityToSearch, (newCity) => {
+  switchData(activeTabs.value?.actualTab!, newCity, undefined);
 });
 
 const detailsData = ref<CardData>({
@@ -103,11 +121,17 @@ function displayDetail(data: CardData) {
 function rollBack(isRollBack: boolean) {
   showDetails.value = isRollBack;
 }
+
+const updateCity = (cityName: string) => {
+  cityToSearch.value = cityName;
+};
 </script>
 
 <template>
-  <v-main>
-    <v-navigation-drawer color="pink" permanent width="470">
+  <v-container fluid>
+    <SearchInput @selectedCity="updateCity" />
+
+    <v-navigation-drawer color="pink" permanent :width="450">
       <v-expand-x-transition>
         <CardDetails
           v-show="showDetails"
@@ -135,11 +159,7 @@ function rollBack(isRollBack: boolean) {
                 </template>
               </v-img> -->
               </div>
-              <v-progress-circular
-                v-else
-                color="grey-lighten-4"
-                indeterminate
-                size="64"></v-progress-circular>
+              <v-progress-circular v-else color="grey-lighten-4" indeterminate size="64" />
               <v-card-actions>
                 <PointButton :data="item.raw" :big="false"></PointButton>
               </v-card-actions>
@@ -155,24 +175,23 @@ function rollBack(isRollBack: boolean) {
         v-if="activeTabs?.paginationMax"
         :length="activeTabs.paginationMax" />
     </v-navigation-drawer>
-    <!-- Content -->
-    <v-layout full-height>
-      <v-row>
-        <v-col>
-          <MapComponent></MapComponent>
-        </v-col>
-      </v-row>
-    </v-layout>
-  </v-main>
+    <!-- Mapbox content -->
+    <MapComponent />
+  </v-container>
 </template>
 
 <style scoped>
 .v-navigation-drawer {
-  position: relative;
+  margin: auto;
+  position: absolute !important;
+  left: 50px !important;
+  background-color: black;
+  max-height: 80%;
 }
 
-.app-bar {
-  color: black;
+.v-container {
+  height: 100%;
+  margin-top: 60px;
 }
 
 .nav-icon {
