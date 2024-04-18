@@ -2,11 +2,6 @@ import { CardData } from "@/components/CardDetails.vue";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export interface MapPoints {
-  from?: Point;
-  to?: Point;
-}
-
 export interface Point {
   latitude: number | undefined;
   longitude: number | undefined;
@@ -14,34 +9,32 @@ export interface Point {
 }
 
 export const useMapPointsStore = defineStore("map_points", () => {
-  const mapPoints = ref<MapPoints>({
-    from: undefined,
-    to: undefined,
-  });
+  const mapPoints = ref<Point[]>([]);
 
-  const setFrom = (data: CardData | undefined) => {
-    if (data === undefined) {
-      mapPoints.value.from = undefined;
-    } else {
-      mapPoints.value.from = {
-        title: data.title,
-        latitude: data.location.latitude,
-        longitude: data.location.longitude,
-      };
-    }
+  const add = (data: CardData) => {
+    mapPoints.value.push({
+      title: data.title,
+      latitude: data.location.latitude,
+      longitude: data.location.longitude,
+    });
   };
 
-  const setTo = (data: CardData | undefined) => {
-    if (data === undefined) {
-      mapPoints.value.to = undefined;
-    } else {
-      mapPoints.value.to = {
-        title: data.title,
-        latitude: data.location.latitude,
-        longitude: data.location.longitude,
-      };
-    }
+  const includes = (data: CardData): boolean => {
+    return mapPoints.value.some(
+      (point) =>
+        point.latitude === data.location.latitude && point.longitude === data.location.longitude,
+    );
   };
 
-  return { mapPoints, setFrom, setTo };
+  const remove = (data: CardData) => {
+    // Find the index of the point to remove
+    const index = mapPoints.value.findIndex(
+      (point) =>
+        point.latitude === data.location.latitude && point.longitude === data.location.longitude,
+    );
+    // Remove the point
+    mapPoints.value.splice(index, 1);
+  };
+
+  return { mapPoints, add, includes, remove };
 });

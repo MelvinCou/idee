@@ -147,33 +147,17 @@ function rollBack(isRollBack: boolean) {
                   variant="outlined"
                   color="green"
                   prepend-icon="mdi-plus"
-                  v-if="mapPointsStore.mapPoints?.from?.title !== item.raw.title"
-                  @click="mapPointsStore.setFrom(item.raw)"
-                  >Départ</v-btn
+                  v-if="!mapPointsStore.includes(item.raw)"
+                  @click="mapPointsStore.add(item.raw)"
+                  >Ajouter</v-btn
                 >
                 <v-btn
                   variant="outlined"
                   color="red"
                   prepend-icon="mdi-minus"
                   v-else
-                  @click="mapPointsStore.setFrom(undefined)"
-                  >Départ</v-btn
-                >
-                <v-btn
-                  variant="outlined"
-                  color="green"
-                  prepend-icon="mdi-plus"
-                  v-if="mapPointsStore.mapPoints?.to?.title !== item.raw.title"
-                  @click="mapPointsStore.setTo(item.raw)"
-                  >Destination</v-btn
-                >
-                <v-btn
-                  variant="outlined"
-                  color="red"
-                  prepend-icon="mdi-minus"
-                  v-else
-                  @click="mapPointsStore.setTo(undefined)"
-                  >Destination</v-btn
+                  @click="mapPointsStore.remove(item.raw)"
+                  >Retirer</v-btn
                 >
               </v-card-actions>
             </v-card>
