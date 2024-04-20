@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import type * as Geojson from "geojson";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import type { Point } from "@/stores/mapPoints";
 import { useMapPointsStore } from "@/stores/mapPoints";
 
 export interface DirectionResponse {
@@ -38,13 +39,7 @@ export interface Waypoint {
   name: string;
 }
 
-// interface MapBoxDirectionsResponse {
-//   code: string;
-//   uuid: string;
-//   waypoints: Waypoint[];
-//   routes: Route[];
-// }
-const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN; // Access token from environment variable
 const MAP_STYLE = "mapbox://styles/mapbox/streets-v12";
 const mapProps: mapboxgl.MapboxOptions = {
   container: "mapContainer",
@@ -52,8 +47,6 @@ const mapProps: mapboxgl.MapboxOptions = {
   center: [-1.553621, 47.218372],
   zoom: 13,
 };
-const start: number[] = [-1.55818, 47.20484];
-const end: number[] = [-1.5667129, 47.2106158];
 
 const router = useRouter();
 const route = useRoute();
@@ -108,22 +101,29 @@ const fetchCityDetails = async (cityId: string) => {
     console.error("Error fetching city details:", error);
   }
 };
+
 async function fetchDirections(
-  origin: number[],
-  destination: number[] | undefined,
+  itinerary: Point[],
   profile: string,
   token: string,
   map: mapboxgl.Map | null,
-): Promise<DirectionResponse> {
+) {
   const accessToken = token;
-  // Use destination if provided, otherwise default to origin
-  const finalDestination = destination ?? origin;
 
-  const url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${origin[0]},${origin[1]};${finalDestination[0]},${finalDestination[1]}?geometries=geojson&access_token=${accessToken}&overview=full`;
+  // Create a list of comma-separated coordinates
+  const coordinates = itinerary.map((point) => `${point.longitude},${point.latitude}`);
+
+  // Handle single point case (round trip)
+  if (itinerary.length === 1) {
+    coordinates.push(coordinates[0]); // Duplicate the first point for a round trip
+  }
+
+  // Build the URL with semicolon-separated coordinates
+  const url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${coordinates.join(";")}?geometries=geojson&access_token=${accessToken}&overview=full`;
 
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Network response was not ok");
+    throw new Error("Network response issue");
   }
   const res = response.json() as Promise<DirectionResponse>;
   const data = (await res).routes[0];
@@ -136,6 +136,7 @@ async function fetchDirections(
       coordinates: route,
     },
   };
+
   // if the route already exists on the map, we'll reset it using setData
   if (map?.getSource("route")) {
     const geojsonsource: mapboxgl.AnySourceImpl = map.getSource("route");
@@ -162,58 +163,7 @@ async function fetchDirections(
         "line-opacity": 0.75,
       },
     });
-    map?.addLayer({
-      id: "STARTpoint",
-      type: "circle",
-      source: {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              properties: {},
-              geometry: {
-                type: "Point",
-                coordinates: start,
-              },
-            },
-          ],
-        },
-      },
-      paint: {
-        "circle-radius": 10,
-        "circle-color": "#3887be",
-      },
-    });
-    map?.addLayer({
-      id: "ENDpoint",
-      type: "circle",
-      source: {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              properties: {},
-              geometry: {
-                type: "Point",
-                coordinates: end,
-              },
-            },
-          ],
-        },
-      },
-      paint: {
-        "circle-radius": 10,
-        "circle-color": "#ff0000",
-      },
-    });
   }
-  // add turn instructions here at the end
-
-  return response.json() as Promise<DirectionResponse>;
 }
 
 onMounted(() => {
@@ -221,9 +171,6 @@ onMounted(() => {
   if (route.params.cityId) {
     fetchCityDetails(route.params.cityId as string);
   }
-  fetchDirections(start, end, "cycling", MAPBOX_ACCESS_TOKEN, map.value.map)
-    .then((data) => console.log(data))
-    .catch((error) => console.error("There was a problem with your fetch operation: ", error));
 });
 
 watch(router.currentRoute, () => {
@@ -249,6 +196,7 @@ watch(useMapPointsStore().mapPoints, () => {
         // Add the marker to the map
         .addTo(map.value.map!);
     });
+    fetchDirections(useMapPointsStore().mapPoints, "cycling", MAPBOX_ACCESS_TOKEN, map.value.map);
   }
 });
 </script>
