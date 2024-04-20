@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import mapboxgl from "mapbox-gl";
 import type * as Geojson from "geojson";
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMapPointsStore } from "@/stores/mapPoints";
 
@@ -44,14 +44,13 @@ export interface Waypoint {
 //   waypoints: Waypoint[];
 //   routes: Route[];
 // }
-const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN; // Access token from environment variable
+const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 const MAP_STYLE = "mapbox://styles/mapbox/streets-v12";
 const mapProps: mapboxgl.MapboxOptions = {
-  // Define map properties
   container: "mapContainer",
   style: MAP_STYLE,
-  center: [-1.553621, 47.218372], // starting position [lng, lat]
-  zoom: 13, // starting zoom
+  center: [-1.553621, 47.218372],
+  zoom: 13,
 };
 const start: number[] = [-1.55818, 47.20484];
 const end: number[] = [-1.5667129, 47.2106158];
@@ -102,7 +101,6 @@ const fetchCityDetails = async (cityId: string) => {
         essential: true,
         zoom: 10,
       });
-      new mapboxgl.Marker().setLngLat(coordinates).addTo(map.value.map!);
     } else {
       console.error("No features found in the data");
     }
@@ -238,7 +236,7 @@ watch(router.currentRoute, () => {
 watch(useMapPointsStore().mapPoints, () => {
   if (map.value) {
     // Remove all markers
-    const markers = map.value?.getContainer().querySelectorAll(".mapboxgl-marker");
+    const markers = map.value?.map?.getContainer().querySelectorAll(".mapboxgl-marker");
     markers?.forEach((marker) => {
       marker.remove();
     });
@@ -249,7 +247,7 @@ watch(useMapPointsStore().mapPoints, () => {
         // Add a popup to the marker with the title of the point
         .setPopup(new mapboxgl.Popup().setHTML(`<h3>${point.title || ""}</h3>`))
         // Add the marker to the map
-        .addTo(map.value!);
+        .addTo(map.value.map!);
     });
   }
 });
