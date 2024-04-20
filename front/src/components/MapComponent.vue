@@ -3,9 +3,9 @@ import mapboxgl from "mapbox-gl";
 import type * as Geojson from "geojson";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import type { Point } from "@/stores/mapPoints";
 import { useMapPointsStore } from "@/stores/mapPoints";
 
+import type { Point } from "@/stores/mapPoints";
 export interface DirectionResponse {
   waypoints: Waypoint[];
   routes: Route[];
@@ -177,6 +177,26 @@ watch(router.currentRoute, () => {
   initializeMap();
   if (route.params.cityId) {
     fetchCityDetails(route.params.cityId as string);
+  }
+});
+
+watch(useMapPointsStore().mapPoints, () => {
+  if (map.value) {
+    // Remove all markers
+    const markers = map.value?.map?.getContainer().querySelectorAll(".mapboxgl-marker");
+    markers?.forEach((marker) => {
+      marker.remove();
+    });
+    // Add markers for each point
+    useMapPointsStore().mapPoints.forEach((point) => {
+      new mapboxgl.Marker()
+        .setLngLat({ lat: point.latitude || 0, lon: point.longitude || 0 })
+        // Add a popup to the marker with the title of the point
+        .setPopup(new mapboxgl.Popup().setHTML(`<h3>${point.title || ""}</h3>`))
+        // Add the marker to the map
+        .addTo(map.value.map!);
+    });
+    fetchDirections(useMapPointsStore().mapPoints, "cycling", MAPBOX_ACCESS_TOKEN, map.value.map);
   }
 });
 </script>
