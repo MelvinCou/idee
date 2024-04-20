@@ -171,6 +171,9 @@ onMounted(() => {
   if (route.params.cityId) {
     fetchCityDetails(route.params.cityId as string);
   }
+  fetchDirections(start, end, "cycling", MAPBOX_ACCESS_TOKEN, map.value.map)
+    .then((data) => console.log(data))
+    .catch((error) => console.error("There was a problem with your fetch operation: ", error));
 });
 
 watch(router.currentRoute, () => {
