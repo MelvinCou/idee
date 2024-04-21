@@ -8,6 +8,10 @@ import { useTravelsStore } from "@/stores/travels";
 import { useSleepsStore } from "@/stores/sleeps";
 import type { TabsInterface } from "@/interfaces/main";
 
+const props = defineProps<{
+  activeTab?: string;
+}>();
+
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
 const eatStore = useEatsStore();
@@ -37,6 +41,9 @@ const tabsData: TabsInterface[] = [
 const selectedTab = ref(tabsData[0]);
 
 onMounted(() => {
+  if (props.activeTab) {
+    selectedTab.value = tabsData.find((tab) => tab.name === props.activeTab)!;
+  }
   selectedTab.value.action();
 });
 
