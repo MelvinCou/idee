@@ -51,7 +51,7 @@ userStore.getUser();
               </v-avatar>
               <h3>{{ userStore.user.name }}</h3>
               <v-btn @click="disconnect" variant="text" rounded v-if="userStore.user.connected"
-                >Deconnexion</v-btn
+                >Déconnexion</v-btn
               >
             </div>
           </v-card-text>
