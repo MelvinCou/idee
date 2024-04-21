@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CardData } from "@/components/CardDetails.vue";
+import type { CardData } from "@/interfaces/main";
 import { useMapPointsStore } from "@/stores/mapPoints";
 
 const mapPointsStore = useMapPointsStore();

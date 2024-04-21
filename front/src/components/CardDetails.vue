@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-catch -->
 <script lang="ts">
 import type {
   GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfInterest,
@@ -6,35 +7,30 @@ import type {
   GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfInterest,
   GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterest,
 } from "@/api/data-contracts";
-
-export interface CardData {
-  title?: string;
-  comment?: string;
-  description?: string;
-  link?: string;
-  contact?: string; // telephone or email
-  location: {
-    longitude?: number;
-    latitude?: number;
-  };
-  reducedMobilityAccess?: boolean;
-  dateUpdate?: string;
-  // we may delete this
-  img?: string;
-}
+import type { CardData } from "@/interfaces/main";
+import fetchImages from "@/api/google-image";
 
 export class Data implements CardData {
   title?: string;
-  comment?: string;
   description?: string;
-  link?: string;
-  contact?: string;
+  comment?: string;
+  contact?: {
+    homepage?: string;
+    telephone?: string;
+    email?: string;
+  };
   location: {
     longitude?: number;
     latitude?: number;
+    address?: {
+      city?: string;
+      postalCode?: string;
+      street?: string;
+    };
   };
   reducedMobilityAccess?: boolean;
   dateUpdate?: string;
+  img?: string[];
 
   constructor(
     r:
@@ -52,17 +48,23 @@ export class Data implements CardData {
       r.hasDescription[0].dc_description &&
       r.hasDescription[0].dc_description[0] &&
       r.hasDescription[0].dc_description[0].value;
-    this.link =
-      r.hasContact &&
-      r.hasContact[0] &&
-      r.hasContact[0].foaf_homepage &&
-      r.hasContact[0].foaf_homepage[0];
-    this.contact =
-      r.hasContact &&
-      r.hasContact[0] &&
-      ((r.hasContact[0].schema_email && r.hasContact[0].schema_email[0]) ||
-        (r.hasContact[0].schema_telephone && r.hasContact[0].schema_telephone[0]));
-
+    this.contact = {
+      homepage:
+        r.hasContact &&
+        r.hasContact[0] &&
+        r.hasContact[0].foaf_homepage &&
+        r.hasContact[0].foaf_homepage[0],
+      telephone:
+        r.hasContact &&
+        r.hasContact[0] &&
+        r.hasContact[0].schema_telephone &&
+        r.hasContact[0].schema_telephone[0],
+      email:
+        r.hasContact &&
+        r.hasContact[0] &&
+        r.hasContact[0].schema_email &&
+        r.hasContact[0].schema_email[0],
+    };
     this.location = {
       latitude:
         r.isLocatedAt &&
@@ -78,111 +80,206 @@ export class Data implements CardData {
         r.isLocatedAt[0].schema_geo[0] &&
         r.isLocatedAt[0].schema_geo[0].schema_longitude &&
         r.isLocatedAt[0].schema_geo[0].schema_longitude[0],
+      address: {
+        city:
+          r.isLocatedAt &&
+          r.isLocatedAt[0] &&
+          r.isLocatedAt[0].schema_address &&
+          r.isLocatedAt[0].schema_address[0] &&
+          r.isLocatedAt[0].schema_address[0].schema_addressLocality &&
+          r.isLocatedAt[0].schema_address[0].schema_addressLocality[0],
+        postalCode:
+          r.isLocatedAt &&
+          r.isLocatedAt[0] &&
+          r.isLocatedAt[0].schema_address &&
+          r.isLocatedAt[0].schema_address[0] &&
+          r.isLocatedAt[0].schema_address[0].schema_postalCode &&
+          r.isLocatedAt[0].schema_address[0].schema_postalCode[0],
+        street:
+          r.isLocatedAt &&
+          r.isLocatedAt[0] &&
+          r.isLocatedAt[0].schema_address &&
+          r.isLocatedAt[0].schema_address[0] &&
+          r.isLocatedAt[0].schema_address[0].schema_streetAddress &&
+          r.isLocatedAt[0].schema_address[0].schema_streetAddress[0],
+      },
     };
-
     this.reducedMobilityAccess = r.reducedMobilityAccess && r.reducedMobilityAccess[0];
     this.dateUpdate = r.lastUpdateDatatourisme && r.lastUpdateDatatourisme[0];
+  }
+
+  async getImages() {
+    try {
+      if (this.title) {
+        const images: string[] = [];
+        const response = await fetchImages(this.title);
+        if (response) {
+          response.forEach((element: any) => {
+            images.push(element.link);
+          });
+          this.img = images;
+        }
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 }
 </script>
 
 <script setup lang="ts">
 import PointButton from "@/components/PointButton.vue";
+import CarouselsComponent from "@/components/CarouselsComponent.vue";
 
 const props = defineProps<{
   data: CardData;
   isClick: boolean;
   pins: string;
 }>();
+
 const emit = defineEmits(["back", "roll_back"]);
 
 const goback = (bool: boolean) => {
   emit("back", !bool);
 };
 </script>
+
 <template>
   <div class="container">
-    <div class="title">
-      <h1 v-if="props.data.title">
-        <v-btn @click="goback(props.isClick)" class="ma-2" color="red">
-          <v-icon icon="mdi-arrow-left" start></v-icon>
-          Back
-        </v-btn>
+    <CarouselsComponent :images="props.data.img" />
+
+    <v-btn @click="goback(props.isClick)" class="button-back" color="red">
+      <v-icon icon="mdi-arrow-left" />
+    </v-btn>
+    <div class="content">
+      <h2 v-if="props.data.title">
         {{ props.data.title }}
-      </h1>
-    </div>
-    <!-- <v-img v-if="props.data.img" aspect-ratio="1.555" cover :src="props.data.img">
-      <template v-slot:placeholder>
-        <div class="d-flex align-center justify-center fill-height">
-          <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+      </h2>
+      <div>
+        <p>{{ props.data.description }}</p>
+        <v-divider></v-divider>
+      </div>
+      <div class="information-div" v-if="props.data.contact">
+        <h3>Informations</h3>
+        <div v-if="props.data.contact.email">
+          <h5>Email</h5>
+          <p>{{ props.data.contact.email }}</p>
         </div>
-      </template>
-    </v-img> -->
-
-    <v-chip-group>
-      <v-chip>Chip 1</v-chip>
-
-      <v-chip>Chip 2</v-chip>
-
-      <v-chip>Chip 3</v-chip>
-    </v-chip-group>
-    <PointButton :data="props.data" :big="true"></PointButton>
-    <v-divider></v-divider>
-
-    <div v-if="props.data.description">
-      <h1>Description officiel</h1>
-      <p>{{ props.data.description }}</p>
+        <div v-if="props.data.contact.telephone">
+          <h5>Telephone</h5>
+          <p>{{ props.data.contact.telephone }}</p>
+        </div>
+        <div v-if="props.data.location.address">
+          <h5>Localisation</h5>
+          <p>
+            {{ props.data.location.address.street }}, {{ props.data.location.address.city }}
+            {{ props.data.location.address.postalCode }}
+          </p>
+          <v-divider></v-divider>
+        </div>
+      </div>
+      <div class="grid-card">
+        <v-row>
+          <v-col cols="6" md="6">
+            <div class="square">
+              <a :href="props.data.contact?.homepage" target="_blank" variant="plain">
+                <v-icon
+                  :class="props.data.contact?.homepage ? 'icon-available' : 'icon-not-available'"
+                  icon="mdi-web" />
+              </a>
+            </div>
+          </v-col>
+          <v-col cols="6" md="6">
+            <div class="square">
+              <v-icon
+                style="cursor: default !important"
+                :class="props.data.reducedMobilityAccess ? 'icon-available' : 'icon-not-available'"
+                icon="mdi-wheelchair" />
+            </div>
+          </v-col>
+        </v-row>
+      </div>
       <v-divider></v-divider>
-    </div>
-    <div v-else-if="props.data.comment">
-      <h1>Description officiel</h1>
-      <p>{{ props.data.comment }}</p>
-      <v-divider></v-divider>
-    </div>
-
-    <div v-if="props.data.link">
-      <h1>Site web</h1>
-      <a :href="props.data.link" target="_blank" variant="plain">{{ props.data.link }}</a>
-      <v-divider></v-divider>
-    </div>
-    <div v-if="props.data.contact">
-      <h1>Contact</h1>
-      <p>{{ props.data.contact }}</p>
-      <v-divider></v-divider>
-    </div>
-    <div v-if="props.data.location">
-      <h1>Localisation</h1>
-      <p>{{ props.data.location }}</p>
-      <v-divider></v-divider>
-    </div>
-    <div v-if="props.data.dateUpdate">
-      <h1>Date de mise à jour</h1>
-      <p>{{ props.data.dateUpdate }}</p>
-      <v-divider></v-divider>
+      <div class="div-before-button" v-if="props.data.dateUpdate">
+        <h5>Date de mise à jour</h5>
+        <p>{{ props.data.dateUpdate }}</p>
+      </div>
+      <PointButton :data="props.data" :big="true" />
     </div>
   </div>
 </template>
+
 <style scoped>
-.title {
-  background-color: rgb(137, 58, 58);
-  width: 100%;
+h2 {
   text-align: center;
-  /* text-align: center;
-  align-items: center;
-  margin: 0 auto;
-  position: absolute;
-  left: 100%; */
 }
+
 .container {
-  background-color: purple;
-  width: 100%;
-  overflow-y: auto;
-  height: 100vh;
-  z-index: 2;
-  position: absolute;
-  padding-bottom: 15%;
+  background-color: white;
+  width: fit-content;
+  padding-bottom: 2%;
+  height: 100%;
+  display: flex; /* Ajoutez cette ligne */
+  flex-direction: column; /* Ajoutez cette ligne */
 }
-a {
-  color: aqua !important;
+
+.content {
+  width: 90%;
+  margin: auto;
+  margin-top: 2%;
+  flex: 1; /* Ajoutez cette ligne */
+  overflow-y: auto; /* pour permettre le défilement si le contenu est trop long */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+div {
+  color: black !important;
+}
+
+.button-back {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+
+.square {
+  background-color: #e0e0e0; /* ou toute autre couleur de fond */
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.v-row {
+  margin: 0 !important;
+  justify-content: space-evenly;
+}
+
+.v-icon {
+  font-size: xx-large;
+}
+
+.v-divider {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.icon-available {
+  cursor: pointer;
+  color: blue;
+  font-weight: 900;
+}
+
+.icon-not-available {
+  cursor: default;
+  color: black;
+  opacity: 80%;
+  font-weight: 900;
+}
+
+.div-before-button {
+  margin-bottom: 4%;
 }
 </style>
