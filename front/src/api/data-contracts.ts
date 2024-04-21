@@ -60,8 +60,19 @@ export interface GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfIntere
 }
 
 export interface GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlace {
+  /** L&#039;adresse postale du lieu concerné */
+  schema_address?: GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress[];
   /** Les coordonnées géographiques de la ressource */
   schema_geo?: GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape[];
+}
+
+export interface GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress {
+  /** La ville en format texte. */
+  schema_addressLocality?: string[];
+  /** Le code postal d&#039;une adresse. */
+  schema_postalCode?: string[];
+  /** Le nom de rue incluant le numéro d&#039;une adresse. */
+  schema_streetAddress?: string[];
 }
 
 export interface GraphqlGetDrinksPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape {
@@ -131,8 +142,19 @@ export interface GraphqlGetEatsPoiPointOfInterestResultSetResultsPointOfInterest
 }
 
 export interface GraphqlGetEatsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlace {
+  /** L&#039;adresse postale du lieu concerné */
+  schema_address?: GraphqlGetEatsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress[];
   /** Les coordonnées géographiques de la ressource */
   schema_geo?: GraphqlGetEatsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape[];
+}
+
+export interface GraphqlGetEatsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress {
+  /** La ville en format texte. */
+  schema_addressLocality?: string[];
+  /** Le code postal d&#039;une adresse. */
+  schema_postalCode?: string[];
+  /** Le nom de rue incluant le numéro d&#039;une adresse. */
+  schema_streetAddress?: string[];
 }
 
 export interface GraphqlGetEatsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape {
@@ -202,8 +224,19 @@ export interface GraphqlGetEnjoysPoiPointOfInterestResultSetResultsPointOfIntere
 }
 
 export interface GraphqlGetEnjoysPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlace {
+  /** L&#039;adresse postale du lieu concerné */
+  schema_address?: GraphqlGetEnjoysPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress[];
   /** Les coordonnées géographiques de la ressource */
   schema_geo?: GraphqlGetEnjoysPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape[];
+}
+
+export interface GraphqlGetEnjoysPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress {
+  /** La ville en format texte. */
+  schema_addressLocality?: string[];
+  /** Le code postal d&#039;une adresse. */
+  schema_postalCode?: string[];
+  /** Le nom de rue incluant le numéro d&#039;une adresse. */
+  schema_streetAddress?: string[];
 }
 
 export interface GraphqlGetEnjoysPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape {
@@ -273,8 +306,19 @@ export interface GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfIntere
 }
 
 export interface GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlace {
+  /** L&#039;adresse postale du lieu concerné */
+  schema_address?: GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress[];
   /** Les coordonnées géographiques de la ressource */
   schema_geo?: GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape[];
+}
+
+export interface GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress {
+  /** La ville en format texte. */
+  schema_addressLocality?: string[];
+  /** Le code postal d&#039;une adresse. */
+  schema_postalCode?: string[];
+  /** Le nom de rue incluant le numéro d&#039;une adresse. */
+  schema_streetAddress?: string[];
 }
 
 export interface GraphqlGetSleepsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape {
@@ -352,8 +396,19 @@ export interface GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInter
 }
 
 export interface GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlace {
+  /** L&#039;adresse postale du lieu concerné */
+  schema_address?: GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress[];
   /** Les coordonnées géographiques de la ressource */
   schema_geo?: GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape[];
+}
+
+export interface GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaAddressSchemaPostalAddress {
+  /** La ville en format texte. */
+  schema_addressLocality?: string[];
+  /** Le code postal d&#039;une adresse. */
+  schema_postalCode?: string[];
+  /** Le nom de rue incluant le numéro d&#039;une adresse. */
+  schema_streetAddress?: string[];
 }
 
 export interface GraphqlGetTravelsPoiPointOfInterestResultSetResultsPointOfInterestIsLocatedAtPlaceSchemaGeoSchemaGeoCoordinatesSchemaGeoShape {
