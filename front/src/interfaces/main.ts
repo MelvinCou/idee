@@ -53,3 +53,40 @@ export interface CardData {
   dateUpdate?: string;
   img?: string[];
 }
+
+export interface DirectionResponse {
+  waypoints: Waypoint[];
+  routes: Route[];
+  code: string;
+}
+
+export interface Route {
+  legs: Leg[];
+  weight_name: string;
+  geometry: Geometry;
+  weight: number;
+  distance: number;
+  duration: number;
+}
+
+export interface Geometry {
+  coordinates: Array<number[]>;
+  type: string;
+}
+
+export interface Leg {
+  steps: any[];
+  weight: number;
+  distance: number;
+  summary: string;
+  duration: number;
+}
+
+export interface Waypoint {
+  location: number[];
+  name: string;
+}
+
+export interface MapState {
+  map: mapboxgl.Map | null;
+}

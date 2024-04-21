@@ -6,41 +6,15 @@ import { useRoute, useRouter } from "vue-router";
 import { useMapPointsStore } from "@/stores/mapPoints";
 
 import type { Point } from "@/stores/mapPoints";
-export interface DirectionResponse {
-  waypoints: Waypoint[];
-  routes: Route[];
-  code: string;
-}
+import type { DirectionResponse, MapState } from "@/interfaces/main";
 
-export interface Route {
-  legs: Leg[];
-  weight_name: string;
-  geometry: Geometry;
-  weight: number;
-  distance: number;
-  duration: number;
-}
+/** Access token from environment variable */
+const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
-export interface Geometry {
-  coordinates: Array<number[]>;
-  type: string;
-}
-
-export interface Leg {
-  steps: any[];
-  weight: number;
-  distance: number;
-  summary: string;
-  duration: number;
-}
-
-export interface Waypoint {
-  location: number[];
-  name: string;
-}
-
-const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN; // Access token from environment variable
+/** Map style */
 const MAP_STYLE = "mapbox://styles/mapbox/streets-v12";
+
+/** Default map properties */
 const mapProps: mapboxgl.MapboxOptions = {
   container: "mapContainer",
   style: MAP_STYLE,
@@ -48,17 +22,18 @@ const mapProps: mapboxgl.MapboxOptions = {
   zoom: 13,
 };
 
+/** Vue router instance */
 const router = useRouter();
+
+/** Vue route instance */
 const route = useRoute();
 
+/** Initialize Mapbox access token */
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
-interface MapState {
-  map: mapboxgl.Map | null; // Interface for the map state
-}
-//  let map: ref<mapboxgl.Map | null>(null); // Reactive ref for the map instance
+/** Reference to the map state */
 const map = ref<MapState>({
-  map: null, // Initialize the map as null initially
+  map: null,
 });
 
 /**
@@ -81,6 +56,11 @@ const initializeMap = () => {
 
   map.value.map.addControl(geolocate, "top-right");
 };
+
+/**
+ * Fetches city details and centers the map on the city.
+ * @param {string} cityId - The ID of the city.
+ */
 const fetchCityDetails = async (cityId: string) => {
   try {
     const response = await fetch(
@@ -102,6 +82,13 @@ const fetchCityDetails = async (cityId: string) => {
   }
 };
 
+/**
+ * Fetches directions for the given itinerary and displays the route on the map.
+ * @param {Point[]} itinerary - The itinerary points.
+ * @param {string} profile - The travel profile (e.g., "cycling").
+ * @param {string} token - The Mapbox access token.
+ * @param {mapboxgl.Map | null} map - The map instance.
+ */
 async function fetchDirections(
   itinerary: Point[],
   profile: string,
@@ -110,15 +97,12 @@ async function fetchDirections(
 ) {
   const accessToken = token;
 
-  // Create a list of comma-separated coordinates
   const coordinates = itinerary.map((point) => `${point.longitude},${point.latitude}`);
 
-  // Handle single point case (round trip)
   if (itinerary.length === 1) {
-    coordinates.push(coordinates[0]); // Duplicate the first point for a round trip
+    coordinates.push(coordinates[0]);
   }
 
-  // Build the URL with semicolon-separated coordinates
   const url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${coordinates.join(";")}?geometries=geojson&access_token=${accessToken}&overview=full`;
 
   const response = await fetch(url);
@@ -137,15 +121,12 @@ async function fetchDirections(
     },
   };
 
-  // if the route already exists on the map, we'll reset it using setData
   if (map?.getSource("route")) {
     const geojsonsource: mapboxgl.AnySourceImpl = map.getSource("route");
     if (geojsonsource.type == "geojson") {
       geojsonsource.setData(geojson);
     }
-  }
-  // otherwise, we'll make a new request
-  else {
+  } else {
     map?.addLayer({
       id: "route",
       type: "line",
@@ -173,6 +154,9 @@ onMounted(() => {
   }
 });
 
+/**
+ * Vue watcher: Watches for route changes and re-initializes the map if necessary.
+ */
 watch(router.currentRoute, () => {
   initializeMap();
   if (route.params.cityId) {
@@ -180,6 +164,9 @@ watch(router.currentRoute, () => {
   }
 });
 
+/**
+ * Vue watcher: Watches for changes in map points and updates the map accordingly.
+ */
 watch(useMapPointsStore().mapPoints, () => {
   if (map.value) {
     // Remove all markers
