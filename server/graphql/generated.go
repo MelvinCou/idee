@@ -141,11 +141,46 @@ func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescripti
 type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
 	// Les coordonnées géographiques de la ressource
 	Schema_geo []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
+	// L&#039;adresse postale du lieu concerné
+	Schema_address []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
 }
 
 // GetSchema_geo returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
 func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
 	return v.Schema_geo
+}
+
+// GetSchema_address returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
+	return v.Schema_address
+}
+
+// GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
+// The GraphQL type's documentation follows.
+//
+// Adresse postale
+type GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
+	// La ville en format texte.
+	Schema_addressLocality []string `json:"schema_addressLocality"`
+	// Le code postal d&#039;une adresse.
+	Schema_postalCode []string `json:"schema_postalCode"`
+	// Le nom de rue incluant le numéro d&#039;une adresse.
+	Schema_streetAddress []string `json:"schema_streetAddress"`
+}
+
+// GetSchema_addressLocality returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_addressLocality, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_addressLocality() []string {
+	return v.Schema_addressLocality
+}
+
+// GetSchema_postalCode returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_postalCode, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_postalCode() []string {
+	return v.Schema_postalCode
+}
+
+// GetSchema_streetAddress returns GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_streetAddress, and is useful for accessing the field via an interface.
+func (v *GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_streetAddress() []string {
+	return v.Schema_streetAddress
 }
 
 // GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
@@ -329,11 +364,46 @@ func (v *GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescription
 type GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
 	// Les coordonnées géographiques de la ressource
 	Schema_geo []GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
+	// L&#039;adresse postale du lieu concerné
+	Schema_address []GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
 }
 
 // GetSchema_geo returns GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
 func (v *GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
 	return v.Schema_geo
+}
+
+// GetSchema_address returns GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
+func (v *GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
+	return v.Schema_address
+}
+
+// GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
+// The GraphQL type's documentation follows.
+//
+// Adresse postale
+type GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
+	// La ville en format texte.
+	Schema_addressLocality []string `json:"schema_addressLocality"`
+	// Le code postal d&#039;une adresse.
+	Schema_postalCode []string `json:"schema_postalCode"`
+	// Le nom de rue incluant le numéro d&#039;une adresse.
+	Schema_streetAddress []string `json:"schema_streetAddress"`
+}
+
+// GetSchema_addressLocality returns GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_addressLocality, and is useful for accessing the field via an interface.
+func (v *GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_addressLocality() []string {
+	return v.Schema_addressLocality
+}
+
+// GetSchema_postalCode returns GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_postalCode, and is useful for accessing the field via an interface.
+func (v *GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_postalCode() []string {
+	return v.Schema_postalCode
+}
+
+// GetSchema_streetAddress returns GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_streetAddress, and is useful for accessing the field via an interface.
+func (v *GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_streetAddress() []string {
+	return v.Schema_streetAddress
 }
 
 // GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
@@ -517,11 +587,46 @@ func (v *GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescripti
 type GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
 	// Les coordonnées géographiques de la ressource
 	Schema_geo []GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
+	// L&#039;adresse postale du lieu concerné
+	Schema_address []GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
 }
 
 // GetSchema_geo returns GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
 func (v *GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
 	return v.Schema_geo
+}
+
+// GetSchema_address returns GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
+func (v *GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
+	return v.Schema_address
+}
+
+// GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
+// The GraphQL type's documentation follows.
+//
+// Adresse postale
+type GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
+	// La ville en format texte.
+	Schema_addressLocality []string `json:"schema_addressLocality"`
+	// Le code postal d&#039;une adresse.
+	Schema_postalCode []string `json:"schema_postalCode"`
+	// Le nom de rue incluant le numéro d&#039;une adresse.
+	Schema_streetAddress []string `json:"schema_streetAddress"`
+}
+
+// GetSchema_addressLocality returns GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_addressLocality, and is useful for accessing the field via an interface.
+func (v *GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_addressLocality() []string {
+	return v.Schema_addressLocality
+}
+
+// GetSchema_postalCode returns GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_postalCode, and is useful for accessing the field via an interface.
+func (v *GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_postalCode() []string {
+	return v.Schema_postalCode
+}
+
+// GetSchema_streetAddress returns GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_streetAddress, and is useful for accessing the field via an interface.
+func (v *GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_streetAddress() []string {
+	return v.Schema_streetAddress
 }
 
 // GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
@@ -705,11 +810,46 @@ func (v *GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescripti
 type GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
 	// Les coordonnées géographiques de la ressource
 	Schema_geo []GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
+	// L&#039;adresse postale du lieu concerné
+	Schema_address []GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
 }
 
 // GetSchema_geo returns GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
 func (v *GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
 	return v.Schema_geo
+}
+
+// GetSchema_address returns GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
+func (v *GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
+	return v.Schema_address
+}
+
+// GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
+// The GraphQL type's documentation follows.
+//
+// Adresse postale
+type GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
+	// La ville en format texte.
+	Schema_addressLocality []string `json:"schema_addressLocality"`
+	// Le code postal d&#039;une adresse.
+	Schema_postalCode []string `json:"schema_postalCode"`
+	// Le nom de rue incluant le numéro d&#039;une adresse.
+	Schema_streetAddress []string `json:"schema_streetAddress"`
+}
+
+// GetSchema_addressLocality returns GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_addressLocality, and is useful for accessing the field via an interface.
+func (v *GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_addressLocality() []string {
+	return v.Schema_addressLocality
+}
+
+// GetSchema_postalCode returns GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_postalCode, and is useful for accessing the field via an interface.
+func (v *GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_postalCode() []string {
+	return v.Schema_postalCode
+}
+
+// GetSchema_streetAddress returns GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_streetAddress, and is useful for accessing the field via an interface.
+func (v *GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_streetAddress() []string {
+	return v.Schema_streetAddress
 }
 
 // GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
@@ -909,11 +1049,46 @@ func (v *GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestHasDescript
 type GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace struct {
 	// Les coordonnées géographiques de la ressource
 	Schema_geo []GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape `json:"schema_geo"`
+	// L&#039;adresse postale du lieu concerné
+	Schema_address []GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress `json:"schema_address"`
 }
 
 // GetSchema_geo returns GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_geo, and is useful for accessing the field via an interface.
 func (v *GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_geo() []GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape {
 	return v.Schema_geo
+}
+
+// GetSchema_address returns GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace.Schema_address, and is useful for accessing the field via an interface.
+func (v *GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace) GetSchema_address() []GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress {
+	return v.Schema_address
+}
+
+// GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress includes the requested fields of the GraphQL type schema_PostalAddress.
+// The GraphQL type's documentation follows.
+//
+// Adresse postale
+type GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress struct {
+	// La ville en format texte.
+	Schema_addressLocality []string `json:"schema_addressLocality"`
+	// Le code postal d&#039;une adresse.
+	Schema_postalCode []string `json:"schema_postalCode"`
+	// Le nom de rue incluant le numéro d&#039;une adresse.
+	Schema_streetAddress []string `json:"schema_streetAddress"`
+}
+
+// GetSchema_addressLocality returns GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_addressLocality, and is useful for accessing the field via an interface.
+func (v *GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_addressLocality() []string {
+	return v.Schema_addressLocality
+}
+
+// GetSchema_postalCode returns GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_postalCode, and is useful for accessing the field via an interface.
+func (v *GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_postalCode() []string {
+	return v.Schema_postalCode
+}
+
+// GetSchema_streetAddress returns GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress.Schema_streetAddress, and is useful for accessing the field via an interface.
+func (v *GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress) GetSchema_streetAddress() []string {
+	return v.Schema_streetAddress
 }
 
 // GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape includes the requested fields of the GraphQL type schema_GeoCoordinates_schema_GeoShape.
@@ -1073,6 +1248,11 @@ query GetDrinks ($city: String, $from: Int, $size: Int) {
 					schema_longitude
 					schema_latitude
 				}
+				schema_address {
+					schema_addressLocality
+					schema_postalCode
+					schema_streetAddress
+				}
 			}
 		}
 	}
@@ -1137,6 +1317,11 @@ query GetEats ($city: String, $from: Int, $size: Int) {
 				schema_geo {
 					schema_longitude
 					schema_latitude
+				}
+				schema_address {
+					schema_addressLocality
+					schema_postalCode
+					schema_streetAddress
 				}
 			}
 		}
@@ -1203,6 +1388,11 @@ query GetEnjoys ($city: String, $from: Int, $size: Int) {
 					schema_longitude
 					schema_latitude
 				}
+				schema_address {
+					schema_addressLocality
+					schema_postalCode
+					schema_streetAddress
+				}
 			}
 		}
 	}
@@ -1267,6 +1457,11 @@ query GetSleeps ($city: String, $from: Int, $size: Int) {
 				schema_geo {
 					schema_longitude
 					schema_latitude
+				}
+				schema_address {
+					schema_addressLocality
+					schema_postalCode
+					schema_streetAddress
 				}
 			}
 		}
@@ -1363,6 +1558,11 @@ query GetTravels ($city: String, $from: Int, $size: Int) {
 				schema_geo {
 					schema_longitude
 					schema_latitude
+				}
+				schema_address {
+					schema_addressLocality
+					schema_postalCode
+					schema_streetAddress
 				}
 			}
 		}

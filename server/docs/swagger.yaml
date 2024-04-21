@@ -92,10 +92,33 @@ definitions:
     type: object
   graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace:
     properties:
+      schema_address:
+        description: L&#039;adresse postale du lieu concerné
+        items:
+          $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress'
+        type: array
       schema_geo:
         description: Les coordonnées géographiques de la ressource
         items:
           $ref: '#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape'
+        type: array
+    type: object
+  graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress:
+    properties:
+      schema_addressLocality:
+        description: La ville en format texte.
+        items:
+          type: string
+        type: array
+      schema_postalCode:
+        description: Le code postal d&#039;une adresse.
+        items:
+          type: string
+        type: array
+      schema_streetAddress:
+        description: Le nom de rue incluant le numéro d&#039;une adresse.
+        items:
+          type: string
         type: array
     type: object
   ? graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape
@@ -215,10 +238,33 @@ definitions:
     type: object
   graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace:
     properties:
+      schema_address:
+        description: L&#039;adresse postale du lieu concerné
+        items:
+          $ref: '#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress'
+        type: array
       schema_geo:
         description: Les coordonnées géographiques de la ressource
         items:
           $ref: '#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape'
+        type: array
+    type: object
+  graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress:
+    properties:
+      schema_addressLocality:
+        description: La ville en format texte.
+        items:
+          type: string
+        type: array
+      schema_postalCode:
+        description: Le code postal d&#039;une adresse.
+        items:
+          type: string
+        type: array
+      schema_streetAddress:
+        description: Le nom de rue incluant le numéro d&#039;une adresse.
+        items:
+          type: string
         type: array
     type: object
   graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape:
@@ -338,10 +384,33 @@ definitions:
     type: object
   graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace:
     properties:
+      schema_address:
+        description: L&#039;adresse postale du lieu concerné
+        items:
+          $ref: '#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress'
+        type: array
       schema_geo:
         description: Les coordonnées géographiques de la ressource
         items:
           $ref: '#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape'
+        type: array
+    type: object
+  graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress:
+    properties:
+      schema_addressLocality:
+        description: La ville en format texte.
+        items:
+          type: string
+        type: array
+      schema_postalCode:
+        description: Le code postal d&#039;une adresse.
+        items:
+          type: string
+        type: array
+      schema_streetAddress:
+        description: Le nom de rue incluant le numéro d&#039;une adresse.
+        items:
+          type: string
         type: array
     type: object
   ? graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape
@@ -461,10 +530,33 @@ definitions:
     type: object
   graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace:
     properties:
+      schema_address:
+        description: L&#039;adresse postale du lieu concerné
+        items:
+          $ref: '#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress'
+        type: array
       schema_geo:
         description: Les coordonnées géographiques de la ressource
         items:
           $ref: '#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape'
+        type: array
+    type: object
+  graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress:
+    properties:
+      schema_addressLocality:
+        description: La ville en format texte.
+        items:
+          type: string
+        type: array
+      schema_postalCode:
+        description: Le code postal d&#039;une adresse.
+        items:
+          type: string
+        type: array
+      schema_streetAddress:
+        description: Le nom de rue incluant le numéro d&#039;une adresse.
+        items:
+          type: string
         type: array
     type: object
   ? graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape
@@ -594,10 +686,33 @@ definitions:
     type: object
   graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace:
     properties:
+      schema_address:
+        description: L&#039;adresse postale du lieu concerné
+        items:
+          $ref: '#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress'
+        type: array
       schema_geo:
         description: Les coordonnées géographiques de la ressource
         items:
           $ref: '#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape'
+        type: array
+    type: object
+  graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress:
+    properties:
+      schema_addressLocality:
+        description: La ville en format texte.
+        items:
+          type: string
+        type: array
+      schema_postalCode:
+        description: Le code postal d&#039;une adresse.
+        items:
+          type: string
+        type: array
+      schema_streetAddress:
+        description: Le nom de rue incluant le numéro d&#039;une adresse.
+        items:
+          type: string
         type: array
     type: object
   ? graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape

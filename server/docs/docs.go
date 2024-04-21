@@ -442,11 +442,44 @@ const docTemplate = `{
         "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
             "type": "object",
             "properties": {
+                "schema_address": {
+                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                    }
+                },
                 "schema_geo": {
                     "description": "Les coordonnées géographiques de la ressource",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetDrinksPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
+            "type": "object",
+            "properties": {
+                "schema_addressLocality": {
+                    "description": "La ville en format texte.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_postalCode": {
+                    "description": "Le code postal d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_streetAddress": {
+                    "description": "Le nom de rue incluant le numéro d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }
@@ -613,11 +646,44 @@ const docTemplate = `{
         "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
             "type": "object",
             "properties": {
+                "schema_address": {
+                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                    }
+                },
                 "schema_geo": {
                     "description": "Les coordonnées géographiques de la ressource",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetEatsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
+            "type": "object",
+            "properties": {
+                "schema_addressLocality": {
+                    "description": "La ville en format texte.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_postalCode": {
+                    "description": "Le code postal d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_streetAddress": {
+                    "description": "Le nom de rue incluant le numéro d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }
@@ -784,11 +850,44 @@ const docTemplate = `{
         "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
             "type": "object",
             "properties": {
+                "schema_address": {
+                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                    }
+                },
                 "schema_geo": {
                     "description": "Les coordonnées géographiques de la ressource",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetEnjoysPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
+            "type": "object",
+            "properties": {
+                "schema_addressLocality": {
+                    "description": "La ville en format texte.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_postalCode": {
+                    "description": "Le code postal d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_streetAddress": {
+                    "description": "Le nom de rue incluant le numéro d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }
@@ -955,11 +1054,44 @@ const docTemplate = `{
         "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
             "type": "object",
             "properties": {
+                "schema_address": {
+                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                    }
+                },
                 "schema_geo": {
                     "description": "Les coordonnées géographiques de la ressource",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetSleepsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
+            "type": "object",
+            "properties": {
+                "schema_addressLocality": {
+                    "description": "La ville en format texte.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_postalCode": {
+                    "description": "Le code postal d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_streetAddress": {
+                    "description": "Le nom de rue incluant le numéro d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }
@@ -1142,11 +1274,44 @@ const docTemplate = `{
         "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlace": {
             "type": "object",
             "properties": {
+                "schema_address": {
+                    "description": "L\u0026#039;adresse postale du lieu concerné",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress"
+                    }
+                },
                 "schema_geo": {
                     "description": "Les coordonnées géographiques de la ressource",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_geoSchema_GeoCoordinates_schema_GeoShape"
+                    }
+                }
+            }
+        },
+        "graphql.GetTravelsPoiPointOfInterest_ResultSetResultsPointOfInterestIsLocatedAtPlaceSchema_addressSchema_PostalAddress": {
+            "type": "object",
+            "properties": {
+                "schema_addressLocality": {
+                    "description": "La ville en format texte.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_postalCode": {
+                    "description": "Le code postal d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schema_streetAddress": {
+                    "description": "Le nom de rue incluant le numéro d\u0026#039;une adresse.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }

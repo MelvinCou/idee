@@ -49,6 +49,11 @@ query GetDrinks($city: String, $from: Int, $size: Int) {
                     schema_longitude
                     schema_latitude
                 }
+                schema_address {
+                    schema_addressLocality
+                    schema_postalCode
+                    schema_streetAddress
+                }
             }
         }
     }
@@ -104,6 +109,11 @@ query GetEnjoys($city: String, $from: Int, $size: Int) {
                     schema_longitude
                     schema_latitude
                 }
+                schema_address {
+                    schema_addressLocality
+                    schema_postalCode
+                    schema_streetAddress
+                }
             }
         }
     }
@@ -155,6 +165,11 @@ query GetSleeps($city: String, $from: Int, $size: Int) {
                 schema_geo {
                     schema_longitude
                     schema_latitude
+                }
+                schema_address {
+                    schema_addressLocality
+                    schema_postalCode
+                    schema_streetAddress
                 }
             }
         }
@@ -208,6 +223,11 @@ query GetEats($city: String, $from: Int, $size: Int) {
                     schema_longitude
                     schema_latitude
                 }
+                schema_address {
+                    schema_addressLocality
+                    schema_postalCode
+                    schema_streetAddress
+                }
             }
         }
     }
@@ -259,6 +279,11 @@ query GetTravels($city: String, $from: Int, $size: Int) {
                 schema_geo {
                     schema_longitude
                     schema_latitude
+                }
+                schema_address {
+                    schema_addressLocality
+                    schema_postalCode
+                    schema_streetAddress
                 }
             }
         }
