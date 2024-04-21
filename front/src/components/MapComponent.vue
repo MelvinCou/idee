@@ -9,6 +9,9 @@ const route = useRoute();
 const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
+/**
+ * Represents the properties required for the map.
+ */
 interface MapProps {
   center: [number, number];
   maxBounds: [[number, number], [number, number]];
@@ -16,6 +19,9 @@ interface MapProps {
 
 const map = ref<mapboxgl.Map | null>(null);
 
+/**
+ * Default map properties.
+ */
 const mapProps: MapProps = {
   center: [2.3522, 48.8566],
   maxBounds: [
@@ -24,6 +30,9 @@ const mapProps: MapProps = {
   ],
 };
 
+/**
+ * Initializes the map with default properties and controls.
+ */
 const initializeMap = () => {
   if (map.value) {
     map.value.remove();
@@ -47,6 +56,10 @@ const initializeMap = () => {
   );
 };
 
+/**
+ * Fetches city details and updates the map view.
+ * @param cityId - The city ID to fetch details for.
+ */
 const fetchCityDetails = async (cityId: string) => {
   try {
     const response = await fetch(

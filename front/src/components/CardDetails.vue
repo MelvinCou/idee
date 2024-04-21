@@ -10,6 +10,9 @@ import type {
 import type { CardData } from "@/interfaces/main";
 import fetchImages from "@/api/google-image";
 
+/**
+ * Represents data for a card.
+ */
 export class Data implements CardData {
   title?: string;
   description?: string;
@@ -108,6 +111,9 @@ export class Data implements CardData {
     this.dateUpdate = r.lastUpdateDatatourisme && r.lastUpdateDatatourisme[0];
   }
 
+  /**
+   * Fetches images related to the data title.
+   */
   async getImages() {
     try {
       if (this.title) {
@@ -121,7 +127,7 @@ export class Data implements CardData {
         }
       }
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   }
 }
@@ -139,6 +145,10 @@ const props = defineProps<{
 
 const emit = defineEmits(["back", "roll_back"]);
 
+/**
+ * Handles navigation back based on a boolean flag.
+ * @param bool - Boolean flag indicating whether to navigate back.
+ */
 const goback = (bool: boolean) => {
   emit("back", !bool);
 };
@@ -219,16 +229,16 @@ h2 {
   width: fit-content;
   padding-bottom: 2%;
   height: 100%;
-  display: flex; /* Ajoutez cette ligne */
-  flex-direction: column; /* Ajoutez cette ligne */
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
   width: 90%;
   margin: auto;
   margin-top: 2%;
-  flex: 1; /* Ajoutez cette ligne */
-  overflow-y: auto; /* pour permettre le défilement si le contenu est trop long */
+  flex: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -245,7 +255,7 @@ div {
 }
 
 .square {
-  background-color: #e0e0e0; /* ou toute autre couleur de fond */
+  background-color: #e0e0e0;
   height: 75px;
   display: flex;
   justify-content: center;

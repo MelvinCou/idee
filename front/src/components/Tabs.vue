@@ -12,6 +12,7 @@ const props = defineProps<{
   activeTab?: string;
 }>();
 
+// Initializing store hooks
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
 const eatStore = useEatsStore();
@@ -19,6 +20,8 @@ const travelStore = useTravelsStore();
 const sleepStore = useSleepsStore();
 
 const emit = defineEmits(["actualTab"]);
+
+// Tabs data configuration
 const tabsData: TabsInterface[] = [
   {
     name: "enjoy",
@@ -38,21 +41,29 @@ const tabsData: TabsInterface[] = [
   },
   { name: "sleep", action: () => handleTabClick(4, sleepStore.getSleeps), icon: "mdi-bed" },
 ];
-const selectedTab = ref(tabsData[0]);
 
-onMounted(() => {
-  if (props.activeTab) {
-    selectedTab.value = tabsData.find((tab) => tab.name === props.activeTab)!;
-  }
-  selectedTab.value.action();
-});
+// Selected tab state
+const selectedTab = ref<TabsInterface>(tabsData[0]);
 
+/**
+ * Handles tab click event to fetch data from the respective store.
+ * @param numTabs - The index of the tab clicked.
+ * @param actionStore - The function to fetch data from the respective store.
+ */
 const handleTabClick = async (numTabs: number, actionStore: () => Promise<void>) => {
   if (numTabs >= 0 && numTabs <= 4) {
     await actionStore();
     emit("actualTab", tabsData[numTabs].name);
   }
 };
+
+// Initialize the selected tab based on the activeTab prop
+onMounted(() => {
+  if (props.activeTab) {
+    selectedTab.value = tabsData.find((tab) => tab.name === props.activeTab)!;
+  }
+  selectedTab.value.action();
+});
 </script>
 
 <template>

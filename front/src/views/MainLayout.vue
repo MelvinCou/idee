@@ -15,18 +15,21 @@ import type { MainLayoutActiveTabs } from "@/interfaces/main";
 import { itemPerPage } from "@/utils";
 import CarouselsComponent from "@/components/CarouselsComponent.vue";
 
+// Initialize store hooks
 const enjoyStore = useEnjoysStore();
 const drinkStore = useDrinksStore();
 const eatStore = useEatsStore();
 const travelStore = useTravelsStore();
 const sleepStore = useSleepsStore();
 
+// Reactive references
 const showDetails = ref(false);
 const activeTabs = ref<MainLayoutActiveTabs>();
 const cardDataDump = ref<CardData[]>();
 const actualPage = ref<number>();
 const cityToSearch = ref<string>("");
 
+// Function to switch tab data
 const switchData = async (tabName: string, newPage?: number) => {
   switch (tabName) {
     case "enjoy":
@@ -97,6 +100,7 @@ const switchData = async (tabName: string, newPage?: number) => {
   }
 };
 
+// Watchers
 watch(actualPage, (newPage) => {
   switchData(activeTabs.value?.actualTab!, newPage);
 });
@@ -105,6 +109,7 @@ watch(cityToSearch, () => {
   switchData(activeTabs.value?.actualTab!);
 });
 
+// Reactive reference for detailed data
 const detailsData = ref<CardData>({
   title: "",
   description: "",
@@ -128,6 +133,7 @@ const detailsData = ref<CardData>({
   img: [],
 });
 
+// Display detailed data
 function displayDetail(data: CardData) {
   detailsData.value = data;
   if (detailsData.value) {
@@ -135,10 +141,12 @@ function displayDetail(data: CardData) {
   }
 }
 
+// Rollback detail view
 function rollBack(isRollBack: boolean) {
   showDetails.value = isRollBack;
 }
 
+// Update city search
 const updateCity = (cityName: string) => {
   cityToSearch.value = cityName;
 };
@@ -146,6 +154,7 @@ const updateCity = (cityName: string) => {
 
 <template>
   <v-container fluid>
+    <!-- Display search input component -->
     <SearchInput @selectedCity="updateCity" />
 
     <v-navigation-drawer color="pink" permanent :width="450">
@@ -160,8 +169,10 @@ const updateCity = (cityName: string) => {
       </v-expand-x-transition>
 
       <template v-else>
+        <!-- Display tabs component -->
         <Tabs @actualTab="switchData" :activeTab="activeTabs?.actualTab" />
 
+        <!-- Display card items -->
         <v-data-iterator :items="cardDataDump" :items-per-page="itemPerPage">
           <template #default="{ items }">
             <!-- eslint-disable-next-line vue/no-v-for-template-key -->
@@ -193,13 +204,14 @@ const updateCity = (cityName: string) => {
           </template>
         </v-data-iterator>
 
+        <!-- Display pagination -->
         <v-pagination
           v-model="actualPage"
           v-if="activeTabs?.paginationMax"
           :length="activeTabs.paginationMax" />
       </template>
     </v-navigation-drawer>
-    <!-- Mapbox content -->
+    <!-- Display Mapbox content -->
     <MapComponent />
   </v-container>
 </template>
@@ -216,14 +228,6 @@ const updateCity = (cityName: string) => {
 .v-container {
   height: 100%;
   margin-top: 60px;
-}
-
-.nav-icon {
-  background-color: rebeccapurple;
-}
-
-.bar-title {
-  background-color: aliceblue;
 }
 
 .v-card-title {

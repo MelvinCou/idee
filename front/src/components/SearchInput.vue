@@ -11,6 +11,9 @@ let timeoutId: number = 0;
 
 const emit = defineEmits(["selectedCity"]);
 
+/**
+ * Fetches cities based on the search query using Mapbox API.
+ */
 const fetchCities = async () => {
   const myAccessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
   const bbox = "-4.833986,42.440817,8.248534,51.011153"; // bbox for France;
@@ -29,6 +32,9 @@ const fetchCities = async () => {
   }
 };
 
+/**
+ * Handles the input change event and triggers city search after a debounce.
+ */
 const handleInput = () => {
   clearTimeout(timeoutId);
   if (searchQuery.value === "") {
@@ -40,6 +46,10 @@ const handleInput = () => {
   }
 };
 
+/**
+ * Selects a city from the search results and navigates to the main page.
+ * @param city - The selected city object.
+ */
 const selectCity = (city: MapBoxSuggestion) => {
   searchQuery.value = `${city.name} - ${city.place_formatted}`;
   cities.value = [];
@@ -85,34 +95,6 @@ const selectCity = (city: MapBoxSuggestion) => {
   position: relative;
   display: flex;
   align-items: center;
-}
-
-.search-input {
-  width: 100%;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  padding: 10px;
-  padding-right: 40px;
-  color: #333;
-  background-color: #fff;
-}
-
-.clear-button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  background-color: #ff0000;
-  color: white;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
 }
 
 .results-list {
